@@ -1,4 +1,4 @@
-import { Product } from '../types/Product';
+import type { Product } from '../types/Product';
 
 export const getPhones = (): Promise<Product[]> => {
   return fetch('/api/phones.json').then((response) => {

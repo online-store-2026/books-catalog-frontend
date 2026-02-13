@@ -1,19 +1,19 @@
 import type { Product } from '../types/Product';
 
-export const getPhones = (): Promise<Product[]> => {
-  return fetch('/api/phones.json').then((response) => {
+export const getAudiobooks = (): Promise<Product[]> => {
+  return fetch('/api/audiobook.json').then((response) => {
     return response.json();
   });
 };
 
-export const getTablets = (): Promise<Product[]> => {
-  return fetch('/api/tablets.json').then((response) => {
+export const getPaperbacks = (): Promise<Product[]> => {
+  return fetch('/api/paperback.json').then((response) => {
     return response.json();
   });
 };
 
-export const getAccessories = (): Promise<Product[]> => {
-  return fetch('/api/accessories.json').then((response) => {
+export const getKindles = (): Promise<Product[]> => {
+  return fetch('/api/kindle.json').then((response) => {
     return response.json();
   });
 };

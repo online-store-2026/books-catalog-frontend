@@ -3,12 +3,17 @@ import './App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
+import { AudiobookPage } from './pages/AudiobookPage';
+import { CartPage } from './pages/CartPage';
 import { CatalogPage } from './pages/CatalogPage';
+import { ContactsPage } from './pages/ContactsPage';
 import { FavouritesPage } from './pages/FavouritesPage';
 import { HomePage } from './pages/HomePage';
 import { ItemCardPage } from './pages/ItemCardPage';
+import { KindlePage } from './pages/KindlePage';
 import { NotFoundPage } from './pages/NotFoundPage';
-import { CartPage } from './pages/CartPage';
+import { PaperPage } from './pages/PaperPage';
+import { RightsPage } from './pages/RightsPage';
 
 function App() {
   return (
@@ -30,12 +35,32 @@ function App() {
               element={<CatalogPage />}
             />
             <Route
+              path="/paper"
+              element={<PaperPage />}
+            />
+            <Route
+              path="/kindle"
+              element={<KindlePage />}
+            />
+            <Route
+              path="/audiobook"
+              element={<AudiobookPage />}
+            />
+            <Route
               path="/favourites"
               element={<FavouritesPage />}
             />
             <Route
               path="/cart"
               element={<CartPage />}
+            />
+            <Route
+              path="/contacts"
+              element={<ContactsPage />}
+            />
+            <Route
+              path="/rights"
+              element={<RightsPage />}
             />
             <Route
               path="/item/:id"

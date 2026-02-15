@@ -7,7 +7,6 @@ function App() {
     <>
       <Header />
       <div>
-        <h1>Vite + React</h1>
         <Footer />
       </div>
     </>

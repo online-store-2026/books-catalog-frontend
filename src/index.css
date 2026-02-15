@@ -130,7 +130,48 @@ body #root {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  .font-manrope {
+    font-family: 'Manrope', sans-serif;
+  }
+}
+
+@layer components {
+  .footer-container {
+    display: flex;
+    align-items: center;
+    padding: 32px 24px;
+  }
+
+  @media (min-width: 1200px) {
+    .footer-container {
+      max-width: calc(1200px + 48px);
+      margin: 0 auto;
+    }
+  }
+
+  .footer-nav-gap {
+    gap: clamp(18px, calc(18px + (100vw - 640px) / 560 * 93), 111px);
+  }
+
+  .footer-spacer-left,
+  .footer-spacer-right {
+    flex-grow: 1;
+  }
+
+  @media (min-width: 1200px) {
+    .footer-spacer-left {
+      flex-grow: 0;
+      width: 290px;
+    }
+
+    .footer-spacer-right {
+      flex-grow: 0;
+      width: 268px;
+    }
   }
 }

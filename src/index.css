@@ -3,6 +3,11 @@
 @import 'shadcn/tailwind.css';
 
 @custom-variant dark (&:is(.dark *));
+body #root {
+  max-width: unset;
+  margin: 0;
+  padding: 0;
+}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -12,6 +17,15 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --color-green: #27ae60;
+  --color-red: #eb5757;
+  --color-icon: #b4bdc3;
+  --color-elements: #e2e6e9;
+  --color-primary-gray: #313237;
+  --breakpoint-md: 640px;
+  --breakpoint-lg: 1200px;
+  --breakpoint-desktop: 1440px;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -43,8 +57,6 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --breakpoint-md: 640px;
-  --breakpoint-lg: 1200px;
 }
 
 @layer utilities {
@@ -59,24 +71,24 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --background: #ffffff;
+  --foreground: #313237;
+  --card: #ffffff;
+  --card-foreground: #313237;
+  --popover: #ffffff;
+  --popover-foreground: #313237;
+  --primary: #27ae60;
+  --primary-foreground: #ffffff;
+  --secondary: #fafbfc;
+  --secondary-foreground: #313237;
+  --muted: #fafbfc;
+  --muted-foreground: #89939a;
+  --accent: #fafbfc;
+  --accent-foreground: #313237;
+  --destructive: #eb5757;
+  --border: #e2e6e9;
+  --input: #e2e6e9;
+  --ring: #b4bdc3;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -130,7 +142,48 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  .font-manrope {
+    font-family: 'Manrope', sans-serif;
+  }
+}
+
+@layer components {
+  .footer-container {
+    display: flex;
+    align-items: center;
+    padding: 32px 24px;
+  }
+
+  @media (min-width: 1200px) {
+    .footer-container {
+      max-width: calc(1200px + 48px);
+      margin: 0 auto;
+    }
+  }
+
+  .footer-nav-gap {
+    gap: clamp(18px, calc(18px + (100vw - 640px) / 560 * 93), 111px);
+  }
+
+  .footer-spacer-left,
+  .footer-spacer-right {
+    flex-grow: 1;
+  }
+
+  @media (min-width: 1200px) {
+    .footer-spacer-left {
+      flex-grow: 0;
+      width: 290px;
+    }
+
+    .footer-spacer-right {
+      flex-grow: 0;
+      width: 268px;
+    }
   }
 }

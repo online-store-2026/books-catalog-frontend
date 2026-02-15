@@ -1,12 +1,12 @@
 import './App.css';
 import { Footer } from './components/Footer/Footer';
-import { Header } from './components/Header/Header';
+import { Header } from './components/Header';
 
 function App() {
   return (
     <>
+      <Header />
       <div>
-        <Header />
         <Footer />
       </div>
     </>

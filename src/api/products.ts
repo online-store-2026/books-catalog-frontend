@@ -1,18 +1,18 @@
-import type { Product } from '../types/Product';
+import type { Audiobook, Kindle, Paperback } from '../types/Product';
 
-export const getAudiobooks = (): Promise<Product[]> => {
+export const getAudiobooks = (): Promise<Audiobook[]> => {
   return fetch('/api/audiobook.json').then((response) => {
     return response.json();
   });
 };
 
-export const getPaperbacks = (): Promise<Product[]> => {
+export const getPaperbacks = (): Promise<Paperback[]> => {
   return fetch('/api/paperback.json').then((response) => {
     return response.json();
   });
 };
 
-export const getKindles = (): Promise<Product[]> => {
+export const getKindles = (): Promise<Kindle[]> => {
   return fetch('/api/kindle.json').then((response) => {
     return response.json();
   });

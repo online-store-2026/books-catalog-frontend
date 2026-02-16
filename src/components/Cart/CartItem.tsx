@@ -15,17 +15,13 @@ export type CartItemType = {
   quantity: number;
 };
 
-type CartItemProps = {
+type Props = {
   item: CartItemType;
   onRemove: (id: string) => void;
   onQuantityChange: (id: string, delta: number) => void;
 };
 
-export const CartItem = ({
-  item,
-  onRemove,
-  onQuantityChange,
-}: CartItemProps) => {
+export const CartItem = ({ item, onRemove, onQuantityChange }: Props) => {
   return (
     <div
       className={cn(

@@ -1,1 +1,3 @@
-export const ItemCardPage = () => <div>Item</div>;
+import { ItemCard } from '@/components/ItemCard';
+
+export const ItemCardPage = () => <ItemCard />;

@@ -67,6 +67,11 @@ body #root {
   .col-span-24 {
     grid-column: span 24 / span 24;
   }
+
+  .font-outline {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--border);
+  }
 }
 
 :root {
@@ -141,6 +146,11 @@ body #root {
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overscroll-behavior: none;
   }
 
   body {

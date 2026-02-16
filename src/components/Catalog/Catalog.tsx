@@ -8,37 +8,49 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { Product } from '@/types/Product';
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from '../ui/pagination';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 export const Catalog = () => {
   const [product, setProduct] = useState<Product[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number | 'all'>('all');
-
-  const currentProducts =
-    itemsPerPage === 'all' ? product : (
-      product.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage,
-      )
-    );
+  const [itemsPerPage, setItemsPerPage] = useState<number | 'all'>(16);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const pageFromUrl = Number(searchParams.get('page') || 1);
+  const MAX_VISIBLE = 5;
 
   const totalPages =
     itemsPerPage === 'all' ? 1 : Math.ceil(product.length / itemsPerPage);
 
-  const pageNumbers = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pageNumbers.push(i);
+  const safePage = Math.min(pageFromUrl, totalPages || 1);
+
+  const currentProducts =
+    itemsPerPage === 'all' ? product : (
+      product.slice((safePage - 1) * itemsPerPage, safePage * itemsPerPage)
+    );
+
+  let startPage = Math.max(safePage - Math.floor(MAX_VISIBLE / 2), 1);
+  let endPage = startPage + MAX_VISIBLE - 1;
+
+  if (endPage > totalPages) {
+    endPage = totalPages;
+    startPage = Math.max(endPage - MAX_VISIBLE + 1, 1);
+  }
+
+  const visiblePages = [];
+
+  for (let i = startPage; i <= endPage; i++) {
+    visiblePages.push(i);
   }
 
   useEffect(() => {
@@ -47,7 +59,48 @@ export const Catalog = () => {
       .catch(() => console.log('Error'));
   }, []);
 
-  console.log(currentProducts);
+  const handleChangeNumber = useCallback(
+    (targetPage: number) => {
+      const newSearchParams = new URLSearchParams(searchParams.toString());
+
+      newSearchParams.set('page', targetPage.toString());
+
+      navigate({
+        pathname: location.pathname,
+        search: `?${newSearchParams.toString()}`,
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+    [searchParams, navigate, location.pathname],
+  );
+
+  const handleChangeArrow = (order: 'prev' | 'next') => {
+    const newSearchParams = new URLSearchParams(searchParams.toString());
+
+    const targetPage = order === 'prev' ? safePage - 1 : safePage + 1;
+
+    newSearchParams.set('page', targetPage.toString());
+
+    navigate({
+      pathname: location.pathname,
+      search: `?${newSearchParams.toString()}`,
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    if (totalPages === 0) return;
+
+    if (pageFromUrl < 1) {
+      handleChangeNumber(1);
+      return;
+    }
+
+    if (pageFromUrl > totalPages) {
+      handleChangeNumber(totalPages);
+    }
+  }, [pageFromUrl, totalPages, handleChangeNumber]);
 
   return (
     <GridContainer className="overflow-hidden">
@@ -83,14 +136,15 @@ export const Catalog = () => {
           Items on page
         </label>
         <Select
-          defaultValue="all"
+          defaultValue="16"
           onValueChange={(value) => {
             if (value === 'all') {
               setItemsPerPage('all');
             } else {
               setItemsPerPage(Number(value));
             }
-            setCurrentPage(1);
+
+            handleChangeNumber(1);
           }}
         >
           <SelectTrigger className="w-full h-[40px] rounded-[8px] border-[#E2E6E9] bg-white font-manrope text-[#313237] text-[14px] font-bold">
@@ -134,18 +188,20 @@ export const Catalog = () => {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  if (currentPage > 1) setCurrentPage(currentPage - 1);
+                  if (safePage > 1) {
+                    handleChangeArrow('prev');
+                  }
                 }}
               />
             </PaginationItem>
-            {pageNumbers.map((page) => (
+            {visiblePages.map((page) => (
               <PaginationItem key={page}>
                 <PaginationLink
                   href="#"
-                  isActive={currentPage === page}
+                  isActive={safePage === page}
                   onClick={(e) => {
                     e.preventDefault();
-                    setCurrentPage(page);
+                    handleChangeNumber(page);
                   }}
                 >
                   {page}
@@ -153,14 +209,13 @@ export const Catalog = () => {
               </PaginationItem>
             ))}
             <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-            <PaginationItem>
               <PaginationNext
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                  if (safePage < totalPages) {
+                    handleChangeArrow('next');
+                  }
                 }}
               />
             </PaginationItem>

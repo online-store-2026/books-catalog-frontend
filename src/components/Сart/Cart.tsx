@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChevronLeft } from 'lucide-react';
 import { getPaperbacks } from '@/api/products';
+import { Button } from '@/components/ui/button';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import type { Paperback } from '@/types/Product';
@@ -30,8 +31,10 @@ function toCartItem(product: Paperback): CartItemType {
 }
 
 export const Cart = () => {
+  const navigate = useNavigate();
   const [items, setItems] = useState<CartItemType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     getPaperbacks()
@@ -41,6 +44,11 @@ export const Cart = () => {
           .map(toCartItem);
 
         setItems(cartProducts);
+        setError(null);
+      })
+      .catch((err) => {
+        console.error('Failed to load cart:', err);
+        setError('Failed to load cart items. Please try again later.');
       })
       .finally(() => setIsLoading(false));
   }, []);
@@ -85,6 +93,25 @@ export const Cart = () => {
         <p className={cn(TYPOGRAPHY.body, 'text-muted-foreground')}>
           Loading...
         </p>
+      : error ?
+        <div className="text-center py-12">
+          <p className={cn(TYPOGRAPHY.body, 'text-destructive mb-4')}>
+            {error}
+          </p>
+          <Button onClick={() => window.location.reload()}>Try Again</Button>
+        </div>
+      : items.length === 0 ?
+        <div className="text-center py-12">
+          <p className={cn(TYPOGRAPHY.h3, 'text-foreground mb-2')}>
+            Your cart is empty
+          </p>
+          <p className={cn(TYPOGRAPHY.body, 'text-muted-foreground mb-6')}>
+            Add some books to get started
+          </p>
+          <Link to="/catalog">
+            <Button size="lg">Continue Shopping</Button>
+          </Link>
+        </div>
       : <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
           <div className="flex-1 space-y-4">
             {items.map((item) => (
@@ -101,6 +128,7 @@ export const Cart = () => {
             <CartCheckout
               total={total}
               totalItems={totalItems}
+              onCheckout={() => navigate('/checkout')}
             />
           </div>
         </div>

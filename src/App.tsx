@@ -1,4 +1,5 @@
 import './App.css';
+import { Catalog } from './components/Catalog/Catalog';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Footer } from './components/Footer';
@@ -22,7 +23,7 @@ function App() {
     <>
       <div className="flex min-h-screen flex-col">
         <Header />
-        {/* <Catalog /> */}
+        <Catalog />
         <main className="flex-1">
           <Routes>
             <Route

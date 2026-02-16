@@ -1,11 +1,17 @@
 import { Button } from '../components/ui/button';
-import { Product } from '../types/Product';
+import type { Product } from '@/types/Product';
 
-interface ProductCardProps {
+interface Props {
   book: Product;
 }
 
-export const ProductCard = ({ book }: ProductCardProps) => {
+export const ProductCard: React.FC<Props> = ({ book }) => {
+  const { name, author, priceRegular, priceDiscount, images } = book;
+
+  const mainImage = images && images.length > 0 ? images[0] : '';
+  const displayPrice = priceDiscount ? priceDiscount : priceRegular;
+  const oldPrice = priceDiscount ? priceRegular : null;
+
   return (
     <div
       className="
@@ -24,31 +30,24 @@ export const ProductCard = ({ book }: ProductCardProps) => {
       border border-border
       gap-[16px]
       bg-card
-      box-sizing-border-box 
+      box-border
     "
     >
       <div
         className="
-        relative
-        w-[174px]
-        h-[185px]
-        lg:w-[208px]
-        lg:h-[263px]
-        flex-shrink-0 
-        bg-pink-200
-      "
+          relative
+          w-[174px]
+          h-[185px]
+          lg:w-[208px]
+          lg:h-[263px]
+          flex-shrink-0
+          overflow-hidden
+        "
       >
         <img
-          src={book.image}
+          src={mainImage}
           alt="Book-cover"
-          className="
-            absolute
-            top-0 left-0
-            w-full h-full
-            object-cover
-            px-[13.84px]
-            py-0
-          "
+          className="w-full h-full object-contain"
         />
       </div>
       <div
@@ -64,7 +63,7 @@ export const ProductCard = ({ book }: ProductCardProps) => {
         <div className="flex flex-col w-[174px]">
           <div className="w-[174px] h-[24px] lg:w-[208px] lg:h-[45px] flex items-center">
             <h5 className="font-bold text-[16px] leading-[24px] text-foreground truncate">
-              Fahrenheit 451
+              {name}
             </h5>
           </div>
 
@@ -76,107 +75,31 @@ export const ProductCard = ({ book }: ProductCardProps) => {
     "
           >
             <p className="text-[14px] leading-[21px] text-muted-foreground truncate">
-              Ray Bradbury
+              {author}
             </p>
           </div>
         </div>
 
-        <div
-          className="
-    flex flex-col
-    w-[94px]
-    h-[50px]
-    lg:w-[108px]
-    lg:h-[54px]
-    gap-[2px]
-  "
-        >
-          <div
-            className="
-    flex flex-row 
-    items-baseline
-    gap-[2.5px]
-    lg:gap-[8px]
-  "
-          >
-            <div
-              className="
-      w-[45px] 
-      h-[27px] 
-      lg:w-[49px]
-      lg:h-[31px]
-      flex items-center
-    "
-            >
-              <span
-                className="
-        font-manrope 
-        font-semibold 
-        text-[20px] 
-        lg:text-[22px] 
-        leading-[100%] 
-        tracking-[0%] 
-        text-foreground
-      "
-              >
-                ₴{541}
+        <div className="flex flex-col w-full lg:h-[54px] gap-[2px]">
+          <div className="flex flex-row items-baseline gap-2">
+            <div className="flex items-center">
+              <span className="font-manrope font-semibold text-[20px] lg:text-[22px] leading-[100%] text-foreground">
+                ₴{displayPrice}
               </span>
             </div>
-
-            <div
-              className="
-      w-[41px] 
-      h-[22px] 
-      lg:w-[51px]
-      lg:h-[27px]
-      flex items-center
-    "
-            >
-              <span
-                className="
-        font-manrope 
-        font-semibold 
-        text-[16px] 
-        lg:text-[20px] 
-        leading-[100%] 
-        tracking-[0%] 
-        line-through
-        text-muted-foreground
-      "
-              >
-                ₴{600}
-              </span>
-            </div>
+            {oldPrice !== null && (
+              <div className="flex items-center">
+                <span className="font-manrope font-semibold text-[16px] lg:text-[20px] leading-[100%] line-through text-muted-foreground">
+                  ₴{oldPrice}
+                </span>
+              </div>
+            )}
           </div>
-          <div
-            className="
-  flex flex-row
-  w-[80px]
-  h-[21px]
-  gap-[1px]
-  items-center
-"
-          >
-            <div
-              className="
-    w-[20px] 
-    h-[20px] 
-    flex-shrink-0 
-    flex items-center 
-    justify-center
-  "
-            >
+          <div className="flex flex-row items-center gap-[4px] h-[21px]">
+            <div className="w-[16px] h-[16px] flex items-center justify-center">
               <div className="w-[12px] h-[12px] rounded-full bg-[#27AE60]" />
             </div>
-            <span
-              className="
-    font-bold
-    text-[14px]
-    leading-[21px]
-    tracking-normal
-    text-[#27AE60]
-  "
-            >
+            <span className="font-bold text-[14px] leading-[21px] text-[#27AE60]">
               In stock
             </span>
           </div>
@@ -189,7 +112,7 @@ export const ProductCard = ({ book }: ProductCardProps) => {
         lg:w-[208px]
         h-[40px]
         gap-[8px]
-        mt-auto
+        mt-[16px]
       "
       >
         <Button

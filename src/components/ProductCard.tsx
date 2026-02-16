@@ -5,7 +5,7 @@ interface Props {
   book: Product;
 }
 
-export const ProductCard: React.FC<Props> = ({ book }) => {
+export const ProductCard = ({ book }: Props) => {
   const { name, author, priceRegular, priceDiscount, images } = book;
 
   const mainImage = images && images.length > 0 ? images[0] : '';

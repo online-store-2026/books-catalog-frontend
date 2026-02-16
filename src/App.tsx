@@ -1,8 +1,5 @@
 import './App.css';
-import { Catalog } from './components/Catalog/Catalog';
-import { Footer } from './components/Footer/Footer';
-import { Header } from './components/Header/Header';
-
+// import { Catalog } from './components/Catalog/Catalog';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
@@ -18,14 +15,14 @@ import { KindlePage } from './pages/KindlePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PaperPage } from './pages/PaperPage';
 import { RightsPage } from './pages/RightsPage';
-import { CategoriesSection } from './components/CategoriesSection/CategoriesSection';
+// import { CategoriesSection } from './components/CategoriesSection/CategoriesSection';
 
 function App() {
   return (
     <>
       <div className="flex min-h-screen flex-col">
         <Header />
-        <Catalog />
+        {/* <Catalog /> */}
         <main className="flex-1">
           <Routes>
             <Route
@@ -81,7 +78,7 @@ function App() {
               element={<NotFoundPage />}
             />
           </Routes>
-          <CategoriesSection />
+          {/* <CategoriesSection /> */}
         </main>
         <Footer />
       </div>

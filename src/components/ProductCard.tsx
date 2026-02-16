@@ -1,17 +1,22 @@
 import { Button } from '../components/ui/button';
+import { Product } from '../types/Product';
 
-//--success: oklch(0.627 0.194 149.214);
+interface ProductCardProps {
+  book: Product;
+}
 
-//product.quantity > 0 ? 'In stock' : 'Out of stock'
-
-export const ProductCard = () => {
+export const ProductCard = ({ book }: ProductCardProps) => {
   return (
     <div
       className="
       flex flex-col
+      flex-shrink-0
       w-[214px]
       h-[400px]
       p-[20px]
+      md:w-[272px]
+      md:h-[506px]
+      md:p-[32px]
       lg:w-[272px]
       lg:h-[506px]
       lg:p-[32px]
@@ -24,6 +29,7 @@ export const ProductCard = () => {
     >
       <div
         className="
+        relative
         w-[174px]
         h-[185px]
         lg:w-[208px]
@@ -33,8 +39,8 @@ export const ProductCard = () => {
       "
       >
         <img
-          //src={defaultImage}
-          alt="Обкладинка книги"
+          src={book.image}
+          alt="Book-cover"
           className="
             absolute
             top-0 left-0

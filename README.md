@@ -1,93 +1,103 @@
 # 📚 Books Catalog Frontend
 
-Онлайн каталог книг з сучасним інтерфейсом та зручним пошуком.
+A modern online book catalog with an intuitive interface and powerful search capabilities.
 
 ## 🚀 Live Demo
 
-**[Переглянути проект →](https://books-catalog-frontend.vercel.app)**
+**[View Live Project →](https://books-catalog-frontend.vercel.app)**
 
 [![Deployment Status](https://img.shields.io/badge/deployment-ready-success?style=flat&logo=vercel)](https://books-catalog-frontend.vercel.app)
+[![React](https://img.shields.io/badge/React-18.3-blue?logo=react)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-6.0-646CFF?logo=vite)](https://vitejs.dev/)
 
 ---
 
-## 📋 Опис проекту
+## 📋 About The Project
 
-Books Catalog - це веб-додаток для перегляду та пошуку книг. Проект створено з використанням сучасних технологій для забезпечення швидкої роботи та приємного користувацького досвіду.
+Books Catalog is a full-featured web application for browsing and discovering books. Built with modern technologies, it delivers exceptional performance and an outstanding user experience across all devices.
 
-### ✨ Основні можливості
+### ✨ Key Features
 
-- 📖 Перегляд каталогу книг
-- 🔍 Пошук за назвою та автором
-- 📑 Детальна інформація про кожну книгу
-- 🛒 Кошик для обраних товарів
-- 📱 Адаптивний дизайн для всіх пристроїв
+- 📖 **Comprehensive Catalog** - Browse extensive collections of books across multiple formats
+- 🔍 **Smart Search** - Find books by title, author, or category with instant results
+- 📑 **Detailed Information** - View complete book details, descriptions, and pricing
+- 🛒 **Shopping Cart** - Add books to cart with real-time updates
+- ❤️ **Favorites** - Save books to your wishlist for later
+- 📱 **Fully Responsive** - Optimized for desktop, tablet, and mobile devices
+- 🎨 **Modern UI/UX** - Clean, intuitive interface with smooth animations
 
 ---
 
-## 🛠️ Технології
+## 🛠️ Tech Stack
 
-- **Frontend Framework:** React + TypeScript
-- **Build Tool:** Vite
-- **Styling:** CSS/SCSS, Tailwind CSS
-- **Routing:** React Router
-- **UI:** Radix UI, shadcn-style components, Lucide React
-- **Deployment:** Vercel
+### Core Technologies
+- **Frontend Framework:** React 18.3 + TypeScript 5.6
+- **Build Tool:** Vite 6.0
+- **Styling:** CSS/SCSS + Tailwind CSS
+- **Routing:** React Router v7
+- **UI Components:** Radix UI, shadcn-style components, Lucide React icons
+
+### Development Tools
+- **Code Quality:** ESLint, Prettier
+- **Git Hooks:** Husky + lint-staged
+- **Deployment:** Vercel (with automatic CI/CD)
 - **Version Control:** Git + GitHub
-- **Code quality:** ESLint, Prettier, Husky + lint-staged
 
 ---
 
-## 💻 Локальна розробка
+## 💻 Getting Started
 
-### Передумови
+### Prerequisites
 
-- Node.js (v16 або новіше)
-- npm або yarn
+- **Node.js** (v16.0 or higher)
+- **npm** or **yarn**
 
-### Встановлення
+### Installation
 
-1. **Клонуйте репозиторій:**
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/online-store-2026/books-catalog-frontend.git
    cd books-catalog-frontend
    ```
 
-2. **Встановіть залежності:**
+2. **Install dependencies:**
    ```bash
    npm install
    ```
 
-3. **Запустіть development сервер:**
+3. **Start the development server:**
    ```bash
    npm run dev
    ```
 
-4. **Відкрийте браузер:**
+4. **Open your browser:**
    ```
    http://localhost:5173
    ```
 
-### Доступні команди
+### Available Scripts
 
 ```bash
-npm run dev          # Запуск development сервера
-npm run build        # Збірка production версії
-npm run preview      # Перегляд production збірки
-npm run lint         # Перевірка коду
+npm run dev          # Start development server with hot reload
+npm run build        # Build production-ready bundle
+npm run preview      # Preview production build locally
+npm run lint         # Run ESLint to check code quality
+npm run format       # Format code with Prettier
 ```
 
 ---
 
-## 📦 Структура проекту
+## 📦 Project Structure
 
 ```
 books-catalog-frontend/
 ├── src/
-│   ├── api/              # API-клієнт
+│   ├── api/              # API client and services
 │   │   └── products.ts
-│   ├── assets/            # Статичні ресурси (svg тощо)
-│   ├── components/       # React-компоненти
-│   │   ├── Cart/         # Кошик
+│   ├── assets/           # Static assets (SVG, images)
+│   ├── components/       # React components
+│   │   ├── Cart/         # Shopping cart components
 │   │   │   ├── Cart.tsx
 │   │   │   ├── CartCheckout.tsx
 │   │   │   ├── CartItem.tsx
@@ -101,15 +111,15 @@ books-catalog-frontend/
 │   │   │   ├── HeaderNav.tsx
 │   │   │   ├── HeaderSearch.tsx
 │   │   │   └── HeaderToolBar.tsx
-│   │   ├── ui/          # UI-кіт (button, select, pagination тощо)
+│   │   ├── ui/          # Reusable UI components (buttons, inputs, etc.)
 │   │   ├── ProductCard.tsx
 │   │   └── YouMightLike.tsx
-│   ├── constants/        # Константи (typography, colors, routes)
-│   ├── context/
-│   ├── data/
-│   ├── hooks/
-│   ├── lib/              # Утиліти (utils)
-│   ├── pages/            # Сторінки додатку
+│   ├── constants/        # App constants (typography, colors, routes)
+│   ├── context/          # React Context providers
+│   ├── data/             # Static data and mock data
+│   ├── hooks/            # Custom React hooks
+│   ├── lib/              # Utility functions and helpers
+│   ├── pages/            # Page components (route views)
 │   │   ├── HomePage.tsx
 │   │   ├── CatalogPage.tsx
 │   │   ├── CartPage.tsx
@@ -122,63 +132,107 @@ books-catalog-frontend/
 │   │   ├── ContactsPage.tsx
 │   │   ├── RightsPage.tsx
 │   │   └── NotFoundPage.tsx
-│   ├── styles/           # Глобальні стилі (SCSS)
-│   ├── types/            # TypeScript-типи
-│   ├── utils/            # Допоміжні функції
-│   ├── App.tsx           # Головний компонент
+│   ├── styles/           # Global styles (SCSS)
+│   ├── types/            # TypeScript type definitions
+│   ├── utils/            # Helper functions
+│   ├── App.tsx           # Main application component
 │   ├── App.css
-│   ├── main.tsx
+│   ├── main.tsx          # Application entry point
 │   └── index.css
-├── public/               # Статичні файли
-│   ├── api/              # JSON-дані (paperback, kindle, audiobook)
-│   ├── fonts/
-│   └── img/              # Зображення
-│       ├── audiobook/    # Обкладинки аудіокниг
-│       ├── kindle/       # Обкладинки Kindle
-│       ├── paperback/    # Обкладинки паперових книг
-│       ├── banner/
-│       ├── categories/
-│       ├── hero/
-│       ├── icons/
-│       └── ...           # (cart-is-empty, favorites-is-empty, тощо)
+├── public/               # Public static files
+│   ├── api/              # JSON data (paperback, kindle, audiobook)
+│   ├── fonts/            # Custom fonts
+│   └── img/              # Images
+│       ├── audiobook/    # Audiobook covers
+│       ├── kindle/       # Kindle covers
+│       ├── paperback/    # Paperback covers
+│       ├── banner/       # Banner images
+│       ├── categories/   # Category images
+│       ├── hero/         # Hero section images
+│       └── icons/        # Icon assets
 ├── index.html
-├── package.json          # Залежності проекту
+├── package.json
 ├── tsconfig.json
 ├── vite.config.ts
-└── ...
+├── eslint.config.js
+└── README.md
 ```
 
 ---
 
 ## 🚀 Deployment
 
-Проект автоматично деплоїться на Vercel при кожному push в гілку `main`.
+This project uses **Vercel** for continuous deployment with automatic builds on every push to the `main` branch.
 
 ### Automatic Deployments
 
-- **Production:** Автоматичний деплой з гілки `main`
-- **Preview:** Автоматичний деплой для кожного Pull Request
+- **Production:** Automatic deployment from `main` branch
+- **Preview:** Automatic preview deployments for every Pull Request
+- **Build Time:** ~1-2 minutes
+- **Performance:** Optimized with Vite's build pipeline
+
+### Deployment URL
+- **Production:** [https://books-catalog-frontend.vercel.app](https://books-catalog-frontend.vercel.app)
 
 ---
 
-## 👥 Команда
+## 🎯 Features In Detail
 
-Проект розроблено командою **online-store-2026**
+### Book Catalog
+- Browse books by format (Paperback, Kindle, Audiobook)
+- Filter by categories
+- Sort by price, popularity, or newest releases
+
+### Shopping Experience
+- Add items to cart with quantity selection
+- Real-time cart updates
+- Persistent cart state
+- Checkout flow
+
+### User Interface
+- Clean, modern design
+- Smooth animations and transitions
+- Loading states and error handling
+- Accessibility-focused components
 
 ---
 
-## 📝 Ліцензія
+## 🤝 Contributing
 
-Цей проект створено в навчальних цілях.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
----
-
-## 🔗 Корисні посилання
-
-- [Live Demo](https://books-catalog-frontend.vercel.app)
-- [GitHub Repository](https://github.com/online-store-2026/books-catalog-frontend)
-- [Vercel Dashboard](https://vercel.com/artem-stadniks-projects/books-catalog-frontend)
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ---
 
-**Зроблено з ❤️ командою online-store-2026**
+## 👥 Team
+
+Developed by the **online-store-2026** team
+
+---
+
+## 📄 License
+
+This project was created for educational purposes.
+
+---
+
+## 🔗 Links
+
+- **Live Demo:** [https://books-catalog-frontend.vercel.app](https://books-catalog-frontend.vercel.app)
+- **GitHub Repository:** [https://github.com/online-store-2026/books-catalog-frontend](https://github.com/online-store-2026/books-catalog-frontend)
+- **Vercel Dashboard:** [Dashboard Link](https://vercel.com/artem-stadniks-projects/books-catalog-frontend)
+
+---
+
+## 📞 Contact
+
+For questions or feedback, please open an issue on GitHub.
+
+---
+
+**Made with ❤️ by the online-store-2026 team**

@@ -1,8 +1,8 @@
+import type { Book } from '@/types/Book';
 import { Button } from '../components/ui/button';
-import type { Product } from '@/types/Product';
 
 interface Props {
-  book: Product;
+  book: Book;
 }
 
 export const ProductCard = ({ book }: Props) => {

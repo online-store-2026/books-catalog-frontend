@@ -9,7 +9,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useCallback, useEffect, useState } from 'react';
-import type { Product } from '@/types/Product';
 import {
   Pagination,
   PaginationContent,
@@ -20,8 +19,9 @@ import {
 } from '../ui/pagination';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { ProductCard } from '../ProductCard';
+import type { Book } from '@/types/Book';
 
-function filtredProduct(incomingProduct: Product[], sortBy: string) {
+function filtredProduct(incomingProduct: Book[], sortBy: string) {
   let changedProduct = [...incomingProduct];
 
   changedProduct = changedProduct.filter((product) => {
@@ -49,7 +49,7 @@ function filtredProduct(incomingProduct: Product[], sortBy: string) {
 }
 
 export const Catalog = () => {
-  const [product, setProduct] = useState<Product[]>([]);
+  const [product, setProduct] = useState<Book[]>([]);
   const [itemsPerPage, setItemsPerPage] = useState<number | 'all'>(16);
   const navigate = useNavigate();
   const location = useLocation();

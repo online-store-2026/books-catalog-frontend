@@ -10,7 +10,7 @@ export const Header = () => {
         className={cn(
           'mx-auto flex items-center justify-between pl-4 transition-all',
           'h-[48px]',
-          'desktop:h-[64px]',
+          'lg:h-[64px]',
         )}
       >
         <div className="flex mr-4">
@@ -21,7 +21,6 @@ export const Header = () => {
         </div>
 
         <HeaderNav />
-
         <div className="flex items-center h-full">
           <HeaderSearch />
           <HeaderToolBar />

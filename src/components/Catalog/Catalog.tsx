@@ -1,4 +1,4 @@
-import { getPaperbacks } from '@/api/products';
+import { getPaperBooks } from '@/services/booksAPI';
 import { GridContainer } from '../GridContainer/GridContainer';
 import {
   Select,
@@ -90,7 +90,7 @@ export const Catalog = () => {
   }
 
   useEffect(() => {
-    getPaperbacks()
+    getPaperBooks()
       .then(setProduct)
       .catch(() => console.log('Error'));
   }, []);

@@ -1,5 +1,5 @@
 import './App.css';
-//import { Catalog } from './components/Catalog/Catalog';
+
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';

@@ -1,5 +1,5 @@
 import { Button } from '../components/ui/button';
-import { Product } from '../types/Product';
+import type { Product } from '../types/Product';
 
 interface ProductCardProps {
   book: Product;
@@ -39,7 +39,7 @@ export const ProductCard = ({ book }: ProductCardProps) => {
       "
       >
         <img
-          src={book.image}
+          src={book.images[0]}
           alt="Book-cover"
           className="
             absolute

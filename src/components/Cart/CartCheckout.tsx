@@ -2,17 +2,13 @@ import { Button } from '@/components/ui/button';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { cn } from '@/lib/utils';
 
-type CartCheckoutProps = {
+type Props = {
   total: number;
   totalItems: number;
   onCheckout: () => void;
 };
 
-export const CartCheckout = ({
-  total,
-  totalItems,
-  onCheckout,
-}: CartCheckoutProps) => {
+export const CartCheckout = ({ total, totalItems, onCheckout }: Props) => {
   return (
     <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-card p-6">
       <p className={cn(TYPOGRAPHY.h2, 'text-foreground')}>

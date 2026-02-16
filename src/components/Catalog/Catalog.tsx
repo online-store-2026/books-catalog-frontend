@@ -1,4 +1,4 @@
-import { getPaperbacks } from '@/api/products';
+import { getPaperBooks } from '@/services/booksAPI';
 import { GridContainer } from '../GridContainer/GridContainer';
 import {
   Select,
@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useEffect, useState } from 'react';
-import type { Product } from '@/types/Product';
+import type { Book } from '@/types/Book';
 import {
   Pagination,
   PaginationContent,
@@ -21,7 +21,7 @@ import {
 } from '../ui/pagination';
 
 export const Catalog = () => {
-  const [product, setProduct] = useState<Product[]>([]);
+  const [product, setProduct] = useState<Book[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState<number | 'all'>('all');
 
@@ -42,7 +42,7 @@ export const Catalog = () => {
   }
 
   useEffect(() => {
-    getPaperbacks()
+    getPaperBooks()
       .then(setProduct)
       .catch(() => console.log('Error'));
   }, []);

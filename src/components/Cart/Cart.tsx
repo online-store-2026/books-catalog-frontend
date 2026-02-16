@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ChevronLeft } from 'lucide-react';
-import { getPaperbacks } from '@/api/products';
+import { getPaperBooks } from '@/services/booksAPI';
 import { Button } from '@/components/ui/button';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { cn } from '@/lib/utils';
-import type { Paperback } from '@/types/Product';
+import type { Book } from '@/types/Book';
 import { CartCheckout, CartItem, type CartItemType } from '@/components/Cart';
 
 /** IDs of products (hardcoded for now) */
@@ -15,7 +15,7 @@ const CART_PRODUCT_IDS = [
   'e6360591-a4b1-418a-922f-de193ff7e096', // Graphic Design: The New Basics
 ];
 
-function toCartItem(product: Paperback): CartItemType {
+function toCartItem(product: Book): CartItemType {
   return {
     id: product.id,
     category: product.type,
@@ -23,9 +23,7 @@ function toCartItem(product: Paperback): CartItemType {
     name: product.name,
     author: product.author,
     image: product.images[0],
-    price: product.priceDiscount ?? product.priceRegular,
-    quantity: 1,
-  };
+  } as CartItemType;
 }
 
 export const Cart = () => {
@@ -35,7 +33,7 @@ export const Cart = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    getPaperbacks()
+    getPaperBooks()
       .then((products) => {
         const cartProducts = products
           .filter((p) => CART_PRODUCT_IDS.includes(p.id))

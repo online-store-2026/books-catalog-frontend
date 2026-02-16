@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { getPaperbacks } from '../api/products';
+import { getPaperbacks } from '@/services/booksAPI';
 import { ProductCard } from './ProductCard';
-import type { Paperback } from '../types/Product';
+import type { Book } from '@/types/Book';
 
 export const YouMightLike = () => {
-  const [books, setBooks] = useState<Paperback[]>([]);
+  const [books, setBooks] = useState<Book[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

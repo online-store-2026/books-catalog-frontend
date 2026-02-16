@@ -5,9 +5,14 @@ import { cn } from '@/lib/utils';
 type CartCheckoutProps = {
   total: number;
   totalItems: number;
+  onCheckout: () => void;
 };
 
-export const CartCheckout = ({ total, totalItems }: CartCheckoutProps) => {
+export const CartCheckout = ({
+  total,
+  totalItems,
+  onCheckout,
+}: CartCheckoutProps) => {
   return (
     <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-card p-6">
       <p className={cn(TYPOGRAPHY.h2, 'text-foreground')}>
@@ -21,6 +26,7 @@ export const CartCheckout = ({ total, totalItems }: CartCheckoutProps) => {
       <div className="w-full border-t border-border" />
 
       <Button
+        onClick={onCheckout}
         className="w-full bg-foreground text-background hover:bg-foreground/90"
         size="lg"
       >

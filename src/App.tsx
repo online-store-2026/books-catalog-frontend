@@ -6,6 +6,7 @@ import { Header } from './components/Header';
 import { AudiobookPage } from './pages/AudiobookPage';
 import { CartPage } from './pages/CartPage';
 import { CatalogPage } from './pages/CatalogPage';
+import { CheckoutPage } from './pages/CheckoutPage';
 import { ContactsPage } from './pages/ContactsPage';
 import { FavouritesPage } from './pages/FavouritesPage';
 import { HomePage } from './pages/HomePage';
@@ -53,6 +54,10 @@ function App() {
             <Route
               path="/cart"
               element={<CartPage />}
+            />
+            <Route
+              path="/checkout"
+              element={<CheckoutPage />}
             />
             <Route
               path="/contacts"

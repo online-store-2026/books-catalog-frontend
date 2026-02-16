@@ -1,73 +1,184 @@
-# React + TypeScript + Vite
+# 📚 Books Catalog Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Онлайн каталог книг з сучасним інтерфейсом та зручним пошуком.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**[Переглянути проект →](https://books-catalog-frontend.vercel.app)**
 
-## React Compiler
+[![Deployment Status](https://img.shields.io/badge/deployment-ready-success?style=flat&logo=vercel)](https://books-catalog-frontend.vercel.app)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📋 Опис проекту
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Books Catalog - це веб-додаток для перегляду та пошуку книг. Проект створено з використанням сучасних технологій для забезпечення швидкої роботи та приємного користувацького досвіду.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### ✨ Основні можливості
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- 📖 Перегляд каталогу книг
+- 🔍 Пошук за назвою та автором
+- 📑 Детальна інформація про кожну книгу
+- 🛒 Кошик для обраних товарів
+- 📱 Адаптивний дизайн для всіх пристроїв
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+---
+
+## 🛠️ Технології
+
+- **Frontend Framework:** React + TypeScript
+- **Build Tool:** Vite
+- **Styling:** CSS/SCSS, Tailwind CSS
+- **Routing:** React Router
+- **UI:** Radix UI, shadcn-style components, Lucide React
+- **Deployment:** Vercel
+- **Version Control:** Git + GitHub
+- **Code quality:** ESLint, Prettier, Husky + lint-staged
+
+---
+
+## 💻 Локальна розробка
+
+### Передумови
+
+- Node.js (v16 або новіше)
+- npm або yarn
+
+### Встановлення
+
+1. **Клонуйте репозиторій:**
+   ```bash
+   git clone https://github.com/online-store-2026/books-catalog-frontend.git
+   cd books-catalog-frontend
+   ```
+
+2. **Встановіть залежності:**
+   ```bash
+   npm install
+   ```
+
+3. **Запустіть development сервер:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Відкрийте браузер:**
+   ```
+   http://localhost:5173
+   ```
+
+### Доступні команди
+
+```bash
+npm run dev          # Запуск development сервера
+npm run build        # Збірка production версії
+npm run preview      # Перегляд production збірки
+npm run lint         # Перевірка коду
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+## 📦 Структура проекту
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
 ```
+books-catalog-frontend/
+├── src/
+│   ├── api/              # API-клієнт
+│   │   └── products.ts
+│   ├── assets/            # Статичні ресурси (svg тощо)
+│   ├── components/       # React-компоненти
+│   │   ├── Cart/         # Кошик
+│   │   │   ├── Cart.tsx
+│   │   │   ├── CartCheckout.tsx
+│   │   │   ├── CartItem.tsx
+│   │   │   └── index.tsx
+│   │   ├── Catalog/
+│   │   ├── CategoriesSection/
+│   │   ├── Footer/
+│   │   ├── GridContainer/
+│   │   ├── Header/
+│   │   │   ├── Header.tsx
+│   │   │   ├── HeaderNav.tsx
+│   │   │   ├── HeaderSearch.tsx
+│   │   │   └── HeaderToolBar.tsx
+│   │   ├── ui/          # UI-кіт (button, select, pagination тощо)
+│   │   ├── ProductCard.tsx
+│   │   └── YouMightLike.tsx
+│   ├── constants/        # Константи (typography, colors, routes)
+│   ├── context/
+│   ├── data/
+│   ├── hooks/
+│   ├── lib/              # Утиліти (utils)
+│   ├── pages/            # Сторінки додатку
+│   │   ├── HomePage.tsx
+│   │   ├── CatalogPage.tsx
+│   │   ├── CartPage.tsx
+│   │   ├── CheckoutPage.tsx
+│   │   ├── FavouritesPage.tsx
+│   │   ├── ItemCardPage.tsx
+│   │   ├── PaperPage.tsx
+│   │   ├── KindlePage.tsx
+│   │   ├── AudiobookPage.tsx
+│   │   ├── ContactsPage.tsx
+│   │   ├── RightsPage.tsx
+│   │   └── NotFoundPage.tsx
+│   ├── styles/           # Глобальні стилі (SCSS)
+│   ├── types/            # TypeScript-типи
+│   ├── utils/            # Допоміжні функції
+│   ├── App.tsx           # Головний компонент
+│   ├── App.css
+│   ├── main.tsx
+│   └── index.css
+├── public/               # Статичні файли
+│   ├── api/              # JSON-дані (paperback, kindle, audiobook)
+│   ├── fonts/
+│   └── img/              # Зображення
+│       ├── audiobook/    # Обкладинки аудіокниг
+│       ├── kindle/       # Обкладинки Kindle
+│       ├── paperback/    # Обкладинки паперових книг
+│       ├── banner/
+│       ├── categories/
+│       ├── hero/
+│       ├── icons/
+│       └── ...           # (cart-is-empty, favorites-is-empty, тощо)
+├── index.html
+├── package.json          # Залежності проекту
+├── tsconfig.json
+├── vite.config.ts
+└── ...
+```
+
+---
+
+## 🚀 Deployment
+
+Проект автоматично деплоїться на Vercel при кожному push в гілку `main`.
+
+### Automatic Deployments
+
+- **Production:** Автоматичний деплой з гілки `main`
+- **Preview:** Автоматичний деплой для кожного Pull Request
+
+---
+
+## 👥 Команда
+
+Проект розроблено командою **online-store-2026**
+
+---
+
+## 📝 Ліцензія
+
+Цей проект створено в навчальних цілях.
+
+---
+
+## 🔗 Корисні посилання
+
+- [Live Demo](https://books-catalog-frontend.vercel.app)
+- [GitHub Repository](https://github.com/online-store-2026/books-catalog-frontend)
+- [Vercel Dashboard](https://vercel.com/artem-stadniks-projects/books-catalog-frontend)
+
+---
+
+**Зроблено з ❤️ командою online-store-2026**

@@ -6,9 +6,7 @@ import { Button } from '@/components/ui/button';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import type { Paperback } from '@/types/Product';
-import { CartCheckout } from './CartCheckout';
-import { CartItem } from './CartItem';
-import type { CartItemType } from './CartItem';
+import { CartCheckout, CartItem, type CartItemType } from '@/components/Cart';
 
 /** IDs of products (hardcoded for now) */
 const CART_PRODUCT_IDS = [
@@ -60,7 +58,10 @@ export const Cart = () => {
   const updateQuantity = (id: string, delta: number) => {
     setItems((prev) =>
       prev.map((item) => {
-        if (item.id !== id) return item;
+        if (item.id !== id) {
+          return item;
+        }
+
         const next = item.quantity + delta;
 
         return { ...item, quantity: next < 1 ? 1 : next };
@@ -75,7 +76,7 @@ export const Cart = () => {
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="mx-auto max-w-[1248px] px-4 pt-6 pb-16 sm:px-6 lg:px-8 lg:pb-20">
+    <div className="mx-auto max-w-312 px-4 pt-6 pb-16 sm:px-6 lg:px-8 lg:pb-20">
       <Link
         to="/catalog"
         className={cn(
@@ -109,7 +110,12 @@ export const Cart = () => {
             Add some books to get started
           </p>
           <Link to="/catalog">
-            <Button size="lg">Continue Shopping</Button>
+            <Button
+              size="lg"
+              className="bg-foreground text-background hover:bg-foreground/90"
+            >
+              Continue Shopping
+            </Button>
           </Link>
         </div>
       : <div className="flex flex-col gap-8 lg:flex-row lg:items-start">

@@ -15,7 +15,7 @@ export const Header = () => {
       >
         <div className="flex mr-4">
           <img
-            src="public/img/icons/Logo.svg"
+            src="/img/icons/Logo.svg"
             alt="Nice Boook logo"
           />
         </div>

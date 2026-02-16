@@ -107,7 +107,7 @@ export const Catalog = () => {
 
       <div className="col-span-full h-0" />
 
-      {currentProducts.map((currentProduct, index) => (
+      {currentProducts.map((_currentProduct, index) => (
         <div
           key={index}
           className="

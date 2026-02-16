@@ -1,3 +1,3 @@
-import { Cart } from '@/components/Сart';
+import { Cart } from '@/components/Cart';
 
 export const CartPage = () => <Cart />;

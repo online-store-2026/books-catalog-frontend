@@ -23,7 +23,7 @@ function App() {
     <>
       <div className="flex min-h-screen flex-col">
         <Header />
-        {/* <Catalog /> */}
+        <Catalog />
         <main className="flex-1">
           <Routes>
             <Route

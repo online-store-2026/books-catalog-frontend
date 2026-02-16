@@ -24,6 +24,10 @@ export const FavoriteButton = ({
   return (
     <button
       onClick={toggleFavorite}
+      className={cn(
+        'p-2 rounded-full transition-all duration-200 border border-transparent border-[#E2E6E9] rounded-lg',
+        'hover:border-[#313237] rounded-lg',
+      )}
       aria-label="Add to favorite"
     >
       <Heart

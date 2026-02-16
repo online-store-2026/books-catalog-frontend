@@ -18,6 +18,7 @@ import { KindlePage } from './pages/KindlePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PaperPage } from './pages/PaperPage';
 import { RightsPage } from './pages/RightsPage';
+import { CategoriesSection } from './components/CategoriesSection/CategoriesSection';
 
 function App() {
   return (
@@ -80,6 +81,7 @@ function App() {
               element={<NotFoundPage />}
             />
           </Routes>
+          <CategoriesSection />
         </main>
         <Footer />
       </div>

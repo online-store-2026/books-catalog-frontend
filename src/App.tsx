@@ -9,6 +9,7 @@ import { Header } from './components/Header';
 import { AudiobookPage } from './pages/AudiobookPage';
 import { CartPage } from './pages/CartPage';
 import { CatalogPage } from './pages/CatalogPage';
+import { CheckoutPage } from './pages/CheckoutPage';
 import { ContactsPage } from './pages/ContactsPage';
 import { FavouritesPage } from './pages/FavouritesPage';
 import { HomePage } from './pages/HomePage';
@@ -17,6 +18,7 @@ import { KindlePage } from './pages/KindlePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PaperPage } from './pages/PaperPage';
 import { RightsPage } from './pages/RightsPage';
+import { CategoriesSection } from './components/CategoriesSection/CategoriesSection';
 
 function App() {
   return (
@@ -59,6 +61,10 @@ function App() {
               element={<CartPage />}
             />
             <Route
+              path="/checkout"
+              element={<CheckoutPage />}
+            />
+            <Route
               path="/contacts"
               element={<ContactsPage />}
             />
@@ -75,6 +81,7 @@ function App() {
               element={<NotFoundPage />}
             />
           </Routes>
+          <CategoriesSection />
         </main>
         <Footer />
       </div>

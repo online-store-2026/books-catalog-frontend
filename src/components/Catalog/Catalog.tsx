@@ -47,6 +47,8 @@ export const Catalog = () => {
       .catch(() => console.log('Error'));
   }, []);
 
+  console.log(currentProducts);
+
   return (
     <GridContainer className="overflow-hidden">
       <div className="col-span-full flex flex-col items-start mb-8">

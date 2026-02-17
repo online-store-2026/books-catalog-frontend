@@ -8,7 +8,11 @@ type Props = {
   onCheckout: () => void;
 };
 
-export const CartCheckout = ({ total, totalItems, onCheckout }: Props) => {
+export const CartCheckout: React.FC<Props> = ({
+  total,
+  totalItems,
+  onCheckout,
+}) => {
   return (
     <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-card p-6">
       <p className={cn(TYPOGRAPHY.h2, 'text-foreground')}>

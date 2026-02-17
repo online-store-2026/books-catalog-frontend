@@ -21,7 +21,11 @@ type Props = {
   onQuantityChange: (id: string, delta: number) => void;
 };
 
-export const CartItem = ({ item, onRemove, onQuantityChange }: Props) => {
+export const CartItem: React.FC<Props> = ({
+  item,
+  onRemove,
+  onQuantityChange,
+}) => {
   return (
     <div
       className={cn(

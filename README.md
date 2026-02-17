@@ -32,6 +32,7 @@ Books Catalog is a full-featured web application for browsing and discovering bo
 ## 🛠️ Tech Stack
 
 ### Core Technologies
+
 - **Frontend Framework:** React 18.3 + TypeScript 5.6
 - **Build Tool:** Vite 6.0
 - **Styling:** CSS/SCSS + Tailwind CSS
@@ -39,6 +40,7 @@ Books Catalog is a full-featured web application for browsing and discovering bo
 - **UI Components:** Radix UI, shadcn-style components, Lucide React icons
 
 ### Development Tools
+
 - **Code Quality:** ESLint, Prettier
 - **Git Hooks:** Husky + lint-staged
 - **Deployment:** Vercel (with automatic CI/CD)
@@ -56,17 +58,20 @@ Books Catalog is a full-featured web application for browsing and discovering bo
 ### Installation
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/online-store-2026/books-catalog-frontend.git
    cd books-catalog-frontend
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 3. **Start the development server:**
+
    ```bash
    npm run dev
    ```
@@ -172,6 +177,7 @@ This project uses **Vercel** for continuous deployment with automatic builds on 
 - **Performance:** Optimized with Vite's build pipeline
 
 ### Deployment URL
+
 - **Production:** [https://books-catalog-frontend.vercel.app](https://books-catalog-frontend.vercel.app)
 
 ---
@@ -179,17 +185,20 @@ This project uses **Vercel** for continuous deployment with automatic builds on 
 ## 🎯 Features In Detail
 
 ### Book Catalog
+
 - Browse books by format (Paperback, Kindle, Audiobook)
 - Filter by categories
 - Sort by price, popularity, or newest releases
 
 ### Shopping Experience
+
 - Add items to cart with quantity selection
 - Real-time cart updates
 - Persistent cart state
 - Checkout flow
 
 ### User Interface
+
 - Clean, modern design
 - Smooth animations and transitions
 - Loading states and error handling

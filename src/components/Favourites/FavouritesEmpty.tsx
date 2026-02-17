@@ -51,7 +51,7 @@ export const FavouritesEmpty = ({
           </div>
         </div>
 
-        <Link to="/catalog">
+        <Link to="/home">
           <CustomButton size="catalog">{buttonText}</CustomButton>
         </Link>
       </div>
@@ -59,7 +59,7 @@ export const FavouritesEmpty = ({
       {showSuggestions && <div />}
 
       <Link
-        to="/catalog"
+        to="/home"
         className="group mt-8 flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
       >
         View all{' '}

@@ -18,7 +18,7 @@ export const Favourites = ({
   return (
     <div className="container mx-auto w-full max-w-[1280px] p-4 md:p-8">
       <Link
-        to="/catalog"
+        to="/home"
         className={cn(
           TYPOGRAPHY.small,
           'mb-2 inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors',

@@ -32,7 +32,7 @@
 
 @media (max-width: 639px) {
   .you-might-like {
-    margin-top: 2191px;
+    margin-top: 56px;
     padding-left: 16px;
     gap: 24px;
   }
@@ -47,7 +47,7 @@
 
 @media (min-width: 640px) and (max-width: 1199px) {
   .you-might-like {
-    margin-top: 1522px;
+    margin-top: 56px;
     padding-left: 24px;
     gap: 24px;
   }
@@ -66,7 +66,7 @@
 
 @media (min-width: 1200px) {
   .you-might-like {
-    margin-top: 1800px;
+    margin-top: 80px;
     padding-left: 32px;
     gap: 24px;
   }

@@ -2,9 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import { getPaperbacks } from '../../api/products';
 import { ProductCard } from '../ProductCard/ProductCard';
 //import { Product } from '../types/Product';
-import './YouMightLikePage.css';
+import './BooksSection.css';
 
-export const YouMightLikePage = () => {
+interface Props {
+  title: string;
+}
+
+export const BooksSection = ({ title }: Props) => {
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -37,7 +41,7 @@ export const YouMightLikePage = () => {
   return (
     <section className="you-might-like w-full">
       <div className="section-header">
-        <h2 className="section-title font-bold">You may like</h2>
+        <h2 className="section-title font-bold">{title}</h2>
         <div className="flex gap-[16px]">
           <button
             onClick={() => scroll('left')}

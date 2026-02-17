@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getPaperbacks } from '@/services/booksAPI';
+import { getPaperBooks } from '@/services/booksAPI';
 import { ProductCard } from './ProductCard';
 import type { Book } from '@/types/Book';
 
@@ -8,7 +8,7 @@ export const YouMightLike = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getPaperbacks()
+    getPaperBooks()
       .then((data) => {
         setBooks(data);
       })

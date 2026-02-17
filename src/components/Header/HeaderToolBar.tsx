@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import { Heart, Menu, Search, ShoppingBag } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const navIconButtonStyles = cn(
   'flex items-center justify-center w-[48px] h-[48px]',
@@ -14,26 +15,28 @@ export const HeaderToolBar = () => {
     <>
       <div className="hidden sm:flex items-center">
         <button
-          className={`${navIconButtonStyles} desktop:hidden`}
+          className={`${navIconButtonStyles} lg:hidden`}
           aria-label="Search"
         >
           <Search size={20} />
         </button>
         <button>
-          <button
-            className={`${navIconButtonStyles} desktop:h-[64px] desktop:w-[64px]`}
-            aria-label="Favorites"
+          <Link
+            to="/favourites"
+            className={`${navIconButtonStyles} lg:h-[64px] lg:w-[64px]`}
+            aria-label="Favourites"
           >
             <Heart size={20} />
-          </button>
+          </Link>
         </button>
-        <button
-          className={`${navIconButtonStyles} desktop:h-[64px] desktop:w-[64px]`}
-          aria-label="Favorites"
+        <Link
+          to="/cart"
+          className={`${navIconButtonStyles} lg:h-[64px] lg:w-[64px]`}
+          aria-label="ShoppingBag"
         >
           <ShoppingBag size={20} />
           {/*<span className="absolute top-1 right-1 w-2 h-2 bg-[#27AE60] rounded-full border border-white" />*/}
-        </button>
+        </Link>
       </div>
       <button className={`${navIconButtonStyles} sm:hidden`}>
         <Menu size={16} />

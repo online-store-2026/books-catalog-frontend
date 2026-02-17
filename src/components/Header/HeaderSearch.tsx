@@ -26,7 +26,7 @@ export const HeaderSearch = () => {
   }, []);
 
   return (
-    <div className="hidden desktop:flex items-center gap-[12px] mr-6 h-full">
+    <div className="hidden lg:flex items-center gap-[12px] mr-6 h-full">
       <div className="flex items-center gap-2 px-4 h-[40px] min-w-[300px] border border-[#E2E6E9] rounded-[8px] bg-[#FAFBFC] focus-within:border-[#B4BDC3] transition-colors">
         <Search
           size={18}

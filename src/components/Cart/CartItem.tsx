@@ -15,17 +15,17 @@ export type CartItemType = {
   quantity: number;
 };
 
-type CartItemProps = {
+type Props = {
   item: CartItemType;
   onRemove: (id: string) => void;
   onQuantityChange: (id: string, delta: number) => void;
 };
 
-export const CartItem = ({
+export const CartItem: React.FC<Props> = ({
   item,
   onRemove,
   onQuantityChange,
-}: CartItemProps) => {
+}) => {
   return (
     <div
       className={cn(

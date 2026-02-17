@@ -1,15 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
-import { getPaperbacks } from '../../api/products';
 import { ProductCard } from '../ProductCard/ProductCard';
 //import { Product } from '../types/Product';
 import './BooksSection.css';
+import { getPaperBooks } from '@/services/booksAPI';
+import type { Book } from '@/types/Book';
 
 interface Props {
   title: string;
 }
 
 export const BooksSection = ({ title }: Props) => {
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState<Book[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -22,7 +23,7 @@ export const BooksSection = ({ title }: Props) => {
   };
 
   useEffect(() => {
-    getPaperbacks()
+    getPaperBooks()
       .then((data) => {
         setBooks(data);
       })

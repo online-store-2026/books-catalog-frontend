@@ -1,4 +1,4 @@
 import { MainBanner } from './MainBanner';
-import './MainBanner.css';
+import './MainBanner.scss';
 
 export { MainBanner };

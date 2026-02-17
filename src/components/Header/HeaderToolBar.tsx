@@ -1,37 +1,40 @@
-import { cn } from '@/lib/utils';
-import { Heart, Menu, Search, ShoppingBag } from 'lucide-react';
+// import { cn } from '@/lib/utils';
+import { Heart, /* Menu, */ Search, ShoppingBag } from 'lucide-react';
 import { Link } from 'react-router-dom';
+// import { Icon } from '../ui/icons';
 
-type Props = {
-  onMenuClick: () => void;
-};
+// const navIconButtonStyles = '...'; // TODO: define or import
 
-const baseButton =
+/*const baseButton =
   'flex items-center justify-center transition-all duration-200 hover:bg-gray-50 active:opacity-80 outline-none cursor-pointer text-[#313237]';
+*/
+// type Props = {
+//   onMenuClick: () => void;
+// };
 
-export const HeaderToolBar = ({ onMenuClick }: Props) => {
+export const HeaderToolBar = (/* { onMenuClick }: Props */) => {
   return (
     <>
       {/* Desktop + Tablet icons */}
       <div className="hidden sm:flex items-center h-full">
         <button
-          className={`${navIconButtonStyles} lg:hidden`}
+          className="lg:hidden flex items-center justify-center h-[48px] w-[48px]"
           aria-label="Search"
         >
           <Search size={20} />
         </button>
-        <button>
-          <Link
-            to="/favourites"
-            className={`${navIconButtonStyles} lg:h-[64px] lg:w-[64px]`}
-            aria-label="Favourites"
-          >
-            <Heart size={20} />
-          </Link>
-        </button>
+        {/* <button> */}
+        <Link
+          to="/favourites"
+          className="flex items-center justify-center h-[48px] w-[48px] lg:h-[64px] lg:w-[64px]"
+          aria-label="Favourites"
+        >
+          <Heart size={20} />
+        </Link>
+        {/* </button> */}
         <Link
           to="/cart"
-          className={`${navIconButtonStyles} lg:h-[64px] lg:w-[64px]`}
+          className="flex items-center justify-center h-[48px] w-[48px] lg:h-[64px] lg:w-[64px]"
           aria-label="ShoppingBag"
         >
           <ShoppingBag size={20} />
@@ -40,7 +43,7 @@ export const HeaderToolBar = ({ onMenuClick }: Props) => {
       </div>
 
       {/* Mobile burger ONLY */}
-      <button
+      {/* <button
         onClick={onMenuClick}
         className={cn(
           baseButton,
@@ -52,7 +55,7 @@ export const HeaderToolBar = ({ onMenuClick }: Props) => {
           name="menu"
           className="w-4 h-4"
         />
-      </button>
+      </button> */}
     </>
   );
 };

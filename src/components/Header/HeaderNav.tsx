@@ -20,7 +20,6 @@ export const HeaderNav = () => {
         return (
           <Link
             key={item.label}
-            // Параметр має бути однаковим (тут 'tab')
             to={item.path}
             className={cn(
               'relative h-full flex items-center px-1 transition-colors duration-200',

@@ -1,17 +1,24 @@
-import { TYPOGRAPHY } from '@/constants/typography';
-import { cn } from '@/lib/utils';
-import { ChevronLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { ChevronLeft } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+import { TYPOGRAPHY } from '@/constants/typography';
+import { ProductCard } from '../ProductCard';
 import { FavouritesEmpty } from './FavouritesEmpty';
 
-export const Favourites = () => {
-  const favourites = ['card'];
-  const emptyFavourites = favourites.length === 0;
+import type { FavouritesProps } from './Favourites.types';
+
+export const Favourites = ({
+  books = [],
+  title = 'Favourites',
+}: FavouritesProps) => {
+  const booksCount: number = books.length;
+  const isEmptyBooks: boolean = booksCount === 0;
 
   return (
     <div className="container mx-auto w-full max-w-[1280px] p-4 md:p-8">
       <Link
-        to="/catalog"
+        to="/home"
         className={cn(
           TYPOGRAPHY.small,
           'mb-2 inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors',
@@ -21,21 +28,20 @@ export const Favourites = () => {
         Home / Favourites
       </Link>
 
-      {emptyFavourites ?
+      {isEmptyBooks ?
         <FavouritesEmpty />
       : <div>
-          <h1 className={cn(TYPOGRAPHY.h1, 'mb-8 text-foreground')}>
-            Favourites
-          </h1>
+          <h1 className={cn(TYPOGRAPHY.h1, 'mb-8 text-foreground')}>{title}</h1>
 
-          <p className="mb-4 text-gray-400">{favourites.length} items</p>
-
+          <p className="mb-4 text-gray-400">
+            {booksCount} {booksCount === 1 ? 'item' : 'items'}
+          </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 [@media(min-width:1200px)]:grid-cols-4 gap-4 justify-items-center">
-            {favourites.map((item) => (
-              <div
-                key={item}
-                className="h-[440px] w-full max-w-[288px] border rounded-lg bg-white shadow-sm"
-              ></div>
+            {books.map((item) => (
+              <ProductCard
+                key={item.id}
+                book={item}
+              />
             ))}
           </div>
         </div>

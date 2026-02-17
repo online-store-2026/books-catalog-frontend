@@ -1,5 +1,6 @@
 import type { Book } from '@/types/Book';
 import { Button } from '../ui/button';
+import { FavoriteButton } from '../ui/FavoriteButton';
 
 interface Props {
   book: Book;
@@ -130,10 +131,7 @@ export const ProductCard = ({ book }: Props) => {
         >
           Add to cart
         </Button>
-
-        <div className="w-[40px] h-[40px] flex items-center justify-center border border-border rounded-[8px]">
-          {/* Іконка серця */}
-        </div>
+        <FavoriteButton />
       </div>
     </div>
   );

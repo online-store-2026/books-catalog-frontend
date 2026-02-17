@@ -1,14 +1,24 @@
-import {
-  Heart,
-  MousePointerClick,
-  ArrowRight,
-  ShoppingBag,
-} from 'lucide-react';
+import { Heart, MousePointerClick, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { TYPOGRAPHY } from '@/constants/typography';
+import { CustomButton } from '../ui/CustomButton';
 
-export const FavouritesEmpty = () => {
+import type { FavouritesEmptyProps } from './FavouritesEmpty.types';
+
+const DEFAULT_CONTENT = {
+  TITLE: 'Your heart is still looking for a match',
+  DESCRIPTION:
+    "It looks like you haven't found any books to fall in love with yet.",
+  BUTTON: 'Explore Catalog',
+} as const;
+
+export const FavouritesEmpty = ({
+  title = DEFAULT_CONTENT.TITLE,
+  description = DEFAULT_CONTENT.DESCRIPTION,
+  buttonText = DEFAULT_CONTENT.BUTTON,
+  showSuggestions = true,
+}: FavouritesEmptyProps) => {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-20">
@@ -23,15 +33,10 @@ export const FavouritesEmpty = () => {
           />
         </div>
 
-        <h2 className={cn(TYPOGRAPHY.h2, 'mb-6')}>
-          Your heart is still looking for a match
-        </h2>
+        <h2 className={cn(TYPOGRAPHY.h2, 'mb-6')}>{title}</h2>
 
         <div className="flex flex-col items-center gap-6 mb-10">
-          <p className="text-gray-500 text-lg">
-            It looks like you haven&apos;t found any items to fall in love with
-            yet.
-          </p>
+          <p className="text-gray-500 text-lg">{description}</p>
 
           <div className="inline-flex items-center gap-3 bg-gray-50 px-6 py-4 rounded-2xl border border-dashed border-gray-300">
             <MousePointerClick className="size-5 text-blue-500" />
@@ -46,34 +51,20 @@ export const FavouritesEmpty = () => {
           </div>
         </div>
 
-        <Link
-          to="/catalog"
-          className="group flex items-center gap-2 bg-[#313237] text-white px-10 py-4 rounded-full font-semibold transition-all hover:bg-black hover:shadow-xl active:scale-95"
-        >
-          <ShoppingBag className="size-5" />
-          <span>Explore Catalog</span>
-          <ArrowRight className="size-5 transition-transform group-hover:translate-x-2" />
+        <Link to="/catalog">
+          <CustomButton size="catalog">{buttonText}</CustomButton>
         </Link>
       </div>
 
-      <div className="border-t border-gray-100 pt-16">
-        <div className="flex items-center justify-between mb-10">
-          <div>
-            <h3 className="text-2xl font-bold">Top Products</h3>
-            <p className="text-gray-400 text-sm mt-1">
-              Maybe your &quot;match&quot; is waiting here?
-            </p>
-          </div>
-          {/* Можна зробити блок з рандомним вибором топ-книг */}
-          <Link
-            to="/catalog"
-            className="group flex items-center gap-1text-muted-foreground hover:text-foreground transition-colors"
-          >
-            View all{' '}
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
-      </div>
+      {showSuggestions && <div />}
+
+      <Link
+        to="/catalog"
+        className="group mt-8 flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+      >
+        View all{' '}
+        <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+      </Link>
     </div>
   );
 };

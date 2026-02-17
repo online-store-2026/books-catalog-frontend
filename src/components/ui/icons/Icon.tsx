@@ -85,7 +85,7 @@ export const Icon: React.FC<IconProps> = ({
     : size === 'sm' ? 'w-4 h-4'
     : 'w-6 h-6';
 
-  const variantClasses: Record<IconVariant, string> = {
+  const variantsOfClasses: Record<IconVariant, string> = {
     default: 'text-foreground',
     black: 'text-black',
   };
@@ -98,7 +98,7 @@ export const Icon: React.FC<IconProps> = ({
         'text-red-600'
       : 'text-foreground hover:text-red-500'
     : isThickIcon ? 'text-black'
-    : variantClasses[variant];
+    : variantsOfClasses[variant];
 
   const fillValue = isHeart && state === 'selected' ? 'currentColor' : 'none';
 

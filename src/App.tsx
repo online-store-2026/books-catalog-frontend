@@ -15,6 +15,7 @@ import { KindlePage } from '@/pages/KindlePage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { PaperPage } from '@/pages/PaperPage';
 import { RightsPage } from '@/pages/RightsPage';
+import { CategoryPage } from './pages/CategoryPage';
 // import { CategoriesSection } from '@/components/CategoriesSection/CategoriesSection';
 
 function App() {
@@ -47,6 +48,10 @@ function App() {
             <Route
               path="/audiobook"
               element={<AudiobookPage />}
+            />
+            <Route
+              path="/category/:categoryName"
+              element={<CategoryPage />}
             />
             <Route
               path="/favourites"

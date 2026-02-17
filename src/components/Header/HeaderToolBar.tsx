@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
-import { Icon } from '../ui/icons/Icon';
+import { Heart, Menu, Search, ShoppingBag } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 type Props = {
   onMenuClick: () => void;
@@ -14,42 +15,28 @@ export const HeaderToolBar = ({ onMenuClick }: Props) => {
       {/* Desktop + Tablet icons */}
       <div className="hidden sm:flex items-center h-full">
         <button
-          className={cn(
-            baseButton,
-            'border-l border-[#E5E7EB] w-[48px] h-[48px] lg:hidden',
-          )}
-          aria-label="Favorites"
+          className={`${navIconButtonStyles} lg:hidden`}
+          aria-label="Search"
         >
-          <Icon
-            name="search"
-            className="w-4 h-4"
-          />
+          <Search size={20} />
         </button>
-        <button
-          className={cn(
-            baseButton,
-            'border-l border-[#E5E7EB] w-[48px] h-[48px] lg:w-[64px] lg:h-[64px]',
-          )}
-          aria-label="Favorites"
+        <button>
+          <Link
+            to="/favourites"
+            className={`${navIconButtonStyles} lg:h-[64px] lg:w-[64px]`}
+            aria-label="Favourites"
+          >
+            <Heart size={20} />
+          </Link>
+        </button>
+        <Link
+          to="/cart"
+          className={`${navIconButtonStyles} lg:h-[64px] lg:w-[64px]`}
+          aria-label="ShoppingBag"
         >
-          <Icon
-            name="heart"
-            className="w-4 h-4"
-          />
-        </button>
-
-        <button
-          className={cn(
-            baseButton,
-            'border-l border-[#E5E7EB] w-[48px] h-[48px] lg:w-[64px] lg:h-[64px]',
-          )}
-          aria-label="Cart"
-        >
-          <Icon
-            name="shoppingBag"
-            className="w-4 h-4"
-          />
-        </button>
+          <ShoppingBag size={20} />
+          {/*<span className="absolute top-1 right-1 w-2 h-2 bg-[#27AE60] rounded-full border border-white" />*/}
+        </Link>
       </div>
 
       {/* Mobile burger ONLY */}

@@ -1,170 +1,155 @@
-import { getPaperBooks } from '@/services/booksAPI';
 import { GridContainer } from '../GridContainer/GridContainer';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import type { Book } from '@/types/Book';
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from '../ui/pagination';
+import { CatalogControls } from './CatalogControls';
+import { PaginationBlock } from './PaginationBlock';
+import { BooksList } from './BooksList';
 
-export const Catalog = () => {
-  const [product, setProduct] = useState<Book[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number | 'all'>('all');
+function filtredProduct(incomingProduct: Book[], sortBy: string) {
+  let changedProduct = [...incomingProduct];
 
-  const currentProducts =
-    itemsPerPage === 'all' ? product : (
-      product.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage,
+  changedProduct = changedProduct.filter((product) => {
+    return product.lang === 'uk';
+  });
+
+  changedProduct.sort((a, b) => {
+    const aPrice = a.priceDiscount ? a.priceDiscount : a.priceRegular;
+    const bPrice = b.priceDiscount ? b.priceDiscount : b.priceRegular;
+
+    switch (sortBy) {
+      case 'alphabetically':
+        return a.name.localeCompare(b.name);
+
+      case 'cheapest':
+        return aPrice - bPrice;
+
+      case 'newest':
+      default:
+        return b.publicationYear - a.publicationYear;
+    }
+  });
+
+  return changedProduct;
+}
+
+type Props = {
+  products: Book[];
+  title: string;
+};
+
+export const Catalog = ({ products, title }: Props) => {
+  const [itemsPerPage, setItemsPerPage] = useState<number | 'all'>(16);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pageFromUrl = Number(searchParams.get('page') || 1);
+  const sort = searchParams.get('sort') || 'newest';
+  const MAX_VISIBLE = 5;
+
+  const filtresProducts = filtredProduct(products, sort);
+
+  const totalPages =
+    itemsPerPage === 'all' ? 1 : (
+      Math.ceil(filtresProducts.length / itemsPerPage)
+    );
+
+  const safePage = Math.min(pageFromUrl, totalPages || 1);
+
+  const currentProducts: Book[] =
+    itemsPerPage === 'all' ? filtresProducts : (
+      filtresProducts.slice(
+        (safePage - 1) * Number(itemsPerPage),
+        safePage * Number(itemsPerPage),
       )
     );
 
-  const totalPages =
-    itemsPerPage === 'all' ? 1 : Math.ceil(product.length / itemsPerPage);
+  let startPage = Math.max(safePage - Math.floor(MAX_VISIBLE / 2), 1);
+  let endPage = startPage + MAX_VISIBLE - 1;
 
-  const pageNumbers = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pageNumbers.push(i);
+  if (endPage > totalPages) {
+    endPage = totalPages;
+    startPage = Math.max(endPage - MAX_VISIBLE + 1, 1);
   }
 
+  const visiblePages = [];
+
+  for (let i = startPage; i <= endPage; i++) {
+    visiblePages.push(i);
+  }
+
+  const handleChangeNumber = useCallback(
+    (targetPage: number) => {
+      const newSearchParams = new URLSearchParams(searchParams.toString());
+
+      newSearchParams.set('page', targetPage.toString());
+
+      navigate({
+        pathname: location.pathname,
+        search: `?${newSearchParams.toString()}`,
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+    [searchParams, navigate, location.pathname],
+  );
+
+  const handleChangeArrow = (order: 'prev' | 'next') => {
+    const newSearchParams = new URLSearchParams(searchParams.toString());
+
+    const targetPage = order === 'prev' ? safePage - 1 : safePage + 1;
+
+    newSearchParams.set('page', targetPage.toString());
+
+    navigate({
+      pathname: location.pathname,
+      search: `?${newSearchParams.toString()}`,
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   useEffect(() => {
-    getPaperBooks()
-      .then(setProduct)
-      .catch(() => console.log('Error'));
-  }, []);
+    if (totalPages === 0) return;
+
+    if (pageFromUrl < 1) {
+      handleChangeNumber(1);
+      return;
+    }
+
+    if (pageFromUrl > totalPages) {
+      handleChangeNumber(totalPages);
+    }
+  }, [pageFromUrl, totalPages, handleChangeNumber]);
 
   return (
     <GridContainer className="overflow-hidden">
       <div className="col-span-full flex flex-col items-start mb-8">
         <h1 className="text-[#313237] text-[32px] md:text-[48px] font-manrope font-bold leading-tight tracking-[-0.01em] md:tracking-[-0.02em] mb-2">
-          Paper books
+          {title}
         </h1>
         <p className="text-[#89939A] text-[14px] font-manrope font-medium">
-          {`${product.length} books`}
+          {`${filtresProducts.length} books`}
         </p>
       </div>
 
-      <div className="col-span-2 md:col-span-4 lg:col-span-4 text-left mb-[24px]">
-        <label className="text-[#89939A] text-[12px] font-manrope font-medium mb-[3px]">
-          Sort by
-        </label>
-        <Select defaultValue="newest">
-          <SelectTrigger className="w-full h-[40px] rounded-[8px] border-[#E2E6E9] bg-white font-manrope text-[#313237] text-[14px] font-bold">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="newest">Newest</SelectItem>
-              <SelectItem value="alphabetically">Alphabetically</SelectItem>
-              <SelectItem value="cheapest ">Cheapest </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div className="col-span-2 md:col-span-3 lg:col-span-3 text-left mb-[24px]">
-        <label className="text-[#89939A] text-[12px] font-manrope font-medium mb-[3px]">
-          Items on page
-        </label>
-        <Select
-          defaultValue="all"
-          onValueChange={(value) => {
-            if (value === 'all') {
-              setItemsPerPage('all');
-            } else {
-              setItemsPerPage(Number(value));
-            }
-            setCurrentPage(1);
-          }}
-        >
-          <SelectTrigger className="w-full h-[40px] rounded-[8px] border-[#E2E6E9] bg-white font-manrope text-[#313237] text-[14px] font-bold">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="all">All</SelectItem>
-              <SelectItem value="4">4</SelectItem>
-              <SelectItem value="8">8</SelectItem>
-              <SelectItem value="16">16</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
+      <CatalogControls
+        sort={sort}
+        setSearchParams={setSearchParams}
+        setItemsPerPage={setItemsPerPage}
+        handleChangeNumber={handleChangeNumber}
+      />
 
       <div className="col-span-full h-0" />
 
-      {currentProducts.map((_currentProduct, index) => (
-        <div
-          key={index}
-          className="
-            col-span-4
-            md:col-span-6
-            lg:col-span-6
-            h-[440px]
-            w-full
-            max-w-[288px]
-            bg-red-600
-            mb-[24px]
-            justify-self-center
-          "
-        />
-      ))}
+      <BooksList books={currentProducts} />
 
-      <div className="col-span-full flex justify-center">
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (currentPage > 1) setCurrentPage(currentPage - 1);
-                }}
-              />
-            </PaginationItem>
-            {pageNumbers.map((page) => (
-              <PaginationItem key={page}>
-                <PaginationLink
-                  href="#"
-                  isActive={currentPage === page}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setCurrentPage(page);
-                  }}
-                >
-                  {page}
-                </PaginationLink>
-              </PaginationItem>
-            ))}
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationNext
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-                }}
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
-      </div>
+      <PaginationBlock
+        safePage={safePage}
+        handleChangeArrow={handleChangeArrow}
+        visiblePages={visiblePages}
+        handleChangeNumber={handleChangeNumber}
+        totalPages={totalPages}
+      />
     </GridContainer>
   );
 };

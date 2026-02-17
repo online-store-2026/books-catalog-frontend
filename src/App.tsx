@@ -1,5 +1,5 @@
 import './App.css';
-// import { Catalog } from './components/Catalog/Catalog';
+
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
@@ -15,6 +15,7 @@ import { KindlePage } from '@/pages/KindlePage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { PaperPage } from '@/pages/PaperPage';
 import { RightsPage } from '@/pages/RightsPage';
+import { CategoryPage } from './pages/CategoryPage';
 // import { CategoriesSection } from '@/components/CategoriesSection/CategoriesSection';
 
 function App() {
@@ -22,7 +23,6 @@ function App() {
     <>
       <div className="flex min-h-screen flex-col">
         <Header />
-        {/* <Catalog /> */}
         <main className="flex-1">
           <Routes>
             <Route
@@ -48,6 +48,10 @@ function App() {
             <Route
               path="/audiobook"
               element={<AudiobookPage />}
+            />
+            <Route
+              path="/category/:categoryName"
+              element={<CategoryPage />}
             />
             <Route
               path="/favourites"

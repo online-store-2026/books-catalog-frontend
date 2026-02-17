@@ -1,5 +1,5 @@
 import type { Book } from '@/types/Book';
-import { Button } from '../components/ui/button';
+import { Button } from '../ui/button';
 
 interface Props {
   book: Book;

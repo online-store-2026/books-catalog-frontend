@@ -1,0 +1,159 @@
+.product-card {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+.product-card-image {
+  position: relative;
+  flex-shrink: 0;
+}
+.product-info {
+  display: flex;
+  flex-direction: column;
+}
+.author-box {
+  display: flex;
+  flex-direction: column;
+}
+.title-wrapper {
+  display: flex;
+  align-items: center;
+}
+.author-wrapper {
+  display: flex;
+  align-items: center;
+}
+.price-section {
+  display: flex;
+  flex-direction: column;
+}
+.price-row {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+.current-price-box {
+  display: flex;
+  align-items: center;
+}
+.old-price-box {
+  display: flex;
+  align-items: center;
+}
+.actions-row {
+  display: flex;
+  flex-direction: row;
+  margin-top: auto;
+}
+.add-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 639px) {
+  .product-card {
+    width: 214px;
+    height: 400px;
+    padding: 20px;
+  }
+  .product-card-image {
+    width: 174px;
+    height: 185px;
+  }
+  .product-info {
+    width: 174px;
+    height: 103px;
+    gap: 8px;
+  }
+  .author-box {
+    width: 174px;
+  }
+  .title-wrapper {
+    width: 174px;
+    height: 24px;
+  }
+  .author-wrapper {
+    width: 87px;
+    height: 21px;
+  }
+  .price-section {
+    width: 94px;
+    height: 50px;
+    gap: 2px;
+  }
+  .price-row {
+    gap: 2.5px;
+  }
+  .current-price-box {
+    width: 45px;
+    height: 27px;
+  }
+  .old-price-box {
+    width: 41px;
+    height: 22px;
+  }
+  .actions-row {
+    width: 174px;
+    height: 40px;
+    gap: 8px;
+  }
+  .add-button {
+    width: 126px;
+    height: 40px;
+  }
+}
+
+@media (min-width: 640px) {
+  .product-card {
+    width: 272px;
+    height: 506px;
+    padding: 32px;
+  }
+  .product-card-image {
+    width: 208px;
+    height: 263px;
+  }
+  .product-info {
+    width: 208px;
+    height: 107px;
+    gap: 8px;
+  }
+  .author-box {
+    width: 208px;
+  }
+  .title-wrapper {
+    width: 208px;
+    height: 45px;
+  }
+  .author-wrapper {
+    width: 87px;
+    height: 21px;
+  } /* залишив як у мобілці, бо в коді було так */
+  .price-section {
+    width: 108px;
+    height: 54px;
+    gap: 2px;
+  }
+  .price-row {
+    gap: 8px;
+  }
+  .current-price-box {
+    width: 49px;
+    height: 31px;
+  }
+  .old-price-box {
+    width: 51px;
+    height: 27px;
+  }
+  .actions-row {
+    width: 208px;
+    height: 40px;
+    gap: 8px;
+  }
+  .add-button {
+    width: 160px;
+    height: 40px;
+  }
+}

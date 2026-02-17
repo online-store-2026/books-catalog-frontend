@@ -1,3 +1,3 @@
-import { Favourites } from '@/components/Favourites/favourites';
+import { Favourites } from '@/components/Favourites';
 
 export const FavouritesPage = () => <Favourites />;

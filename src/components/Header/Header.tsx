@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { HeaderSearch } from './HeaderSearch';
 import { HeaderNav } from './HeaderNav';
+import { BurgerMenu } from './BurgerMenu';
 import { HeaderToolBar } from './HeaderToolBar';
 
 export const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <header className="w-full bg-white border-b border-elements min-w-[320px]">
       <div
@@ -25,7 +29,9 @@ export const Header = () => {
           <HeaderSearch />
           <HeaderToolBar />
         </div>
-      </div>
-    </header>
+      </header>
+
+      {isMenuOpen && <BurgerMenu onClose={() => setIsMenuOpen(false)} />}
+    </>
   );
 };

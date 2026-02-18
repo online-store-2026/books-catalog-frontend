@@ -26,7 +26,7 @@ export const KindlePage = () => {
   return (
     <Catalog
       products={books}
-      title="KindlePage"
+      title="Kindle"
     />
   );
 };

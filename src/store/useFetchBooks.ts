@@ -1,6 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type DependencyList } from 'react';
 
-export const useFetchBooks = <T>(fetchFn: () => Promise<T[]>) => {
+export const useFetchBooks = <T>(
+  fetchFn: () => Promise<T[]>,
+  deps: DependencyList,
+) => {
   const [data, setData] = useState<T[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -30,7 +33,7 @@ export const useFetchBooks = <T>(fetchFn: () => Promise<T[]>) => {
     return () => {
       isMounted = false;
     };
-  }, [fetchFn]);
+  }, deps);
 
   return { data, loading, error };
 };

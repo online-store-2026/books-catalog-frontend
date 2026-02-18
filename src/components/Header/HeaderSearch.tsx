@@ -1,4 +1,3 @@
-import { Search } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Select,
@@ -8,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { SearchInput } from '../ui/input/SearchInput';
+import { SearchWithAutocomplete } from './SearchWithAutocomplete';
 
 const CATEGORIES = [
   { label: 'Programming', value: 'programming' },
@@ -39,14 +38,7 @@ export const HeaderSearch = ({ isMobile }: Props) => {
     return (
       <div className="flex flex-col gap-2 w-full">
         {/* Search input */}
-        <div className="flex items-center gap-2 px-4 h-[40px] w-full border border-border rounded-md">
-          <Search size={16} />
-          <input
-            type="text"
-            placeholder="Find a book or author"
-            className="w-full outline-none text-sm"
-          />
-        </div>
+        <SearchWithAutocomplete />
 
         {/* Dropdown categories */}
         <Select
@@ -78,7 +70,7 @@ export const HeaderSearch = ({ isMobile }: Props) => {
   // Desktop версія (горизонтально)
   return (
     <div className="hidden lg:flex items-center gap-3 mr-6 h-full">
-      <SearchInput />
+      <SearchWithAutocomplete />
 
       <Select
         value={currentCategory}

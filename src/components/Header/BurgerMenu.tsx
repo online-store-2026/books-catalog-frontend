@@ -2,6 +2,7 @@ import { HeaderSearch } from './HeaderSearch';
 import { Icon } from '../ui/icons';
 import { HeaderNav } from './HeaderNav';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
 type Props = {
   onClose: () => void;
@@ -18,12 +19,15 @@ export const BurgerMenu = ({ onClose }: Props) => {
             'h-[48px] border-b',
           )}
         >
-          <div className="flex items-center">
+          <Link
+            to="/"
+            className="flex mr-4 transition-transform hover:scale-105"
+          >
             <img
               src="/img/icons/Logo.svg"
-              alt="Nice Book logo"
+              alt="Nice Boook logo"
             />
-          </div>
+          </Link>
           <button
             onClick={onClose}
             className="w-[48px] h-[48px] flex items-center justify-center"

@@ -4,6 +4,7 @@ import { HeaderSearch } from './HeaderSearch';
 import { HeaderNav } from './HeaderNav';
 import { BurgerMenu } from './BurgerMenu';
 import { HeaderToolBar } from './HeaderToolBar';
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,12 +19,15 @@ export const Header = () => {
             'lg:h-[64px]',
           )}
         >
-          <div className="flex mr-4">
+          <Link
+            to="/"
+            className="flex mr-4 transition-transform hover:scale-105"
+          >
             <img
               src="/img/icons/Logo.svg"
-              alt="Nice Book logo"
+              alt="Nice Boook logo"
             />
-          </div>
+          </Link>
 
           <HeaderNav />
 

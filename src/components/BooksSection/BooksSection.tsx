@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { ProductCard } from '../ProductCard/ProductCard';
-//import { Product } from '../types/Product';
-import './BooksSection.scss';
+import { ProductCard } from '@/components/ProductCard';
 import { getPaperBooks } from '@/services/booksAPI';
 import type { Book } from '@/types/Book';
 import { ScrollButton } from '@/utils/ScrollButtons';

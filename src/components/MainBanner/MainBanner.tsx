@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import './MainBanner.scss';
 import bannerSm from './banner-mob.png';
 import { handleScroll } from '@/utils/handleScroll';
 import { ScrollButton } from '@/utils/ScrollButtons';
@@ -7,7 +6,7 @@ import { ScrollButton } from '@/utils/ScrollButtons';
 const BANNERS = [
   { id: 1, img: bannerSm, alt: 'Independence Day' },
   { id: 2, img: bannerSm, alt: 'New books' },
-  { id: 3, img: bannerSm, alt: 'Recomendations' },
+  { id: 3, img: bannerSm, alt: 'Recommendations' },
 ];
 
 export const MainBanner = () => {

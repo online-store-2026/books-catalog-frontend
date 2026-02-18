@@ -22,8 +22,11 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
   const price = book.priceDiscount ?? book.priceRegular;
 
   const toggleAddToCart = () => {
-    if (isBookInCart) removeFromCart(book.id);
-    else addToCart(book);
+    if (isBookInCart) {
+      removeFromCart(book.id);
+    } else {
+      addToCart(book);
+    }
   };
 
   return (

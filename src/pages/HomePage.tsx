@@ -1,8 +1,6 @@
 import { BooksSection } from './../components/BooksSection';
 import { MainBanner } from '@/components/MainBanner';
 
-//export const HomePage = () => <div>Home</div>;
-
 export const HomePage = () => {
   return (
     <main className="flex flex-col w-full">

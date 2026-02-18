@@ -51,12 +51,14 @@ export const MainBanner = () => {
       className="flex flex-col items-center
     w-full h-[352px] pt-0
     min-[640px]:h-[368px] min-[640px]:pt-[40px]
-    min-[1200px]:h-[432px] min-[1200px]:pt-[65px]"
+    min-[1200px]:h-[432px] min-[1200px]:pt-[65px]
+    min-[1200px]:max-w-[1136px] min-[1200px]:mx-auto"
     >
       <div
         ref={scrollRef}
         onScroll={onScroll}
-        className="flex w-full h-[320px] overflow-x-auto snap-x snap-mandatory scrollbar-hide [&::-webkit-scrollbar]:hidden"
+        className="flex w-full h-[320px] overflow-x-auto overflow-y-hidden snap-x snap-mandatory scrollbar-hide [&::-webkit-scrollbar]:hidden 
+        touch-action-pan-x"
         style={{ scrollbarWidth: 'none' }}
       >
         {BANNERS.map((banner) => (

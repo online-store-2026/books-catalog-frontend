@@ -26,10 +26,12 @@ export const ScrollButton = ({
   return (
     <button
       onClick={handleScroll}
-      className="w-[40px] h-[40px] flex items-center justify-center border border-border rounded-full hover:bg-accent transition-colors flex-shrink-0"
+      className="w-[40px] h-[40px] flex items-center justify-center transition-all duration-200 hover:scale-125 transition-colors flex-shrink-0"
       aria-label={`Scroll ${direction}`}
     >
-      <span className="text-[20px]">{direction === 'left' ? '←' : '→'}</span>
+      <span className="text-[20px] font-normal hover:font-black transition-all ">
+        {direction === 'left' ? '←' : '→'}
+      </span>
     </button>
   );
 };

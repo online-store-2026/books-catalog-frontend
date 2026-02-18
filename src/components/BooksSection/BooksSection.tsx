@@ -38,7 +38,11 @@ export const BooksSection = ({ title }: Props) => {
     flex flex-col
     mt-[56px] pl-[16px] gap-[24px]
     min-[640px]:mt-[56px] min-[640px]:pl-[24px]
-    min-[1200px]:mt-[80px] min-[1200px]:pl-[32px]
+    min-[1200px]:mt-[80px] 
+  min-[1200px]:w-[1136px] 
+  min-[1200px]:mx-auto 
+  min-[1200px]:pl-0
+    min-[1200px]:overflow-x-auto
   "
     >
       <div
@@ -79,7 +83,8 @@ export const BooksSection = ({ title }: Props) => {
         [&::-webkit-scrollbar]:hidden
         overflow-x-auto gap-[16px] h-[400px]
         min-[640px]:h-[506px]
-        min-[1200px]:overflow-x-hidden min-[1200px]:h-[571px]
+       min-[1200px]:h-[571px]
+       min-[1200px]:overflow-x-auto
       "
       >
         {books.map((book, index) => (

@@ -23,7 +23,7 @@ export const AddButton: React.FC<AddButtonProps> = ({
       size={size}
       className={cn(className)}
     >
-      {isSelected ? 'Remove from cart' : 'Add to cart'}
+      {isSelected ? 'Added' : 'Add to cart'}
     </CustomButton>
   );
 };

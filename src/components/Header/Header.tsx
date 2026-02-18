@@ -11,7 +11,7 @@ export const Header = () => {
 
   return (
     <>
-      <header className="w-full bg-white border-b border-elements min-w-[320px]">
+      <header className="sticky top-0 z-50 w-full bg-white border-b border-elements min-w-[320px]">
         <div
           className={cn(
             'mx-auto flex items-center justify-between pl-4 transition-all',

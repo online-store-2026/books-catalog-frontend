@@ -3,7 +3,7 @@ import { getPaperBooks } from '@/services/booksAPI';
 import { useFetchBooks } from '@/store/useFetchBooks';
 
 export const PaperPage = () => {
-  const { data: books, loading, error } = useFetchBooks(getPaperBooks);
+  const { data: books, loading, error } = useFetchBooks(getPaperBooks, []);
 
   if (loading) {
     return (

@@ -74,7 +74,7 @@ function App() {
               element={<RightsPage />}
             />
             <Route
-              path="/item/:id"
+              path="/item/:type/:bookSlug"
               element={<ItemCardPage />}
             />
             <Route

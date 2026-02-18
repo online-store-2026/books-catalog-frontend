@@ -3,7 +3,7 @@ import { getKindleBooks } from '@/services/booksAPI';
 import { useFetchBooks } from '@/store/useFetchBooks';
 
 export const KindlePage = () => {
-  const { data: books, loading, error } = useFetchBooks(getKindleBooks);
+  const { data: books, loading, error } = useFetchBooks(getKindleBooks, []);
 
   if (loading) {
     return (
@@ -26,7 +26,7 @@ export const KindlePage = () => {
   return (
     <Catalog
       products={books}
-      title="KindlePage"
+      title="Kindle"
     />
   );
 };

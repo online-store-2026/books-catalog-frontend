@@ -1,5 +1,5 @@
 import type { Book } from '@/types/Book';
-import { useCartAndFavorites } from '@/hooks/useCartAndFavourites.ts';
+import { useCartFavorites } from '@/context/CartFavoritesContext.tsx';
 
 import { AddButton } from '@/components/ui/Buttons/AddButton';
 import { HeartButton } from '@/components/ui/Buttons/HeartButton';
@@ -44,7 +44,7 @@ export const ItemCardDetails: React.FC<Props> = ({
     decreaseQuantity,
     toggleFavorite,
     isFavorite,
-  } = useCartAndFavorites();
+  } = useCartFavorites();
 
   const isFavourite = isFavorite(book.id);
   const cartItem = cart.find((item) => item.id === book.id);

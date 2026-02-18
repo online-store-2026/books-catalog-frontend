@@ -1,31 +1,23 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Minus, Plus, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useCartFavorites } from '@/context/CartFavoritesContext.tsx';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { cn } from '@/lib/utils';
-
-export type CartItemType = {
-  id: string;
-  category: string;
-  itemId: string;
-  name: string;
-  author: string;
-  image: string;
-  price: number;
-  quantity: number;
-};
+import type { CartItem as CartItemType } from '@/types/Book';
 
 type Props = {
-  item: CartItemType;
-  onRemove: (id: string) => void;
-  onQuantityChange: (id: string, delta: number) => void;
+  book: CartItemType;
 };
 
-export const CartItem: React.FC<Props> = ({
-  item,
-  onRemove,
-  onQuantityChange,
-}) => {
+export const CartItem: React.FC<Props> = ({ book }) => {
+  const { removeFromCart, increaseQuantity, decreaseQuantity } =
+    useCartFavorites();
+
+  const price = book.priceDiscount ?? book.priceRegular;
+  const total = Math.round(price * book.quantity * 100) / 100;
+
   return (
     <div
       className={cn(
@@ -36,7 +28,7 @@ export const CartItem: React.FC<Props> = ({
       <div className="flex items-center gap-4 sm:gap-6">
         <button
           type="button"
-          onClick={() => onRemove(item.id)}
+          onClick={() => removeFromCart(book.id)}
           className="flex shrink-0 items-center justify-center text-ring hover:text-muted-foreground transition-colors"
           aria-label="Remove item"
         >
@@ -44,20 +36,20 @@ export const CartItem: React.FC<Props> = ({
         </button>
 
         <Link
-          to={`/${item.category}/${item.itemId}`}
+          to={`/item/${book.type}/${book.slug}`}
           className="flex items-center gap-4 h-20 sm:gap-6"
         >
           <img
-            src={item.image}
-            alt={item.name}
+            src={`/${book.images[0]}`}
+            alt={book.name}
             className="h-full object-contain"
           />
           <div className="min-w-0">
             <p className={cn(TYPOGRAPHY.body, 'font-semibold text-foreground')}>
-              {item.name}
+              {book.name}
             </p>
             <p className={cn(TYPOGRAPHY.small, 'text-muted-foreground')}>
-              {item.author}
+              {book.author}
             </p>
           </div>
         </Link>
@@ -69,8 +61,8 @@ export const CartItem: React.FC<Props> = ({
             variant="outline"
             size="icon-sm"
             className="rounded-full"
-            disabled={item.quantity === 1}
-            onClick={() => onQuantityChange(item.id, -1)}
+            disabled={book.quantity === 1}
+            onClick={() => decreaseQuantity(book.id)}
             aria-label="Decrease quantity"
           >
             <Minus className="size-4" />
@@ -82,14 +74,14 @@ export const CartItem: React.FC<Props> = ({
               'w-5 text-center font-semibold text-foreground',
             )}
           >
-            {item.quantity}
+            {book.quantity}
           </span>
 
           <Button
             variant="outline"
             size="icon-sm"
             className="rounded-full"
-            onClick={() => onQuantityChange(item.id, 1)}
+            onClick={() => increaseQuantity(book.id)}
             aria-label="Increase quantity"
           >
             <Plus className="size-4" />
@@ -97,7 +89,7 @@ export const CartItem: React.FC<Props> = ({
         </div>
 
         <p className={cn(TYPOGRAPHY.h3, 'text-foreground sm:w-20 sm:text-end')}>
-          ₴{item.price * item.quantity}
+          ${total}
         </p>
       </div>
     </div>

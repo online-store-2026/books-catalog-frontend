@@ -3,7 +3,7 @@ import { getAudioBooks } from '@/services/booksAPI';
 import { useFetchBooks } from '@/store/useFetchBooks';
 
 export const AudiobookPage = () => {
-  const { data: books, loading, error } = useFetchBooks(getAudioBooks);
+  const { data: books, loading, error } = useFetchBooks(getAudioBooks, []);
 
   if (loading) {
     return (
@@ -26,7 +26,7 @@ export const AudiobookPage = () => {
   return (
     <Catalog
       products={books}
-      title="Audiobooks"
+      title="Audiobook"
     />
   );
 };

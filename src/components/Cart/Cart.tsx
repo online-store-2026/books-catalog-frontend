@@ -1,82 +1,47 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useMemo } from 'react';
 import { ChevronLeft } from 'lucide-react';
-import { getPaperBooks } from '@/services/booksAPI';
-import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
+import { useCartFavorites } from '@/context/CartFavoritesContext.tsx';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { cn } from '@/lib/utils';
-import type { Book } from '@/types/Book';
-import { CartCheckout, CartItem, type CartItemType } from '@/components/Cart';
-
-/** IDs of products (hardcoded for now) */
-const CART_PRODUCT_IDS = [
-  'de4cdd13-4819-4b76-8ac6-d8dbc8d182ff', // Don't Make Me Think
-  '01df779d-fcca-40be-8ac8-6e2ef15bc0df', // Grokking Algorithms
-  'e6360591-a4b1-418a-922f-de193ff7e096', // Graphic Design: The New Basics
-];
-
-function toCartItem(product: Book): CartItemType {
-  return {
-    id: product.id,
-    category: product.type,
-    itemId: product.slug,
-    name: product.name,
-    author: product.author,
-    image: product.images[0],
-  } as CartItemType;
-}
+import { CartItem } from './CartItem';
+import { CartSummary } from './CartSummary';
+import { EmptyCart } from './EmptyCart';
 
 export const Cart = () => {
+  const { cart } = useCartFavorites();
   const navigate = useNavigate();
-  const [items, setItems] = useState<CartItemType[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    getPaperBooks()
-      .then((products) => {
-        const cartProducts = products
-          .filter((p) => CART_PRODUCT_IDS.includes(p.id))
-          .map(toCartItem);
-
-        setItems(cartProducts);
-        setError(null);
-      })
-      .catch((err) => {
-        console.error('Failed to load cart:', err);
-        setError('Failed to load cart items. Please try again later.');
-      })
-      .finally(() => setIsLoading(false));
-  }, []);
-
-  const removeItem = (id: string) => {
-    setItems((prev) => prev.filter((item) => item.id !== id));
-  };
-
-  const updateQuantity = (id: string, delta: number) => {
-    setItems((prev) =>
-      prev.map((item) => {
-        if (item.id !== id) {
-          return item;
-        }
-
-        const next = item.quantity + delta;
-
-        return { ...item, quantity: next < 1 ? 1 : next };
-      }),
-    );
-  };
-
-  const total = items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0,
+  const totalPrice = useMemo(
+    () =>
+      Math.round(
+        cart.reduce(
+          (sum, book) =>
+            sum + (book.priceDiscount ?? book.priceRegular) * book.quantity,
+          0,
+        ) * 100,
+      ) / 100,
+    [cart],
   );
-  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+
+  const totalQuantity = useMemo(
+    () => cart.reduce((sum, book) => sum + book.quantity, 0),
+    [cart],
+  );
 
   return (
     <div className="mx-auto max-w-312 px-4 pt-6 pb-16 sm:px-6 lg:px-8 lg:pb-20">
-      <Link
-        to="/catalog"
+      <button
+        onClick={() => {
+          if (
+            document.referrer &&
+            new URL(document.referrer).origin === window.location.origin
+          ) {
+            navigate(-1);
+          } else {
+            navigate('/');
+          }
+        }}
         className={cn(
           TYPOGRAPHY.small,
           'mb-2 inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors',
@@ -84,59 +49,31 @@ export const Cart = () => {
       >
         <ChevronLeft className="size-4" />
         Back
-      </Link>
+      </button>
 
-      <h1 className={cn(TYPOGRAPHY.h1, 'mb-8 text-foreground')}>Cart</h1>
-
-      {isLoading ?
+      <div className="mb-8 sm:mb-10 pt-2">
+        <h1 className={cn(TYPOGRAPHY.h1, 'text-foreground')}>Cart</h1>
         <p className={cn(TYPOGRAPHY.body, 'text-muted-foreground')}>
-          Loading...
+          {totalQuantity} {totalQuantity === 1 ? 'item' : 'items'}
         </p>
-      : error ?
-        <div className="text-center py-12">
-          <p className={cn(TYPOGRAPHY.body, 'text-destructive mb-4')}>
-            {error}
-          </p>
-          <Button onClick={() => window.location.reload()}>Try Again</Button>
-        </div>
-      : items.length === 0 ?
-        <div className="text-center py-12">
-          <p className={cn(TYPOGRAPHY.h3, 'text-foreground mb-2')}>
-            Your cart is empty
-          </p>
-          <p className={cn(TYPOGRAPHY.body, 'text-muted-foreground mb-6')}>
-            Add some books to get started
-          </p>
-          <Link to="/catalog">
-            <Button
-              size="lg"
-              className="bg-foreground text-background hover:bg-foreground/90"
-            >
-              Continue Shopping
-            </Button>
-          </Link>
-        </div>
-      : <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
-          <div className="flex-1 space-y-4">
-            {items.map((item) => (
+      </div>
+
+      {cart.length > 0 ?
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-4 lg:justify-center">
+          <div className="flex flex-col gap-4 flex-1 min-w-75 lg:max-w-188">
+            {cart.map((book) => (
               <CartItem
-                key={item.id}
-                item={item}
-                onRemove={removeItem}
-                onQuantityChange={updateQuantity}
+                key={book.slug}
+                book={book}
               />
             ))}
           </div>
-
-          <div className="w-full shrink-0 lg:w-80">
-            <CartCheckout
-              total={total}
-              totalItems={totalItems}
-              onCheckout={() => navigate('/checkout')}
-            />
-          </div>
+          <CartSummary
+            totalPrice={totalPrice}
+            totalQuantity={totalQuantity}
+          />
         </div>
-      }
+      : <EmptyCart />}
     </div>
   );
 };

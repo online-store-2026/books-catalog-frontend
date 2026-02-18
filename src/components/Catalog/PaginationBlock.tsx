@@ -23,7 +23,7 @@ export const PaginationBlock = ({
   totalPages,
 }: Props) => {
   return (
-    <div className="col-span-full flex justify-center">
+    <div className="col-span-full flex justify-center mb-6">
       <Pagination>
         <PaginationContent>
           <PaginationItem>

@@ -3,9 +3,10 @@ import { Icon } from '../ui/icons';
 
 type Props = {
   onMenuClick: () => void;
+  onSearchIconClick: () => void;
 };
 
-export const HeaderToolBar = ({ onMenuClick }: Props) => {
+export const HeaderToolBar = ({ onMenuClick, onSearchIconClick }: Props) => {
   return (
     <>
       {/* Desktop + Tablet */}
@@ -15,6 +16,7 @@ export const HeaderToolBar = ({ onMenuClick }: Props) => {
           aria-label="Search"
         >
           <Icon
+            onClick={onSearchIconClick}
             name="search"
             className="w-4 h-4"
           />

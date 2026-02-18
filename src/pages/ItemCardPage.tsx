@@ -5,7 +5,7 @@ import { ItemCard } from '@/components/ItemCard';
 type BookType = 'paperback' | 'kindle' | 'audiobook';
 
 export const ItemCardPage: React.FC = () => {
-  const { type } = useParams<{ type: string }>();
+  const { type } = useParams<{ type: string; bookSlug: string }>();
 
   const validType = type as BookType;
 

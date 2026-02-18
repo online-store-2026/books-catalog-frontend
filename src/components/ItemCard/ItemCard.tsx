@@ -9,6 +9,7 @@ import { ItemCardGallery } from './ItemCardGallery';
 import { ItemCardDetails } from './ItemCardDetails';
 import { ItemCardAbout } from './ItemCardAbout';
 import { ItemCardCharacteristics } from './ItemCardCharacteristics';
+import { BooksSection } from '@/components/BooksSection';
 
 type BookType = 'paperback' | 'kindle' | 'audiobook';
 
@@ -34,7 +35,7 @@ export const ItemCard: React.FC<Props> = ({ type }) => {
         setBook(current);
         setBookVariants(variants);
       })
-      .catch(() => navigate('/404', { replace: true }))
+      .catch(() => navigate('*', { replace: true }))
       .finally(() => setIsLoading(false));
   }, [type, bookSlug, navigate]);
 
@@ -64,11 +65,9 @@ export const ItemCard: React.FC<Props> = ({ type }) => {
 
         <header className="mb-10">
           <h1 className={`${TYPOGRAPHY.h1} text-foreground mb-2`}>
-            {' '}
             {book.name}
           </h1>
           <p className={`${TYPOGRAPHY.h4} text-muted-foreground font-medium`}>
-            {' '}
             {book.author}
           </p>
         </header>
@@ -87,6 +86,11 @@ export const ItemCard: React.FC<Props> = ({ type }) => {
           <ItemCardCharacteristics book={book} />
         </section>
       </article>
+
+      <BooksSection
+        title="You may like"
+        //fetchBooks={getYouMightLikeBooks}
+      />
     </div>
   );
 };

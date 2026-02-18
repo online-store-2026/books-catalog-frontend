@@ -1,52 +1,51 @@
-import { TYPOGRAPHY } from '@/constants/typography';
+import React from 'react';
 import type { Book } from '@/types/Book';
 import { formatListeningLength } from '@/utils/formatListeningLength';
+import { TYPOGRAPHY } from '@/constants/typography';
 
-type Props = {
-  book: Book;
-};
+type Props = { book: Book };
+type Spec = { label: string; value: string | number | null | undefined };
 
 export const ItemCardCharacteristics: React.FC<Props> = ({ book }) => {
-  const langLabel = book.lang.toUpperCase() === 'UK' ? 'Ukrainian' : 'ENG';
-  const illustrationsLabel = book.illustrations ? 'Yes' : 'No';
-
-  const items: [string, string | number | null][] = [
-    ['Author', book.author],
-    ['Cover', book.coverType ?? null],
-    [
-      'ListeningLength',
-      book.listeningLength ? formatListeningLength(book.listeningLength) : null,
-    ],
-    ['Narrator', book.narrator ?? null],
-    ['Pages', book.numberOfPages ?? null],
-    ['Year', book.publicationYear ?? null],
-    ['Publication', book.publication],
-    ['Format', book.format ?? null],
-    ['Language', langLabel],
-    ['Illustrations', illustrationsLabel],
+  const specs: Spec[] = [
+    { label: 'Author', value: book.author },
+    { label: 'Cover type', value: book.coverType },
+    { label: 'Number of pages', value: book.numberOfPages },
+    { label: 'Year of publication', value: book.publicationYear },
+    { label: 'Publication', value: book.publication },
+    { label: 'Format', value: book.format },
+    {
+      label: 'Duration',
+      value:
+        book.listeningLength ?
+          formatListeningLength(book.listeningLength)
+        : null,
+    },
+    { label: 'Narrator', value: book.narrator },
+    { label: 'Language', value: book.lang === 'uk' ? 'Ukrainian' : 'English' },
   ];
 
-  const filteredItems = items.filter(([, value]) => value !== null);
+  const filtered = specs.filter((s) => s.value != null);
 
   return (
     <section className="w-full max-w-160 mx-auto lg:mx-0">
-      <h2 className={`${TYPOGRAPHY.h2} text-foreground mb-4`}>
+      <h2 className={`${TYPOGRAPHY.h2} text-foreground dark:text-white mb-4`}>
         Characteristics
       </h2>
 
       <div className="border-t border-border">
-        {filteredItems.map(([label, value], idx) => (
+        {filtered.map((spec, index) => (
           <div
-            key={label}
-            className={`flex justify-between py-2.5 ${idx > 0 ? 'border-t border-border' : ''}`}
+            key={spec.label}
+            className={`flex justify-between py-3 ${index !== filtered.length - 1 ? 'border-b border-border' : ''}`}
           >
-            <span
-              className={`${TYPOGRAPHY.body} font-medium text-muted-foreground`}
-            >
-              {label}
+            <span className={`${TYPOGRAPHY.body} text-muted-foreground`}>
+              {spec.label}
             </span>
-            <span className={`${TYPOGRAPHY.body} font-medium text-foreground`}>
-              {value}
+            <span
+              className={`${TYPOGRAPHY.body} font-medium text-foreground text-right`}
+            >
+              {spec.value}
             </span>
           </div>
         ))}

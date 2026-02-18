@@ -1,4 +1,4 @@
 import { BooksSection } from './BooksSection';
-import './BooksSection.css';
+import './BooksSection.scss';
 
 export { BooksSection };

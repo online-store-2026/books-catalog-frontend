@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import './MainBanner.css';
+import './MainBanner.scss';
 import bannerSm from './banner-mob.png';
 import { handleScroll } from '@/utils/handleScroll';
 import { ScrollButton } from '@/utils/ScrollButtons';

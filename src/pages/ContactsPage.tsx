@@ -1,10 +1,10 @@
 import { useState, useRef } from 'react';
 
-enum ContactFormField {
-  Name = 'name',
-  Email = 'email',
-  Message = 'message',
-}
+const ContactFormField = {
+  Name: 'name',
+  Email: 'email',
+  Message: 'message',
+} as const;
 
 export const ContactsPage = () => {
   const [formData, setFormData] = useState({

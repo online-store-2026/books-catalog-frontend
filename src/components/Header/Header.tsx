@@ -21,7 +21,7 @@ export const Header = () => {
           <div className="flex mr-4">
             <img
               src="/img/icons/Logo.svg"
-              alt="Nice Boook logo"
+              alt="Nice Book logo"
             />
           </div>
 
@@ -29,7 +29,7 @@ export const Header = () => {
 
           <div className="flex items-center h-full">
             <HeaderSearch />
-            <HeaderToolBar />
+            <HeaderToolBar onMenuClick={() => setIsMenuOpen(true)} />
           </div>
         </div>
       </header>

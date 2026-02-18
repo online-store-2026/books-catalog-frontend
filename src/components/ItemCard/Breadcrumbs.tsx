@@ -29,7 +29,7 @@ export const Breadcrumbs: React.FC<Props> = ({ type, category, bookName }) => {
       />
 
       <Link
-        to={`/${type}`}
+        to={`/${type === 'paperback' ? 'paper' : type}`}
         className={`${TYPOGRAPHY.body} capitalize hover:text-foreground transition-colors`}
       >
         {type === 'paperback' ? 'Paper Books' : type}

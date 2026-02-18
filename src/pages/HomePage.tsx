@@ -1,7 +1,6 @@
-import { BooksSection } from './../components/BooksSection';
+import { BooksSection } from '@/components/BooksSection';
 import { MainBanner } from '@/components/MainBanner';
-
-//export const HomePage = () => <div>Home</div>;
+import { CategoriesSection } from '@/components/CategoriesSection/CategoriesSection.tsx';
 
 export const HomePage = () => {
   return (
@@ -11,6 +10,8 @@ export const HomePage = () => {
         title="New Books"
         //fetchBooks={getNewBooks}
       />
+
+      <CategoriesSection />
 
       <BooksSection
         title="You may like"

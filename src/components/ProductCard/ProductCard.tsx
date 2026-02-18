@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Book } from '@/types/Book';
 import { Button } from '../ui/button';
 import { Icon } from '../ui/icons';
+import { FavoriteButton } from '../ui/FavoriteButton';
 
 interface Props {
   book: Book;
@@ -145,6 +146,7 @@ export const ProductCard = ({ book }: Props) => {
             state={isFavorite ? 'selected' : 'default'}
           />
         </div>
+        <FavoriteButton />
       </div>
     </div>
   );

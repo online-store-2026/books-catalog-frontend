@@ -46,7 +46,7 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
           <>
             <img
               className="w-full h-full object-contain"
-              src="/books/img/audiobook/2.webp"
+              src="/public/img/audiobook/2.webp"
               alt="iPad"
             />
             <img

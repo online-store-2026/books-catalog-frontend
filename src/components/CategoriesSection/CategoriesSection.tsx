@@ -1,64 +1,49 @@
 import { Link } from 'react-router-dom';
+import { TYPOGRAPHY } from '@/constants/typography';
+import { cn } from '@/lib/utils';
+
+const CATEGORIES = [
+  {
+    label: 'Paper books',
+    path: '/paper',
+    image: '/img/categories/Paper-books.png',
+  },
+  {
+    label: 'Audiobooks',
+    path: '/audiobook',
+    image: '/img/categories/Audiobooks.png',
+  },
+  {
+    label: 'Kindle books',
+    path: '/kindle',
+    image: '/img/categories/Kindle-books.png',
+  },
+];
 
 export const CategoriesSection = () => {
   return (
-    <section className="py-12">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold mb-8 text-left">Shop by category</h2>
+    <section className="flex flex-col mt-[56px] px-4 gap-6 min-[640px]:mt-[56px] min-[640px]:px-6 min-[1200px]:mt-[80px] min-[1200px]:w-[1136px] min-[1200px]:mx-auto min-[1200px]:px-0">
+      <h2 className={cn(TYPOGRAPHY.h2, 'text-foreground')}>Shop by category</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        {CATEGORIES.map((cat) => (
           <Link
-            to="/paper"
+            key={cat.path}
+            to={cat.path}
             className="group"
           >
             <div className="overflow-hidden rounded-2xl">
               <img
-                src="/img/categories/Paper-books.png"
-                alt="Paper books"
+                src={cat.image}
+                alt={cat.label}
                 className="w-full aspect-[4/3] object-cover transition duration-500 group-hover:scale-105"
               />
             </div>
-
-            <h3 className="mt-4 text-xl font-semibold text-left">
-              Paper books
+            <h3 className={cn(TYPOGRAPHY.h4, 'mt-4 text-foreground')}>
+              {cat.label}
             </h3>
-            <p className="text-gray-500 text-left">10,305 books</p>
           </Link>
-
-          <Link
-            to="/audiobook"
-            className="group"
-          >
-            <div className="overflow-hidden rounded-2xl">
-              <img
-                src="/img/categories/Audiobooks.png"
-                alt="Audiobooks"
-                className="w-full aspect-[4/3] object-cover transition duration-500 group-hover:scale-105"
-              />
-            </div>
-
-            <h3 className="mt-4 text-xl font-semibold text-left">Audiobooks</h3>
-            <p className="text-gray-500 text-left">10,305 books</p>
-          </Link>
-
-          <Link
-            to="/Kindle"
-            className="group"
-          >
-            <div className="overflow-hidden rounded-2xl">
-              <img
-                src="/img/categories/Kindle-books.png"
-                alt="Kindle books"
-                className="w-full aspect-[4/3] object-cover transition duration-500 group-hover:scale-105"
-              />
-            </div>
-
-            <h3 className="mt-4 text-xl font-semibold text-left">
-              Kindle books
-            </h3>
-            <p className="text-gray-500 text-left">10,305 books</p>
-          </Link>
-        </div>
+        ))}
       </div>
     </section>
   );

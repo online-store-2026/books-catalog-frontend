@@ -14,6 +14,9 @@ import {
   X,
   Headphones,
   Truck,
+  LogIn,
+  LogOut,
+  UserPlus,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -31,7 +34,10 @@ export type IconName =
   | 'plus'
   | 'close'
   | 'headphones'
-  | 'truck';
+  | 'truck'
+  | 'signIn'
+  | 'signUp'
+  | 'signOut';
 
 export type IconSize = 'sm' | 'md';
 
@@ -54,6 +60,9 @@ const icons = {
   close: X,
   headphones: Headphones,
   truck: Truck,
+  signIn: LogIn,
+  signUp: UserPlus,
+  signOut: LogOut,
 };
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {

@@ -4,7 +4,7 @@ import { useCartFavorites } from '@/context/CartFavoritesContext.tsx';
 import { AddButton } from '@/components/ui/Buttons/AddButton';
 import { HeartButton } from '@/components/ui/Buttons/HeartButton';
 import { Minus, Plus } from 'lucide-react';
-import { formatListeningLength } from '@/utils/formatListeningLength';
+import { formatListeningLength } from '@/utils/formatListeningLength.ts';
 import { LanguageSelector } from './LanguageSelector';
 import { TYPOGRAPHY } from '@/constants/typography';
 import React from 'react';

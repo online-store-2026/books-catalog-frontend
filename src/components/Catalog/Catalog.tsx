@@ -130,8 +130,8 @@ export const Catalog = ({ products, title, isLoading = false }: Props) => {
 
   return (
     <GridContainer className="overflow-hidden">
-      <div className="col-span-full flex flex-col items-start m-6">
-        <h1 className="text-[#313237] text-[32px] md:text-[48px] font-manrope font-bold leading-tight tracking-[-0.01em] md:tracking-[-0.02em] m-2">
+      <div className="col-span-full flex flex-col items-start mt-8 mb-8 md:mt-16-mb-10">
+        <h1 className="text-[#313237] text-[32px] md:text-[48px] font-manrope font-bold leading-tight tracking-[-0.01em] md:tracking-[-0.02em] mb-2">
           {title}
         </h1>
         <p className="text-[#89939A] text-[14px] font-manrope font-medium">

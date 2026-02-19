@@ -10,8 +10,7 @@ export const KindlePage = () => {
   return (
     <Catalog
       products={books}
-      title="Kindle"
-      isLoading={isLoading}
+      title="Kindle books"
     />
   );
 };

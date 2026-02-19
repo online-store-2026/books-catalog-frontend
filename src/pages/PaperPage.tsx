@@ -10,8 +10,7 @@ export const PaperPage = () => {
   return (
     <Catalog
       products={books}
-      title="Paper"
-      isLoading={isLoading}
+      title="Paper books"
     />
   );
 };

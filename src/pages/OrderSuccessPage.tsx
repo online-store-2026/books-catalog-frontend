@@ -65,7 +65,6 @@ const OrderSuccessPage = () => {
   return (
     <div className="py-12 pb-24">
       <div className="max-w-2xl mx-auto px-6">
-        {/* ── Success header ─────────────────────────── */}
         <div className="flex flex-col items-center text-center mb-12">
           <div className="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mb-6">
             <svg
@@ -91,9 +90,7 @@ const OrderSuccessPage = () => {
           </p>
         </div>
 
-        {/* ── Order card ──────────────────────────────── */}
         <div className="border border-gray-200 rounded-lg overflow-hidden">
-          {/* Header */}
           <div className="flex items-center justify-between px-6 py-4 bg-gray-50 border-b border-gray-200">
             <div>
               <p className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-0.5">
@@ -115,7 +112,6 @@ const OrderSuccessPage = () => {
             </div>
           </div>
 
-          {/* Items */}
           <ul className="divide-y divide-gray-100">
             {order.items.map((item) => (
               <li
@@ -146,7 +142,6 @@ const OrderSuccessPage = () => {
             ))}
           </ul>
 
-          {/* Totals */}
           <div className="px-6 py-4 border-t border-gray-200 bg-gray-50 flex flex-col gap-2">
             <div className="flex justify-between">
               <span className="text-sm text-gray-500">Subtotal</span>
@@ -168,7 +163,6 @@ const OrderSuccessPage = () => {
             </div>
           </div>
 
-          {/* Delivery info */}
           <div className="px-6 py-4 border-t border-gray-200">
             <p className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-3">
               Delivery to
@@ -185,7 +179,6 @@ const OrderSuccessPage = () => {
           </div>
         </div>
 
-        {/* ── Actions ─────────────────────────────────── */}
         <div className="flex flex-col gap-3 mt-8">
           <Link
             to="/"

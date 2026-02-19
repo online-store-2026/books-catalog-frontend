@@ -202,7 +202,6 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
         size="A4"
         style={styles.page}
       >
-        {/* ── Header ────────────────────────────── */}
         <View style={styles.header}>
           <Text style={styles.logo}>NICE BOOOK</Text>
           <View style={{ alignItems: 'flex-end' }}>
@@ -211,7 +210,6 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
           </View>
         </View>
 
-        {/* ── Meta row 1 — дата, оплата, статус ── */}
         <View
           style={{
             flexDirection: 'row',
@@ -246,14 +244,12 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
           </View>
         </View>
 
-        {/* ── Meta row 2 — білінг і доставка ───── */}
         <View
           style={{
             flexDirection: 'row',
             marginBottom: 36,
           }}
         >
-          {/* Bill to */}
           <View style={{ flex: 1, paddingRight: 24 }}>
             <Text style={styles.metaLabel}>BILL TO</Text>
             <Text
@@ -281,7 +277,6 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
             </Text>
           </View>
 
-          {/* Divider */}
           <View
             style={{
               width: 1,
@@ -290,7 +285,6 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
             }}
           />
 
-          {/* Ship to */}
           <View style={{ flex: 1, paddingLeft: 24 }}>
             <Text style={styles.metaLabel}>SHIP TO</Text>
             <Text
@@ -329,7 +323,6 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
           </View>
         </View>
 
-        {/* ── Table header ──────────────────────── */}
         <View style={styles.tableHeader}>
           <View style={styles.colImg} />
           <View style={styles.colItem}>
@@ -346,7 +339,6 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
           </View>
         </View>
 
-        {/* ── Table rows ────────────────────────── */}
         {order.items.map((item) => (
           <View
             key={item.id}
@@ -380,7 +372,6 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
           </View>
         ))}
 
-        {/* ── Totals ────────────────────────────── */}
         <View style={styles.totalsSection}>
           <View style={styles.totalRow}>
             <Text style={styles.totalLabel}>Subtotal</Text>
@@ -397,7 +388,6 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
           </View>
         </View>
 
-        {/* ── Footer ────────────────────────────── */}
         <View style={styles.footer}>
           <Text style={styles.footerText}>NICE BOOOK · niceboook.com</Text>
           <Text style={styles.footerText}>

@@ -21,7 +21,6 @@ export const DownloadInvoiceButton = ({
     if (ready) return;
     setIsConverting(true);
 
-    // Конвертуємо всі webp в base64
     const convertedItems = await Promise.all(
       order.items.map(async (item) => {
         const base64Images = await Promise.all(item.images.map(imageToBase64));

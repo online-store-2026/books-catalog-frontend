@@ -25,7 +25,6 @@ export const LiqPayButton = ({
       const result = await getLiqPayPayload(orderId, amount);
       setPayload(result);
 
-      // Mock — показуємо що буде після підключення бекенду
       if (
         result.data.startsWith('mock') ||
         result.signature.startsWith('mock')
@@ -45,7 +44,6 @@ export const LiqPayButton = ({
 
   return (
     <>
-      {/* Прихована форма — сабмітить автоматично коли є реальні дані */}
       {payload && (
         <LiqPayForm
           data={payload.data}
@@ -55,7 +53,6 @@ export const LiqPayButton = ({
 
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-3 p-4 bg-blue-50 border border-blue-100 rounded">
-          {/* LiqPay logo */}
           <svg
             width="48"
             height="20"

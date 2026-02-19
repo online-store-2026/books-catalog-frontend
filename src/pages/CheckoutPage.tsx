@@ -10,6 +10,7 @@ import { LiqPayButton } from '@/components/Checkout/LiqPayButton';
 import type { CheckoutFormValues } from '@/utils/checkoutSchema';
 import type { PaymentMethod } from '@/types/Order';
 import type { Order } from '@/types/Order';
+import { auth } from '@/firebase/firebase';
 
 type Step = 'delivery' | 'payment';
 
@@ -40,7 +41,6 @@ const CheckoutPage = () => {
     );
   }
 
-  // Крок 1 — зберегти замовлення і перейти до оплати
   const handleDeliverySubmit = async (data: CheckoutFormValues) => {
     setIsLoading(true);
     setError(null);
@@ -49,6 +49,7 @@ const CheckoutPage = () => {
         customer: data,
         items: cartItems,
         paymentMethod,
+        userId: auth.currentUser?.uid,
       });
       setCurrentOrder(order);
 
@@ -69,7 +70,6 @@ const CheckoutPage = () => {
     }
   };
 
-  // Крок 2 — успішна оплата
   const handlePaymentSuccess = () => {
     navigate(`/order-success/${currentOrder?.id}`);
   };
@@ -78,19 +78,12 @@ const CheckoutPage = () => {
     setError(msg);
   };
 
-  // LiqPay — mock редирект
-  // const handleLiqPay = () => {
-  //   alert('LiqPay redirect — підключається коли є бекенд');
-  //   // Реально: form.submit() з data + signature від бекенду
-  // };
-
   const stepLabels = ['1. Delivery', '2. Payment', '3. Confirmation'];
   const currentStepIndex = step === 'delivery' ? 0 : 1;
 
   return (
     <div className="py-10 pb-20 min-h-screen">
       <div className="max-w-5xl mx-auto px-6">
-        {/* Back */}
         <button
           type="button"
           onClick={() =>
@@ -119,7 +112,6 @@ const CheckoutPage = () => {
           Checkout
         </h1>
 
-        {/* Steps */}
         <div className="flex items-center gap-2.5 mb-12">
           {stepLabels.map((label, i) => (
             <div
@@ -144,7 +136,6 @@ const CheckoutPage = () => {
               </div>
             )}
 
-            {/* ── Step 1: Delivery ───────────────────── */}
             {step === 'delivery' && (
               <>
                 <PaymentMethodSelector
@@ -158,7 +149,6 @@ const CheckoutPage = () => {
               </>
             )}
 
-            {/* ── Step 2: Payment ────────────────────── */}
             {step === 'payment' && (
               <div className="flex flex-col gap-6">
                 <p className="text-[11px] font-bold tracking-widest uppercase text-gray-400">

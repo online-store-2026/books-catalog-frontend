@@ -42,7 +42,6 @@ const OrdersPage = () => {
   return (
     <div className="py-10 pb-24">
       <div className="max-w-3xl mx-auto px-6">
-        {/* ── Header ──────────────────────────────────── */}
         <div className="mb-10">
           <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight mb-1">
             My Orders
@@ -54,7 +53,6 @@ const OrdersPage = () => {
           </p>
         </div>
 
-        {/* ── Empty state ──────────────────────────────── */}
         {orders.length === 0 && (
           <div className="flex flex-col items-center gap-6 py-20 text-center">
             <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center">
@@ -106,7 +104,6 @@ const OrdersPage = () => {
           </div>
         )}
 
-        {/* ── Orders list ──────────────────────────────── */}
         {orders.length > 0 && (
           <ul className="flex flex-col gap-4">
             {orders.map((order) => (
@@ -115,7 +112,6 @@ const OrdersPage = () => {
                   to={`/order-success/${order.id}`}
                   className="block border border-gray-200 rounded-lg overflow-hidden hover:border-gray-400 transition-colors group"
                 >
-                  {/* Card header */}
                   <div className="flex items-center justify-between px-5 py-4 bg-gray-50 border-b border-gray-200">
                     <div className="flex flex-col gap-0.5">
                       <p className="text-[11px] font-bold tracking-widest uppercase text-gray-400">
@@ -137,9 +133,7 @@ const OrdersPage = () => {
                     </div>
                   </div>
 
-                  {/* Books preview */}
                   <div className="px-5 py-4 flex items-center gap-4">
-                    {/* Images stack */}
                     <div className="flex -space-x-3">
                       {order.items.slice(0, 3).map((item, i) => (
                         <img
@@ -162,7 +156,6 @@ const OrdersPage = () => {
                       )}
                     </div>
 
-                    {/* Info */}
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-gray-900 truncate">
                         {order.items.map((i) => i.name).join(', ')}
@@ -173,7 +166,6 @@ const OrdersPage = () => {
                       </p>
                     </div>
 
-                    {/* Total + arrow */}
                     <div className="flex items-center gap-3 flex-shrink-0">
                       <span className="text-base font-extrabold text-gray-900">
                         ${order.total.toFixed(2)}

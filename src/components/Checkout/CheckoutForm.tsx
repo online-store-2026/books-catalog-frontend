@@ -47,7 +47,6 @@ export const CheckoutForm = ({ onSubmit, isLoading }: CheckoutFormProps) => {
       noValidate
       className="flex flex-col gap-10"
     >
-      {/* ── Contact ─────────────────────────────────────── */}
       <div className="flex flex-col gap-5">
         <p className="text-[11px] font-bold tracking-widest uppercase text-gray-400">
           Contact information
@@ -101,7 +100,6 @@ export const CheckoutForm = ({ onSubmit, isLoading }: CheckoutFormProps) => {
         </div>
       </div>
 
-      {/* ── Delivery ────────────────────────────────────── */}
       <div className="flex flex-col gap-5">
         <p className="text-[11px] font-bold tracking-widest uppercase text-gray-400">
           Delivery address

@@ -5,13 +5,10 @@ interface LiqPayFormProps {
   signature: string;
 }
 
-// Коли є реальні data+signature — ця форма автоматично сабмітить
-// і юзера редиректить на сторінку LiqPay
 export const LiqPayForm = ({ data, signature }: LiqPayFormProps) => {
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
-    // Автосабміт як тільки отримали реальні дані від бекенду
     if (data && signature && !data.startsWith('mock')) {
       formRef.current?.submit();
     }

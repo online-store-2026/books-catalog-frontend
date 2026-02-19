@@ -25,11 +25,10 @@ export const StripePaymentForm = ({
 
     setIsLoading(true);
 
-    // Mock mode — clientSecret не справжній
     const isMock = !stripe || window.location.hostname === 'localhost';
 
     if (isMock) {
-      await new Promise((res) => setTimeout(res, 1000)); // імітуємо затримку
+      await new Promise((res) => setTimeout(res, 1000));
       setIsLoading(false);
       onSuccess();
       return;

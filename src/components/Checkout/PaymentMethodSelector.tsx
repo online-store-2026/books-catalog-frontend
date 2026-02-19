@@ -93,7 +93,6 @@ export const PaymentMethodSelector = ({
                 : 'border-gray-200 bg-white hover:border-gray-400',
               ].join(' ')}
             >
-              {/* Radio dot */}
               <span
                 className={[
                   'w-4 h-4 rounded-full border-2 flex-shrink-0 flex items-center justify-center transition-colors',
@@ -105,10 +104,8 @@ export const PaymentMethodSelector = ({
                 )}
               </span>
 
-              {/* Icon */}
               {method.icon}
 
-              {/* Text */}
               <div className="flex flex-col min-w-0">
                 <span className="text-sm font-semibold text-gray-900">
                   {method.label}

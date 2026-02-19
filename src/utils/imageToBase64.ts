@@ -15,7 +15,7 @@ export const imageToBase64 = (url: string): Promise<string> => {
       resolve(canvas.toDataURL('image/jpeg', 0.85));
     };
 
-    img.onerror = () => resolve(''); // якщо не завантажилась — порожньо
+    img.onerror = () => resolve('');
     img.src = absoluteUrl;
   });
 };

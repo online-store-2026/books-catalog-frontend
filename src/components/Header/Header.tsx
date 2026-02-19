@@ -6,6 +6,7 @@ import { BurgerMenu } from './BurgerMenu';
 import { HeaderToolBar } from './HeaderToolBar';
 import { Link } from 'react-router-dom';
 import { SearchWithAutocomplete } from './SearchWithAutocomplete';
+import { Bookmark } from './Bookmark';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,10 +52,13 @@ export const Header = () => {
           <div className="flex items-center h-full">
             <HeaderSearch />
             {isSearchOpen && <SearchWithAutocomplete />}
-            <HeaderToolBar
-              onMenuClick={() => setIsMenuOpen(true)}
-              onSearchIconClick={handleSearchClick}
-            />
+            <div className="relative h-full flex items-center">
+              <HeaderToolBar
+                onMenuClick={() => setIsMenuOpen(true)}
+                onSearchIconClick={handleSearchClick}
+              />
+              <Bookmark />
+            </div>
           </div>
         </div>
       </header>

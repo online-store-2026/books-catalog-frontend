@@ -2,6 +2,7 @@ import React from 'react';
 import { CustomButton } from '../CustomButton';
 import { cn } from '@/lib/utils';
 import type { ButtonSize } from '@/types/ui/Buttons';
+import { useTranslation } from 'react-i18next';
 
 interface AddButtonProps {
   onClick: () => void;
@@ -16,6 +17,7 @@ export const AddButton: React.FC<AddButtonProps> = ({
   size = 'itemCard',
   className,
 }) => {
+  const { t } = useTranslation();
   return (
     <CustomButton
       onClick={onClick}
@@ -23,7 +25,7 @@ export const AddButton: React.FC<AddButtonProps> = ({
       size={size}
       className={cn(className)}
     >
-      {isSelected ? 'Added' : 'Add to cart'}
+      {isSelected ? t('ui.added') : t('ui.addToCart')}
     </CustomButton>
   );
 };

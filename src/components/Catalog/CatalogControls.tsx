@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import {
   Select,
   SelectContent,
@@ -21,11 +22,12 @@ export const CatalogControls = ({
   setItemsPerPage,
   handleChangeNumber,
 }: Props) => {
+  const { t } = useTranslation();
   return (
     <>
       <div className="col-span-2 md:col-span-4 lg:col-span-4 text-left mb-[24px]">
         <label className="text-[#89939A] text-[12px] font-manrope font-medium mb-[3px]">
-          Sort by
+          {t('ui.sortBy')}
         </label>
         <Select
           value={sort}
@@ -49,9 +51,9 @@ export const CatalogControls = ({
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="newest">Newest</SelectItem>
-              <SelectItem value="alphabetically">Alphabetically</SelectItem>
-              <SelectItem value="cheapest">Cheapest</SelectItem>
+              <SelectItem value="newest">{t('ui.date')}</SelectItem>
+              <SelectItem value="alphabetically">{t('ui.name')}</SelectItem>
+              <SelectItem value="cheapest">{t('ui.price')}</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -59,7 +61,7 @@ export const CatalogControls = ({
 
       <div className="col-span-2 md:col-span-3 lg:col-span-3 text-left mb-[24px]">
         <label className="text-[#89939A] text-[12px] font-manrope font-medium mb-[3px]">
-          Items on page
+          {t('ui.itemsOnPage')}
         </label>
         <Select
           defaultValue="16"
@@ -78,7 +80,7 @@ export const CatalogControls = ({
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="all">All</SelectItem>
+              <SelectItem value="all">{t('ui.all')}</SelectItem>
               <SelectItem value="4">4</SelectItem>
               <SelectItem value="8">8</SelectItem>
               <SelectItem value="16">16</SelectItem>

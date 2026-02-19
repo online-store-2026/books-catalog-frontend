@@ -1,29 +1,33 @@
 import { Link } from 'react-router-dom';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 const CATEGORIES = [
   {
-    label: 'Paper books',
+    label: 'categories.paperBooks',
     path: '/paper',
     image: '/img/categories/Paper-books.png',
   },
   {
-    label: 'Audiobooks',
+    label: 'categories.audioBooks',
     path: '/audiobook',
     image: '/img/categories/Audiobooks.png',
   },
   {
-    label: 'Kindle books',
+    label: 'categories.kindleBooks',
     path: '/kindle',
     image: '/img/categories/Kindle-books.png',
   },
 ];
 
 export const CategoriesSection = () => {
+  const { t } = useTranslation();
   return (
     <section className="flex flex-col mt-[56px] px-4 gap-6 min-[640px]:mt-[56px] min-[640px]:px-6 min-[1200px]:mt-[80px] min-[1200px]:w-[1136px] min-[1200px]:mx-auto min-[1200px]:px-0">
-      <h2 className={cn(TYPOGRAPHY.h2, 'text-foreground')}>Shop by category</h2>
+      <h2 className={cn(TYPOGRAPHY.h2, 'text-foreground')}>
+        {t('categories.shopByCategory')}
+      </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
         {CATEGORIES.map((cat) => (
@@ -35,12 +39,12 @@ export const CategoriesSection = () => {
             <div className="overflow-hidden rounded-2xl">
               <img
                 src={cat.image}
-                alt={cat.label}
+                alt={t(cat.label)}
                 className="w-full aspect-[4/3] object-cover transition duration-500 group-hover:scale-105"
               />
             </div>
             <h3 className={cn(TYPOGRAPHY.h4, 'mt-4 text-foreground')}>
-              {cat.label}
+              {t(cat.label)}
             </h3>
           </Link>
         ))}

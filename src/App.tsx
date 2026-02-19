@@ -6,7 +6,7 @@ import { Header } from '@/components/Header';
 import { AudiobookPage } from '@/pages/AudiobookPage';
 import { CartPage } from '@/pages/CartPage';
 import { CatalogPage } from '@/pages/CatalogPage';
-import { CheckoutPage } from '@/pages/CheckoutPage';
+import CheckoutPage from '@/pages/CheckoutPage';
 import { ContactsPage } from '@/pages/ContactsPage';
 import { FavouritesPage } from '@/pages/FavouritesPage';
 import { HomePage } from '@/pages/HomePage';
@@ -16,6 +16,8 @@ import { NotFoundPage } from '@/pages/NotFoundPage.tsx';
 import { PaperPage } from '@/pages/PaperPage';
 import { RightsPage } from '@/pages/RightsPage';
 import { CategoryPage } from './pages/CategoryPage';
+import OrderSuccessPage from '@/pages/OrderSuccessPage';
+import OrdersPage from '@/pages/OrderPage.tsx';
 import { LoginPage } from './pages/LoginPage';
 import { SignUpPage } from './pages/SignUpPage';
 
@@ -80,6 +82,14 @@ function App() {
             <Route
               path="/checkout"
               element={<CheckoutPage />}
+            />
+            <Route
+              path="/order-success/:orderId"
+              element={<OrderSuccessPage />}
+            />
+            <Route
+              path="/orders"
+              element={<OrdersPage />}
             />
             <Route
               path="/contacts"

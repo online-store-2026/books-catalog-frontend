@@ -18,7 +18,7 @@ export const AudiobookPage = () => {
   return (
     <Catalog
       products={books}
-      title="Audiobook"
+      title="Audiobooks"
     />
   );
 };

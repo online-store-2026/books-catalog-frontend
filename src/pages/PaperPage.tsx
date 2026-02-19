@@ -18,7 +18,7 @@ export const PaperPage = () => {
   return (
     <Catalog
       products={books}
-      title="Paper"
+      title="Paper books"
     />
   );
 };

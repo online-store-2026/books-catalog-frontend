@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils';
 
 type Props = {
   isMobile?: boolean;
+  onLinkClick?: () => void;
 };
 
 const NAV_ITEMS = [
@@ -12,7 +13,7 @@ const NAV_ITEMS = [
   { label: 'AUDIOBOOK', path: '/audiobook' },
 ];
 
-export const HeaderNav = ({ isMobile }: Props) => {
+export const HeaderNav = ({ isMobile, onLinkClick }: Props) => {
   const { pathname } = useLocation();
 
   if (isMobile) {
@@ -24,6 +25,7 @@ export const HeaderNav = ({ isMobile }: Props) => {
             <Link
               key={item.label}
               to={item.path}
+              onClick={onLinkClick}
               className={cn(
                 'relative text-lg font-bold uppercase tracking-wider transition-colors duration-200',
                 isActive ?

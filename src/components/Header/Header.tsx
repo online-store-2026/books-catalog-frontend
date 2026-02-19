@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { HeaderSearch } from './HeaderSearch';
 import { HeaderNav } from './HeaderNav';
@@ -14,6 +14,17 @@ export const Header = () => {
   const handleSearchClick = () => {
     setIsSearchOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 639) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <>

@@ -5,6 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import { searchAllBooks } from '@/hooks/searchAllBooks';
 import { TextHighlighter } from './TextHighlighter';
 
+type Props = {
+  onSelect?: () => void;
+};
+
 const TEXTS = {
   placeholder: 'Find a book or author',
   searching: 'Searching...',
@@ -21,7 +25,7 @@ const STYLES = {
   bookAuthor: 'text-[12px] text-gray-500',
 };
 
-export const SearchWithAutocomplete = () => {
+export const SearchWithAutocomplete = ({ onSelect }: Props) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const [results, setResults] = useState<Book[]>([]);
@@ -38,6 +42,7 @@ export const SearchWithAutocomplete = () => {
   const handleBookChange = (newBook: Book) => {
     navigate(`/item/${newBook.type}/${newBook.slug}`);
     clearSearch();
+    onSelect?.();
   };
 
   useEffect(() => {

@@ -2,14 +2,19 @@ import { HeaderSearch } from './HeaderSearch';
 import { Icon } from '../ui/icons';
 import { HeaderNav } from './HeaderNav';
 import { cn } from '@/lib/utils';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { HeaderIconLink } from './HeaderIconLink';
+import { useAuth } from '@/context/authContext';
+import { doSingOut } from '@/firebase/auth';
 
 type Props = {
   onClose: () => void;
 };
 
 export const BurgerMenu = ({ onClose }: Props) => {
+  const { userLoggedIn } = useAuth();
+  const navigate = useNavigate();
+
   return (
     <div className="fixed inset-0 z-50 bg-white">
       <div className="flex flex-col justify-between h-full w-full">
@@ -81,6 +86,41 @@ export const BurgerMenu = ({ onClose }: Props) => {
               className="w-4 h-4"
             />
           </HeaderIconLink>
+          {userLoggedIn ?
+            <HeaderIconLink
+              className="flex-1"
+              onClick={() => {
+                doSingOut().then(() => {
+                  navigate('/login', { replace: true });
+                });
+              }}
+            >
+              <Icon
+                name="signOut"
+                className="w-4 h-4"
+              />
+            </HeaderIconLink>
+          : <>
+              <HeaderIconLink
+                to="/login"
+                className="flex-1"
+              >
+                <Icon
+                  name="signIn"
+                  className="w-4 h-4"
+                />
+              </HeaderIconLink>
+              <HeaderIconLink
+                to="/signup"
+                className="flex-1"
+              >
+                <Icon
+                  name="signUp"
+                  className="w-4 h-4"
+                />
+              </HeaderIconLink>
+            </>
+          }
         </div>
       </div>
     </div>

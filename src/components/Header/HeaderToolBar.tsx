@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import { Icon } from '../ui/icons';
+import { HeaderIconLink } from './HeaderIconLink';
 
 type Props = {
   onMenuClick: () => void;
@@ -22,25 +22,25 @@ export const HeaderToolBar = ({ onMenuClick, onSearchIconClick }: Props) => {
           />
         </button>
 
-        <Link
+        <HeaderIconLink
           to="/favourites"
-          className="flex items-center justify-center h-[48px] w-[48px] lg:h-[64px] lg:w-[64px]"
+          className="w-[64px] h-full border-1"
         >
           <Icon
             name="heart"
             className="w-4 h-4"
           />
-        </Link>
+        </HeaderIconLink>
 
-        <Link
+        <HeaderIconLink
           to="/cart"
-          className="flex items-center justify-center h-[48px] w-[48px] lg:h-[64px] lg:w-[64px]"
+          className="w-[64px] h-full border-1"
         >
           <Icon
             name="shoppingBag"
             className="w-4 h-4"
           />
-        </Link>
+        </HeaderIconLink>
       </div>
 
       {/* Mobile burger */}

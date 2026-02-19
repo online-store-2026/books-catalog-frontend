@@ -12,7 +12,7 @@ import { FavouritesPage } from '@/pages/FavouritesPage';
 import { HomePage } from '@/pages/HomePage';
 import { ItemCardPage } from '@/pages/ItemCardPage';
 import { KindlePage } from '@/pages/KindlePage';
-import { NotFoundPage } from '@/pages/NotFoundPage';
+import { NotFoundPage } from '@/pages/NotFoundPage.tsx';
 import { PaperPage } from '@/pages/PaperPage';
 import { RightsPage } from '@/pages/RightsPage';
 import { CategoryPage } from './pages/CategoryPage';

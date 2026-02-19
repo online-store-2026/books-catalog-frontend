@@ -19,9 +19,15 @@ const CATEGORIES = [
 
 type Props = {
   isMobile?: boolean;
+  onCategorySelect?: () => void;
+  onSearchSelect?: () => void;
 };
 
-export const HeaderSearch = ({ isMobile }: Props) => {
+export const HeaderSearch = ({
+  isMobile,
+  onCategorySelect,
+  onSearchSelect,
+}: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentCategory =
@@ -31,6 +37,7 @@ export const HeaderSearch = ({ isMobile }: Props) => {
 
   const handleCategoryChange = (value: string) => {
     navigate(`/category/${value}`);
+    onCategorySelect?.();
   };
 
   if (isMobile) {
@@ -38,7 +45,7 @@ export const HeaderSearch = ({ isMobile }: Props) => {
     return (
       <div className="flex flex-col gap-2 w-full">
         {/* Search input */}
-        <SearchWithAutocomplete />
+        <SearchWithAutocomplete onSelect={onSearchSelect} />
 
         {/* Dropdown categories */}
         <Select

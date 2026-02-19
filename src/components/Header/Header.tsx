@@ -1,13 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { HeaderSearch } from './HeaderSearch';
 import { HeaderNav } from './HeaderNav';
 import { BurgerMenu } from './BurgerMenu';
 import { HeaderToolBar } from './HeaderToolBar';
 import { Link } from 'react-router-dom';
+import { SearchWithAutocomplete } from './SearchWithAutocomplete';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const handleSearchClick = () => {
+    setIsSearchOpen((prev) => !prev);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 639) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <>
@@ -33,7 +50,11 @@ export const Header = () => {
 
           <div className="flex items-center h-full">
             <HeaderSearch />
-            <HeaderToolBar onMenuClick={() => setIsMenuOpen(true)} />
+            {isSearchOpen && <SearchWithAutocomplete />}
+            <HeaderToolBar
+              onMenuClick={() => setIsMenuOpen(true)}
+              onSearchIconClick={handleSearchClick}
+            />
           </div>
         </div>
       </header>

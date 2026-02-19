@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SearchInput } from '../ui/input/SearchInput';
-import { useFetchBooks } from '@/store/useFetchBooks';
-import { searchAllBooks } from '@/services/searchAllBooks';
 import type { Book } from '@/types/Book';
+import { useNavigate } from 'react-router-dom';
+import { searchAllBooks } from '@/hooks/searchAllBooks';
+import { TextHighlighter } from './TextHighlighter';
+
+type Props = {
+  onSelect?: () => void;
+};
 
 const TEXTS = {
   placeholder: 'Find a book or author',
@@ -20,26 +25,46 @@ const STYLES = {
   bookAuthor: 'text-[12px] text-gray-500',
 };
 
-export const SearchWithAutocomplete = () => {
+export const SearchWithAutocomplete = ({ onSelect }: Props) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isFocused, setIsFocused] = useState(false);
-
-  const { data: results, loading } = useFetchBooks(
-    () => searchAllBooks(searchTerm),
-    [searchTerm],
-  );
+  const [results, setResults] = useState<Book[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const showResults = isFocused && searchTerm.trim().length > 0;
+  const navigate = useNavigate();
+  const clearSearch = () => {
+    setSearchTerm('');
+    setResults([]);
+    setIsFocused(false);
+  };
+
+  const handleBookChange = (newBook: Book) => {
+    navigate(`/item/${newBook.type}/${newBook.slug}`);
+    clearSearch();
+    onSelect?.();
+  };
+
+  useEffect(() => {
+    if (!searchTerm.trim()) {
+      return;
+    }
+
+    searchAllBooks(searchTerm)
+      .then((data) => setResults(data))
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+  }, [searchTerm]);
 
   return (
-    <div className="relative w-[289px]">
+    <div className="relative">
       <SearchInput
         value={searchTerm}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setSearchTerm(e.target.value)
         }
         onFocus={() => setIsFocused(true)}
-        onBlur={() => setTimeout(() => setIsFocused(false), 200)}
+        onBlur={() => setTimeout(clearSearch, 200)}
         placeholder={TEXTS.placeholder}
       />
 
@@ -56,16 +81,21 @@ export const SearchWithAutocomplete = () => {
                   results.map((book: Book) => (
                     <li
                       key={book.id}
-                      className="p-3 hover:bg-slate-50 cursor-pointer transition-colors group"
-                      onMouseDown={() => {
-                        console.log('Вибрано:', book.name);
-                        setSearchTerm(book.name);
-                      }}
+                      onClick={() => handleBookChange(book)}
+                      className={STYLES.listItem}
                     >
-                      <p className="text-sm font-medium text-gray-900 group-hover:text-blue-600 truncate">
-                        {book.name}
+                      <p className={STYLES.bookName}>
+                        <TextHighlighter
+                          text={book.name}
+                          query={searchTerm}
+                        />
                       </p>
-                      <p className="text-[12px] text-gray-500">{book.author}</p>
+                      <p className={STYLES.bookAuthor}>
+                        <TextHighlighter
+                          text={book.author}
+                          query={searchTerm}
+                        />
+                      </p>
                     </li>
                   ))
                 : <li className="p-4 text-sm text-gray-400 text-center italic">

@@ -3,6 +3,7 @@ import { Icon } from '../ui/icons';
 import { HeaderNav } from './HeaderNav';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
+import { HeaderIconLink } from './HeaderIconLink';
 
 type Props = {
   onClose: () => void;
@@ -41,30 +42,45 @@ export const BurgerMenu = ({ onClose }: Props) => {
 
         {/* Content: Nav + Search + Dropdown */}
         <div className="flex-1 overflow-y-auto flex flex-col py-8 gap-6">
-          <HeaderNav isMobile />
+          <HeaderNav
+            isMobile
+            onLinkClick={onClose}
+          />
 
           {/* Search Input */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 px-4">
             {/* Dropdown (categories) */}
-            <HeaderSearch isMobile />
+            <HeaderSearch
+              isMobile
+              onCategorySelect={onClose}
+              onSearchSelect={onClose}
+            />
           </div>
         </div>
 
         {/* Footer: Icons */}
         <div className="flex border-t h-[56px]">
-          <button className="flex-1 flex items-center justify-center border-b-4 border-transparent transition-all duration-200 hover:border-gray-800">
+          <HeaderIconLink
+            to="/favourites"
+            onClick={onClose}
+            className="flex-1"
+          >
             <Icon
               name="heart"
               className="w-4 h-4"
             />
-          </button>
+          </HeaderIconLink>
 
-          <button className="flex-1 flex items-center justify-center border-b-4 border-transparent transition-all duration-200 hover:border-gray-800">
+          <HeaderIconLink
+            to="/cart"
+            onClick={onClose}
+            className="flex-1"
+          >
             <Icon
               name="shoppingBag"
               className="w-4 h-4"
             />
-          </button>
+          </HeaderIconLink>
         </div>
       </div>
     </div>

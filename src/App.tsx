@@ -1,6 +1,6 @@
 import './App.css';
 
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { AudiobookPage } from '@/pages/AudiobookPage';
@@ -16,13 +16,21 @@ import { NotFoundPage } from '@/pages/NotFoundPage.tsx';
 import { PaperPage } from '@/pages/PaperPage';
 import { RightsPage } from '@/pages/RightsPage';
 import { CategoryPage } from './pages/CategoryPage';
+import { LoginPage } from './pages/LoginPage';
+import { SignUpPage } from './pages/SignUpPage';
+
 // import { CategoriesSection } from '@/components/CategoriesSection/CategoriesSection';
 
 function App() {
+  const location = useLocation();
+
+  const hideLayout =
+    location.pathname === '/login' || location.pathname === '/signup';
+
   return (
     <>
       <div className="flex min-h-screen flex-col">
-        <Header />
+        {!hideLayout && <Header />}
         <main className="flex-1">
           <Routes>
             <Route
@@ -32,6 +40,14 @@ function App() {
             <Route
               path="/home"
               element={<Navigate to="/" />}
+            />
+            <Route
+              path="/login"
+              element={<LoginPage />}
+            />
+            <Route
+              path="/signup"
+              element={<SignUpPage />}
             />
             <Route
               path="/catalog"
@@ -84,7 +100,7 @@ function App() {
           </Routes>
           {/* <CategoriesSection /> */}
         </main>
-        <Footer />
+        {!hideLayout && <Footer />}
       </div>
     </>
   );

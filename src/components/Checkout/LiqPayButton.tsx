@@ -36,8 +36,12 @@ export const LiqPayButton = ({
             `Order ID: ${orderId}\nAmount: $${amount.toFixed(2)}`,
         );
       }
-    } catch {
-      onError('Failed to initialize LiqPay payment. Please try again.');
+    } catch (error) {
+      const message =
+        error instanceof Error && error.message ?
+          error.message
+        : 'Failed to initialize LiqPay payment. Please try again.';
+      onError(message);
     } finally {
       setIsLoading(false);
     }

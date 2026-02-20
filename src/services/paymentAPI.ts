@@ -11,6 +11,37 @@ import {
 import { auth, firestore, functions } from '@/firebase/firebase';
 import type { Order, CreateOrderPayload } from '../types/Order';
 
+type CallableFunctionError = {
+  message?: string;
+  code?: string;
+  details?: unknown;
+};
+
+const extractFunctionErrorMessage = (error: unknown): string => {
+  if (!error || typeof error !== 'object') {
+    return 'Unknown payment error';
+  }
+
+  const fnError = error as CallableFunctionError;
+
+  if (
+    typeof fnError.details === 'object' &&
+    fnError.details !== null &&
+    'message' in fnError.details
+  ) {
+    const detailsMessage = (fnError.details as { message?: unknown }).message;
+    if (typeof detailsMessage === 'string' && detailsMessage.trim()) {
+      return detailsMessage;
+    }
+  }
+
+  if (typeof fnError.message === 'string' && fnError.message.trim()) {
+    return fnError.message;
+  }
+
+  return 'Unknown payment error';
+};
+
 const docToOrder = (id: string, data: Record<string, unknown>): Order => ({
   id,
   createdAt: data.createdAt as string,
@@ -28,8 +59,12 @@ export const createOrder = async (
   payload: CreateOrderPayload,
 ): Promise<Order> => {
   const fn = httpsCallable<CreateOrderPayload, Order>(functions, 'createOrder');
-  const result = await fn(payload);
-  return result.data;
+  try {
+    const result = await fn(payload);
+    return result.data;
+  } catch (error) {
+    throw new Error(extractFunctionErrorMessage(error));
+  }
 };
 
 export const getOrder = async (orderId: string): Promise<Order | null> => {
@@ -61,8 +96,12 @@ export const createStripeIntent = async (
     { orderId: string; amount: number },
     { clientSecret: string }
   >(functions, 'createStripeIntent');
-  const result = await fn({ orderId, amount });
-  return result.data;
+  try {
+    const result = await fn({ orderId, amount });
+    return result.data;
+  } catch (error) {
+    throw new Error(extractFunctionErrorMessage(error));
+  }
 };
 
 export const getLiqPayPayload = async (
@@ -73,6 +112,10 @@ export const getLiqPayPayload = async (
     { orderId: string; amount: number },
     { data: string; signature: string }
   >(functions, 'getLiqPayPayload');
-  const result = await fn({ orderId, amount });
-  return result.data;
+  try {
+    const result = await fn({ orderId, amount });
+    return result.data;
+  } catch (error) {
+    throw new Error(extractFunctionErrorMessage(error));
+  }
 };

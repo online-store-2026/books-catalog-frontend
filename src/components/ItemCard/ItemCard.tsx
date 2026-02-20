@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getBookAndVariants } from '@/utils/getBookAndVariants';
 import type { Book } from '@/types/Book';
+import { useBooks } from '../../context/BooksContext';
 import { TYPOGRAPHY } from '@/constants/typography';
 
 import { Breadcrumbs } from './Breadcrumbs';
@@ -18,6 +19,7 @@ interface Props {
 }
 
 export const ItemCard: React.FC<Props> = ({ type }) => {
+  const { suggestedBooks } = useBooks();
   const [book, setBook] = useState<Book | null>(null);
   const [bookVariants, setBookVariants] = useState<Book[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -89,7 +91,7 @@ export const ItemCard: React.FC<Props> = ({ type }) => {
 
       <BooksSection
         title="You may like"
-        //fetchBooks={getYouMightLikeBooks}
+        books={suggestedBooks}
       />
     </div>
   );

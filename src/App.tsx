@@ -17,17 +17,16 @@ import { PaperPage } from '@/pages/PaperPage';
 import { RightsPage } from '@/pages/RightsPage';
 import { CategoryPage } from './pages/CategoryPage';
 import { BooksProvider } from './context/BooksContext';
-// import { CategoriesSection } from '@/components/CategoriesSection/CategoriesSection';
-//const location = useLocation();
-// const hideLayout = location.pathname === '/login' || location.pathname === '/signup';
+import { BookWordsBackground } from '@/components/BookWordsBackground';
 
 function App() {
   return (
     <>
       <BooksProvider>
-        <div className="flex min-h-screen flex-col">
+        <div className="flex min-h-screen flex-col relative">
+          <BookWordsBackground />
           <Header />
-          <main className="flex-1">
+          <main className="flex-1 relative z-10">
             <Routes>
               <Route
                 path="/"
@@ -86,7 +85,6 @@ function App() {
                 element={<NotFoundPage />}
               />
             </Routes>
-            {/* <CategoriesSection /> */}
           </main>
           <Footer />
         </div>

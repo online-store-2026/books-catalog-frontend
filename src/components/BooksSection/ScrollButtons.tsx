@@ -13,7 +13,14 @@ export const ScrollButton = ({
 }: ScrollButtonsProps) => {
   const handleScroll = () => {
     if (scrollRef.current) {
-      const step = amount || scrollRef.current.clientWidth;
+      const firstCard = scrollRef.current.querySelector(
+        ':scope > *',
+      ) as HTMLElement;
+      const step =
+        amount ||
+        (firstCard ?
+          firstCard.offsetWidth + 16
+        : scrollRef.current.clientWidth);
       const scrollAmount = direction === 'left' ? -step : step;
 
       scrollRef.current.scrollBy({

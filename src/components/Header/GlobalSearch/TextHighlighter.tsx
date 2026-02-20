@@ -16,7 +16,7 @@ export const TextHighlighter = ({
         regex.test(part) ?
           <mark
             key={i}
-            className="bg-blue-100 text-red-400 font-bold rounded-sm"
+            className="text-gray-400 bg-transparent font-bold rounded-sm"
           >
             {part}
           </mark>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   totalPrice: number;
@@ -11,6 +12,7 @@ type Props = {
 
 export const CartSummary: React.FC<Props> = ({ totalPrice, totalQuantity }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div
@@ -21,7 +23,12 @@ export const CartSummary: React.FC<Props> = ({ totalPrice, totalQuantity }) => {
     >
       <p className={cn(TYPOGRAPHY.h2, 'text-foreground')}>${totalPrice}</p>
       <p className={cn(TYPOGRAPHY.body, 'text-muted-foreground')}>
-        Total for {totalQuantity} {totalQuantity === 1 ? 'item' : 'items'}
+        {t('cart.totalFor')} {totalQuantity}{' '}
+        {totalQuantity === 1 ?
+          t('books.item')
+        : totalQuantity >= 2 && totalQuantity <= 4 ?
+          t('books.items2-4')
+        : t('books.items')}
       </p>
       <div className="w-full border-t border-border" />
       <Button
@@ -29,7 +36,7 @@ export const CartSummary: React.FC<Props> = ({ totalPrice, totalQuantity }) => {
         className="w-full bg-foreground text-background hover:bg-foreground/90"
         size="lg"
       >
-        Checkout
+        {t('cart.checkout')}
       </Button>
     </div>
   );

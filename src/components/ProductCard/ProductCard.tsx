@@ -8,6 +8,7 @@ import { useCartFavorites } from '@/context/CartFavoritesContext';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import type { Book } from '@/types/Book';
+import { useTranslation } from 'react-i18next';
 import { showError, showInfo, showSuccess } from '@/lib/toast';
 
 type Props = {
@@ -15,6 +16,7 @@ type Props = {
 };
 
 export const ProductCard: React.FC<Props> = ({ book }) => {
+  const { t } = useTranslation();
   const { addToCart, removeFromCart, toggleFavorite, isFavorite, isInCart } =
     useCartFavorites();
 
@@ -97,7 +99,7 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
         <div className="flex items-center gap-1">
           <Truck className="text-primary w-4 h-4" />
           <span className={cn(TYPOGRAPHY.buttons, 'text-primary')}>
-            In stock
+            {t('ui.inStock')}
           </span>
         </div>
       </Link>

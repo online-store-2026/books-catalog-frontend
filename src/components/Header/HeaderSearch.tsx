@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { SearchWithAutocomplete } from './SearchWithAutocomplete';
+import { GlobalSearch } from './GlobalSearch/GlobalSearch';
 
 const CATEGORIES = [
   { label: 'Programming', value: 'programming' },
@@ -45,7 +45,7 @@ export const HeaderSearch = ({
     return (
       <div className="flex flex-col gap-2 w-full">
         {/* Search input */}
-        <SearchWithAutocomplete onSelect={onSearchSelect} />
+        <GlobalSearch onSelect={onSearchSelect} />
 
         {/* Dropdown categories */}
         <Select
@@ -77,7 +77,7 @@ export const HeaderSearch = ({
   // Desktop версія (горизонтально)
   return (
     <div className="hidden lg:flex items-center gap-3 mr-6 h-full">
-      <SearchWithAutocomplete />
+      <GlobalSearch />
 
       <Select
         value={currentCategory}

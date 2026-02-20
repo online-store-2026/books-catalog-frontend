@@ -16,6 +16,7 @@ import { NotFoundPage } from '@/pages/NotFoundPage.tsx';
 import { PaperPage } from '@/pages/PaperPage';
 import { RightsPage } from '@/pages/RightsPage';
 import { CategoryPage } from './pages/CategoryPage';
+import ToasterWrapper from './components/ui/ToasterWrapper/ToasterWrapper';
 import OrderSuccessPage from '@/pages/OrderSuccessPage';
 import OrdersPage from '@/pages/OrderPage.tsx';
 import { LoginPage } from './pages/LoginPage';
@@ -110,7 +111,8 @@ function App() {
           </Routes>
           {/* <CategoriesSection /> */}
         </main>
-        {!hideLayout && <Footer />}
+        <Footer />
+        <ToasterWrapper />
       </div>
     </>
   );

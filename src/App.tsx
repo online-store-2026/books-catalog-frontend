@@ -6,7 +6,7 @@ import { Header } from '@/components/Header';
 import { AudiobookPage } from '@/pages/AudiobookPage';
 import { CartPage } from '@/pages/CartPage';
 import { CatalogPage } from '@/pages/CatalogPage';
-import { CheckoutPage } from '@/pages/CheckoutPage';
+import CheckoutPage from '@/pages/CheckoutPage';
 import { ContactsPage } from '@/pages/ContactsPage';
 import { FavouritesPage } from '@/pages/FavouritesPage';
 import { HomePage } from '@/pages/HomePage';
@@ -18,6 +18,8 @@ import { RightsPage } from '@/pages/RightsPage';
 import { CategoryPage } from './pages/CategoryPage';
 import { BooksProvider } from './context/BooksContext';
 // import { CategoriesSection } from '@/components/CategoriesSection/CategoriesSection';
+//const location = useLocation();
+// const hideLayout = location.pathname === '/login' || location.pathname === '/signup';
 
 function App() {
   return (

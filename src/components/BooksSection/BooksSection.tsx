@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { ProductCard } from '@/components/ProductCard';
+import { ProductCardSkeleton } from '@/components/ProductCard/ProductCardSkeleton';
 import type { Book } from '@/types/Book';
 import { ScrollButton } from '@/components/BooksSection/ScrollButtons';
 import { cn } from '@/lib/utils';
@@ -20,13 +21,11 @@ export const BooksSection = ({ title, books = [] }: Props) => {
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!scrollRef.current) return;
     isDragging.current = true;
-    // Початок координат та поточна позиція прокрутки
     startX.current = e.pageX - scrollRef.current.offsetLeft;
     scrollLeft.current = scrollRef.current.scrollLeft;
 
-    // Змінюємо курсор на "затиснуту руку"
     scrollRef.current.style.cursor = 'grabbing';
-    scrollRef.current.style.userSelect = 'none'; // щоб не виділявся текст
+    scrollRef.current.style.userSelect = 'none';
   };
 
   const handleMouseLeave = () => {
@@ -35,7 +34,7 @@ export const BooksSection = ({ title, books = [] }: Props) => {
   };
 
   const handleMouseUp = () => {
-    isDragging.current = true; // короткочасно залишаємо true для блокування кліків (опційно)
+    isDragging.current = true;
     isDragging.current = false;
     if (scrollRef.current) scrollRef.current.style.cursor = 'pointer';
   };
@@ -45,7 +44,7 @@ export const BooksSection = ({ title, books = [] }: Props) => {
     e.preventDefault();
 
     const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX.current) * 2; // швидкість прокрутки (2 — коефіцієнт)
+    const walk = (x - startX.current) * 2;
     scrollRef.current.scrollLeft = scrollLeft.current - walk;
   };
 
@@ -105,12 +104,17 @@ export const BooksSection = ({ title, books = [] }: Props) => {
         h-[400px] md:h-[506px] lg:h-[571px] lg:overflow-x-auto
       "
       >
-        {books.map((book, index) => (
-          <ProductCard
-            key={`${book.id}-${index}`}
-            book={book}
-          />
-        ))}
+        {isLoading ?
+          Array(4)
+            .fill(null)
+            .map((_, i) => <ProductCardSkeleton key={i} />)
+        : books.map((book, index) => (
+            <ProductCard
+              key={`${book.id}-${index}`}
+              book={book}
+            />
+          ))
+        }
       </div>
     </section>
   );

@@ -9,6 +9,7 @@ import { TYPOGRAPHY } from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import type { Book } from '@/types/Book';
 import { useTranslation } from 'react-i18next';
+import { showInfo, showSuccess } from '@/lib/toast';
 
 type Props = {
   book: Book;
@@ -26,8 +27,10 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
   const toggleAddToCart = () => {
     if (isBookInCart) {
       removeFromCart(book.id);
+      showInfo('Book removed from cart!');
     } else {
       addToCart(book);
+      showSuccess('Book added to cart!');
     }
   };
 
@@ -51,17 +54,17 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
           <>
             <img
               className="w-full h-full object-contain"
-              src="/public/img/audiobook/2.webp"
+              src={`${import.meta.env.BASE_URL}img/audiobook/2.webp`}
               alt="iPad"
             />
             <img
               className="absolute top-[8.7%] left-[10.5%] w-[79.5%] h-[82%] object-cover"
-              src={`/${book.images[0]}`}
+              src={`${import.meta.env.BASE_URL}${book.images[0]}`}
               alt={book.name}
             />
           </>
         : <img
-            src={`/${book.images[0]}`}
+            src={`${import.meta.env.BASE_URL}${book.images[0]}`}
             alt={book.name}
             className="w-full h-full object-contain rounded-md"
           />
@@ -108,7 +111,14 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
           className="flex-1"
         />
         <HeartButton
-          onClick={() => toggleFavorite(book)}
+          onClick={() => {
+            toggleFavorite(book); // додає або видаляє з фаворитів
+            if (isBookInFavorites) {
+              showInfo('Book removed from favorites!');
+            } else {
+              showSuccess('Book added to favorites!');
+            }
+          }}
           isSelected={isBookInFavorites}
         />
       </div>

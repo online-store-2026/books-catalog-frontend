@@ -1,28 +1,41 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import { useTranslation } from 'react-i18next';
+import { CategoriesSectionSkeleton } from './CategoriesSectionSkeleton';
+
+const BASE = import.meta.env.BASE_URL;
 
 const CATEGORIES = [
   {
     label: 'categories.paperBooks',
     path: '/paper',
-    image: '/img/categories/Paper-books.png',
+    image: `${BASE}img/categories/Paper-books.png`,
   },
   {
     label: 'categories.audioBooks',
     path: '/audiobook',
-    image: '/img/categories/Audiobooks.png',
+    image: `${BASE}img/categories/Audiobooks.png`,
   },
   {
     label: 'categories.kindleBooks',
     path: '/kindle',
-    image: '/img/categories/Kindle-books.png',
+    image: `${BASE}img/categories/Kindle-books.png`,
   },
 ];
 
 export const CategoriesSection = () => {
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setIsLoading(false), 500);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  if (isLoading) return <CategoriesSectionSkeleton />;
+
   return (
     <section className="flex flex-col mt-[56px] px-4 gap-6 min-[640px]:mt-[56px] min-[640px]:px-6 min-[1200px]:mt-[80px] min-[1200px]:w-[1136px] min-[1200px]:mx-auto min-[1200px]:px-0">
       <h2 className={cn(TYPOGRAPHY.h2, 'text-foreground')}>

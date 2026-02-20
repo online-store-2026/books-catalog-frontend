@@ -24,7 +24,6 @@ export const PaperPage = () => {
     <Catalog
       products={books}
       title={t('categories.paper')}
-      title="Paper books"
     />
   );
 };

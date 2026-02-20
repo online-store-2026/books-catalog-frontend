@@ -39,7 +39,7 @@ export const Bookmark = () => {
           </button>
         </div>
         <button
-          onClick={() => {
+          onClick={(e) => {
             e.stopPropagation();
             setIsOpen(!isOpen);
           }}

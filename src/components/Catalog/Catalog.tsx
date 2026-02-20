@@ -40,10 +40,8 @@ type Props = {
   isLoading?: boolean;
 };
 
-export const Catalog = ({ products, title }: Props) => {
-  const { t } = useTranslation();
-  const [itemsPerPage, setItemsPerPage] = useState<number | 'all'>(16);
 export const Catalog = ({ products, title, isLoading = false }: Props) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();

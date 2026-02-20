@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { VisuallyHidden } from 'radix-ui';
 import { SearchInput } from '../../ui/input/SearchInput';
 import { SearchDialogContent } from './SearchDialogContent';
-import { Dialog, DialogContent, DialogTitle } from '../../ui/dialog';
+import { Dialog, DialogContent, DialogTitle } from '../../ui/Dialog.tsx';
 
 export const GlobalSearch = ({ onSelect }: { onSelect?: () => void }) => {
   const [open, setOpen] = useState(false);

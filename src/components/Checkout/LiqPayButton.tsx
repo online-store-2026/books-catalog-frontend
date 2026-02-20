@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { LiqPayForm } from './LiqPayForm';
 import { getLiqPayPayload } from '@/services/paymentAPI';
 import { TYPOGRAPHY } from '@/constants/typography';
-import { Loader } from 'lucide-react';
+import { Loader } from '@/components/ui/Loader';
 
 interface LiqPayButtonProps {
   orderId: string;

@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/select.tsx';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { showError } from '@/lib/toast';
-import { Loader } from 'lucide-react';
+import { Loader } from '@/components/ui/Loader';
 
 interface CheckoutFormProps {
   onSubmit: (data: CheckoutFormValues) => void;

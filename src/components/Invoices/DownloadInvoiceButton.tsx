@@ -4,7 +4,7 @@ import { InvoicePDF } from './InvoicePDF';
 import { imageToBase64 } from '@/utils/imageToBase64';
 import type { Order } from '@/types/Order';
 import { TYPOGRAPHY } from '@/constants/typography';
-import { Loader } from 'lucide-react';
+import { Loader } from '@/components/ui/Loader';
 
 interface DownloadInvoiceButtonProps {
   order: Order;

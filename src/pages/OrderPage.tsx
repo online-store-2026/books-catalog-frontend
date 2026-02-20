@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getUserOrders } from '@/services/paymentAPI';
 import type { Order } from '@/types/Order';
 import { TYPOGRAPHY } from '@/constants/typography';
-import { ChevronLeft, Loader } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
+import { Loader } from '@/components/ui/Loader';
 import { cn } from '@/lib/utils.ts';
 
 const StatusBadge = ({ status }: { status: Order['status'] }) => {

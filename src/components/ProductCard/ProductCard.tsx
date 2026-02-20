@@ -35,7 +35,7 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
   };
 
   return (
-    <div className="pointer-events-none relative flex flex-col gap-4 flex-shrink-0 w-[214px] h-[400px] p-5 sm:w-[272px] sm:h-[506px] sm:p-8 rounded-xl border border-border bg-card hover:shadow-lg transition-shadow">
+    <div className="pointer-events-none relative flex flex-col gap-4 flex-shrink-0 w-full h-[400px] p-5 lg:w-[272px] sm:h-[506px] sm:p-8 rounded-xl border border-border bg-card hover:shadow-lg transition-shadow">
       {book.type === 'audiobook' && (
         <div className="absolute top-8 right-6 w-10 h-10 flex items-center justify-center bg-primary rounded-full z-10">
           <Icon
@@ -48,7 +48,7 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
 
       <Link
         to={`/item/${book.type}/${book.slug}`}
-        className="relative flex-shrink-0 flex items-center justify-center w-[174px] h-[185px] sm:w-[208px] sm:h-[263px]"
+        className="relative flex-shrink-0 flex items-center justify-center w-full h-[185px] lg:w-[208px] sm:h-[263px]"
       >
         {book.type === 'kindle' ?
           <>

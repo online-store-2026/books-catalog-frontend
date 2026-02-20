@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { CustomButton } from '../ui/CustomButton';
 
-import type { FavouritesEmptyProps } from './FavouritesEmpty.types';
+import type { FavouritesEmptyProps } from './types/FavouritesEmpty';
 
 const DEFAULT_CONTENT = {
   TITLE: 'Your heart is still looking for a match',

@@ -6,7 +6,7 @@ import { TYPOGRAPHY } from '@/constants/typography';
 import { ProductCard } from '../ProductCard';
 import { FavouritesEmpty } from './FavouritesEmpty';
 
-import type { FavouritesProps } from './Favourites.types';
+import type { FavouritesProps } from './types/Favourites';
 
 export const Favourites = ({
   books = [],

@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { GlobalSearch } from './GlobalSearch/GlobalSearch';
+import { SearchInput } from '../ui/input/SearchInput';
 
 const CATEGORIES = [
   { label: 'Programming', value: 'programming' },
@@ -20,13 +20,13 @@ const CATEGORIES = [
 type Props = {
   isMobile?: boolean;
   onCategorySelect?: () => void;
-  onSearchSelect?: () => void;
+  onClick?: () => void;
 };
 
 export const HeaderSearch = ({
   isMobile,
   onCategorySelect,
-  onSearchSelect,
+  onClick,
 }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -45,7 +45,17 @@ export const HeaderSearch = ({
     return (
       <div className="flex flex-col gap-2 w-full">
         {/* Search input */}
-        <GlobalSearch onSelect={onSearchSelect} />
+
+        <div
+          onClick={onClick}
+          className="cursor-pointer"
+        >
+          <SearchInput
+            value=""
+            placeholder="Find a book or author"
+            readOnly
+          />
+        </div>
 
         {/* Dropdown categories */}
         <Select
@@ -76,8 +86,15 @@ export const HeaderSearch = ({
 
   // Desktop версія (горизонтально)
   return (
-    <div className="hidden lg:flex items-center gap-3 mr-6 h-full">
-      <GlobalSearch />
+    <div
+      onClick={onClick}
+      className="hidden lg:flex items-center gap-3 mr-6 h-full"
+    >
+      <SearchInput
+        value=""
+        placeholder="Find a book or author"
+        readOnly
+      />
 
       <Select
         value={currentCategory}

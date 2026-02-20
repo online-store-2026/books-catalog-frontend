@@ -19,11 +19,11 @@ export const HeaderToolBar = ({ onMenuClick, onSearchIconClick }: Props) => {
       {/* Desktop + Tablet */}
       <div className="hidden sm:flex items-center h-full">
         <button
+          onClick={onSearchIconClick}
           className="lg:hidden flex items-center justify-center h-[48px] w-[48px]"
           aria-label="Search"
         >
           <Icon
-            onClick={onSearchIconClick}
             name="search"
             className="w-4 h-4"
           />

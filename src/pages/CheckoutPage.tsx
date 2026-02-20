@@ -64,7 +64,11 @@ const CheckoutPage = () => {
       setStep('payment');
     } catch (err) {
       console.error(err);
-      setError('Something went wrong. Please try again.');
+      const message =
+        err instanceof Error && err.message ?
+          err.message
+        : 'Something went wrong. Please try again.';
+      setError(message);
     } finally {
       setIsLoading(false);
     }

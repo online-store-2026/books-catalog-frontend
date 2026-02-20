@@ -2,7 +2,7 @@ import { HeaderSearch } from './HeaderSearch';
 import { Icon } from '../ui/icons';
 import { HeaderNav } from './HeaderNav';
 import { cn } from '@/lib/utils';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { HeaderIconLink } from './HeaderIconLink';
 import { useAuth } from '@/context/authContext';
 import { doSingOut } from '@/firebase/auth';
@@ -15,6 +15,7 @@ type Props = {
 export const BurgerMenu = ({ onClose, onSearchClick }: Props) => {
   const { userLoggedIn } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <div className="fixed inset-0 z-50 bg-white">
@@ -88,19 +89,31 @@ export const BurgerMenu = ({ onClose, onSearchClick }: Props) => {
             />
           </HeaderIconLink>
           {userLoggedIn ?
-            <HeaderIconLink
-              className="flex-1"
-              onClick={() => {
-                doSingOut().then(() => {
-                  navigate('/login', { replace: true });
-                });
-              }}
-            >
-              <Icon
-                name="signOut"
-                className="w-4 h-4"
-              />
-            </HeaderIconLink>
+            <>
+              <HeaderIconLink
+                to="/profile"
+                state={{ background: location }}
+                className="flex-1"
+              >
+                <Icon
+                  name="profileIcon"
+                  className="w-4 h-4"
+                />
+              </HeaderIconLink>
+              <HeaderIconLink
+                className="flex-1"
+                onClick={() => {
+                  doSingOut().then(() => {
+                    navigate('/login', { replace: true });
+                  });
+                }}
+              >
+                <Icon
+                  name="signOut"
+                  className="w-4 h-4"
+                />
+              </HeaderIconLink>
+            </>
           : <>
               <HeaderIconLink
                 to="/login"

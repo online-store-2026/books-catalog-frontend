@@ -17,6 +17,7 @@ import {
   LogIn,
   LogOut,
   UserPlus,
+  CircleUserRound,
   Check,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -39,6 +40,7 @@ export type IconName =
   | 'signIn'
   | 'signUp'
   | 'signOut'
+  | 'profileIcon'
   | 'check';
 
 export type IconSize = 'sm' | 'md';
@@ -65,6 +67,7 @@ const icons = {
   signIn: LogIn,
   signUp: UserPlus,
   signOut: LogOut,
+  profileIcon: CircleUserRound,
   check: Check,
 };
 

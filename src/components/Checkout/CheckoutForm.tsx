@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/select.tsx';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { showError } from '@/lib/toast';
+import { Loader } from '@/components/ui/Loader';
 
 interface CheckoutFormProps {
   onSubmit: (data: CheckoutFormValues) => void;
@@ -178,7 +179,7 @@ export const CheckoutForm = ({ onSubmit, isLoading }: CheckoutFormProps) => {
         className={`h-14 ${TYPOGRAPHY.uppercase}`}
       >
         {isLoading ?
-          <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+          <Loader />
         : 'Proceed to Payment'}
       </Button>
     </form>

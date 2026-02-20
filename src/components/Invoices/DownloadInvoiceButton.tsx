@@ -4,6 +4,7 @@ import { InvoicePDF } from './InvoicePDF';
 import { imageToBase64 } from '@/utils/imageToBase64';
 import type { Order } from '@/types/Order';
 import { TYPOGRAPHY } from '@/constants/typography';
+import { Loader } from '@/components/ui/Loader';
 
 interface DownloadInvoiceButtonProps {
   order: Order;
@@ -69,7 +70,7 @@ export const DownloadInvoiceButton = ({
       >
         {isConverting ?
           <>
-            <span className="w-4 h-4 border-2 border-gray-300 border-t-gray-900 rounded-full animate-spin" />
+            <Loader />
             Preparing...
           </>
         : <>
@@ -94,7 +95,7 @@ export const DownloadInvoiceButton = ({
         >
           {loading ?
             <>
-              <span className="w-4 h-4 border-2 border-gray-300 border-t-gray-900 rounded-full animate-spin" />
+              <Loader />
               Generating...
             </>
           : <>

@@ -16,7 +16,7 @@ const scrollToTop = () => {
 export const Footer = () => {
   const { t } = useTranslation();
   return (
-    <footer className="border-t border-border font-manrope">
+    <footer className="relative z-10 bg-background border-t border-border font-manrope">
       <div className="max-[639px]:hidden w-full">
         <div className="footer-container">
           <Link

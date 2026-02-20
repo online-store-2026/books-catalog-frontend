@@ -5,6 +5,7 @@ import type { Book } from '@/types/Book';
 import { CatalogControls } from './CatalogControls';
 import { PaginationBlock } from './PaginationBlock';
 import { BooksList } from './BooksList';
+import { useTranslation } from 'react-i18next';
 
 function filtredProduct(incomingProduct: Book[], sortBy: string) {
   let changedProduct = [...incomingProduct];
@@ -39,6 +40,9 @@ type Props = {
   isLoading?: boolean;
 };
 
+export const Catalog = ({ products, title }: Props) => {
+  const { t } = useTranslation();
+  const [itemsPerPage, setItemsPerPage] = useState<number | 'all'>(16);
 export const Catalog = ({ products, title, isLoading = false }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -135,6 +139,7 @@ export const Catalog = ({ products, title, isLoading = false }: Props) => {
           {title}
         </h1>
         <p className="text-[#89939A] text-[14px] font-manrope font-medium">
+          {`${filtresProducts.length} ${t('books.books')}`}
           {isLoading ? '...' : `${filtresProducts.length} books`}
         </p>
       </div>

@@ -4,6 +4,8 @@ import { ProductCardSkeleton } from '@/components/ProductCard/ProductCardSkeleto
 import { getPaperBooks } from '@/services/booksAPI';
 import type { Book } from '@/types/Book';
 import { ScrollButton } from '@/utils/ScrollButtons';
+import { cn } from '@/lib/utils';
+import { TYPOGRAPHY } from '@/constants/typography';
 
 interface Props {
   title: string;
@@ -30,15 +32,12 @@ export const BooksSection = ({ title }: Props) => {
   return (
     <section
       className="
-        flex flex-col
-        mt-[56px] pl-[16px] gap-[24px]
-        min-[640px]:mt-[56px] min-[640px]:pl-[24px]
-        min-[1200px]:mt-[80px]
-        min-[1200px]:w-[1136px]
-        min-[1200px]:mx-auto
-        min-[1200px]:pl-0
-        min-[1200px]:overflow-x-auto
-      "
+    flex flex-col
+    mt-[56px] pl-[16px] gap-[24px]
+    md:mt-[56px] md:pl-[24px]
+    lg:mt-[80px] lg:w-[1136px] lg:mx-auto lg:pl-0
+    lg:overflow-x-auto
+  "
     >
       <div
         className="
@@ -49,11 +48,10 @@ export const BooksSection = ({ title }: Props) => {
         "
       >
         <h2
-          className="
-            font-bold text-foreground
-            text-[22px] leading-normal
-            min-[640px]:text-[32px] min-[640px]:leading-[41px]
-          "
+          className={cn(
+            TYPOGRAPHY.h2,
+            'text-foreground min-[640px]:text-[32px] min-[640px]:leading-[41px]',
+          )}
         >
           {title}
         </h2>

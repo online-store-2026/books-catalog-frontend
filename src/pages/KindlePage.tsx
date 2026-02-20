@@ -2,8 +2,10 @@ import { Catalog } from '@/components/Catalog/Catalog';
 import { getKindleBooks } from '@/services/booksAPI';
 import { useFetchBooks } from '@/hooks/useFetchBooks';
 import { TYPOGRAPHY } from '@/constants/typography';
+import { useTranslation } from 'react-i18next';
 
 export const KindlePage = () => {
+  const { t } = useTranslation();
   const { books, error, isLoading } = useFetchBooks(getKindleBooks);
 
   if (error) {
@@ -21,6 +23,7 @@ export const KindlePage = () => {
   return (
     <Catalog
       products={books}
+      title={t('categories.kindle')}
       title="Kindle books"
     />
   );

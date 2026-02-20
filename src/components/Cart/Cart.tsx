@@ -9,6 +9,7 @@ import { CartItemSkeleton } from './CartItemSkeleton';
 import { CartSummarySkeleton } from './CartSummarySkeleton';
 import { CartSummary } from './CartSummary';
 import { EmptyCart } from './EmptyCart';
+import { useTranslation } from 'react-i18next';
 
 export const Cart = () => {
   const { cart } = useCartFavorites();
@@ -36,6 +37,7 @@ export const Cart = () => {
     () => cart.reduce((sum, book) => sum + book.quantity, 0),
     [cart],
   );
+  const { t } = useTranslation();
 
   const skeletonCount = cart.length;
 
@@ -58,12 +60,18 @@ export const Cart = () => {
         )}
       >
         <ChevronLeft className="size-4" />
-        Back
+        {t('ui.back')}
       </button>
 
       <div className="mb-8 sm:mb-10 pt-2">
         <h1 className={cn(TYPOGRAPHY.h1, 'text-foreground')}>Cart</h1>
         <p className={cn(TYPOGRAPHY.body, 'text-muted-foreground')}>
+          {totalQuantity}{' '}
+          {totalQuantity === 1 ?
+            t('books.item')
+          : totalQuantity >= 2 && totalQuantity <= 4 ?
+            t('books.items2-4')
+          : t('books.items')}
           {isLoading ?
             `${skeletonCount} ${skeletonCount === 1 ? 'item' : 'items'}`
           : `${totalQuantity} ${totalQuantity === 1 ? 'item' : 'items'}`}

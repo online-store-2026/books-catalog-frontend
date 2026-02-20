@@ -2,8 +2,10 @@ import { Catalog } from '@/components/Catalog/Catalog';
 import { getPaperBooks } from '@/services/booksAPI';
 import { useFetchBooks } from '@/hooks/useFetchBooks';
 import { TYPOGRAPHY } from '@/constants/typography';
+import { useTranslation } from 'react-i18next';
 
 export const PaperPage = () => {
+  const { t } = useTranslation();
   const { books, error, isLoading } = useFetchBooks(getPaperBooks);
 
   if (error) {
@@ -21,6 +23,7 @@ export const PaperPage = () => {
   return (
     <Catalog
       products={books}
+      title={t('categories.paper')}
       title="Paper books"
     />
   );

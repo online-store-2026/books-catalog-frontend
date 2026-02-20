@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { ProductCard } from '@/components/ProductCard';
-import { ProductCardSkeleton } from '@/components/ProductCard/ProductCardSkeleton';
 import type { Book } from '@/types/Book';
 import { ScrollButton } from '@/components/BooksSection/ScrollButtons';
 import { cn } from '@/lib/utils';
@@ -104,17 +103,12 @@ export const BooksSection = ({ title, books = [] }: Props) => {
         h-[400px] md:h-[506px] lg:h-[571px] lg:overflow-x-auto
       "
       >
-        {isLoading ?
-          Array(4)
-            .fill(null)
-            .map((_, i) => <ProductCardSkeleton key={i} />)
-        : books.map((book, index) => (
-            <ProductCard
-              key={`${book.id}-${index}`}
-              book={book}
-            />
-          ))
-        }
+        {books.map((book, index) => (
+          <ProductCard
+            key={`${book.id}-${index}`}
+            book={book}
+          />
+        ))}
       </div>
     </section>
   );

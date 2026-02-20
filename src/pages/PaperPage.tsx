@@ -1,8 +1,8 @@
 import { Catalog } from '@/components/Catalog/Catalog';
 import { getPaperBooks } from '@/services/booksAPI';
 import { useFetchBooks } from '@/hooks/useFetchBooks';
-import { TYPOGRAPHY } from '@/constants/typography';
 import { useTranslation } from 'react-i18next';
+import { Loader } from '@/components/ui/Loader';
 
 export const PaperPage = () => {
   const { t } = useTranslation();
@@ -13,11 +13,7 @@ export const PaperPage = () => {
   }
 
   if (isLoading) {
-    return (
-      <div className="w-full min-h-[60vh] flex items-center justify-center">
-        <p className={TYPOGRAPHY.h3}>Loading...</p>
-      </div>
-    );
+    return <Loader />;
   }
 
   return (

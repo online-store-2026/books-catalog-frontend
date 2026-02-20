@@ -4,7 +4,7 @@ import { getOrder } from '@/services/paymentAPI';
 import type { Order } from '@/types/Order';
 import { DownloadInvoiceButton } from '@/components/Invoices';
 import { TYPOGRAPHY } from '@/constants/typography';
-import { Loader } from 'lucide-react';
+import { Loader } from '@/components/ui/Loader';
 
 const StatusBadge = ({ status }: { status: Order['status'] }) => {
   const config = {

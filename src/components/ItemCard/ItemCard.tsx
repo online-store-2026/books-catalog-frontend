@@ -11,6 +11,7 @@ import { ItemCardDetails } from './ItemCardDetails';
 import { ItemCardAbout } from './ItemCardAbout';
 import { ItemCardCharacteristics } from './ItemCardCharacteristics';
 import { BooksSection } from '@/components/BooksSection';
+import { Loader } from '@/components/ui/Loader.tsx';
 
 type BookType = 'paperback' | 'kindle' | 'audiobook';
 
@@ -46,11 +47,7 @@ export const ItemCard: React.FC<Props> = ({ type }) => {
   };
 
   if (isLoading || !book) {
-    return (
-      <div className="w-full min-h-[60vh] flex items-center justify-center">
-        <p className={TYPOGRAPHY.h3}>Loading...</p>
-      </div>
-    );
+    return <Loader />;
   }
 
   const imageUrls = book.images.map((img) => `/${img}`);

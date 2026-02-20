@@ -6,7 +6,7 @@ import {
 } from '@stripe/react-stripe-js';
 import { Button } from '@/components/ui/button';
 import { TYPOGRAPHY } from '@/constants/typography';
-import { Loader } from 'lucide-react';
+import { Loader } from '@/components/ui/Loader';
 
 interface StripePaymentFormProps {
   onSuccess: () => void;

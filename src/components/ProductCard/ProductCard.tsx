@@ -9,7 +9,7 @@ import { TYPOGRAPHY } from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import type { Book } from '@/types/Book';
 import { useTranslation } from 'react-i18next';
-import { showError, showInfo, showSuccess } from '@/lib/toast';
+import { showInfo, showSuccess } from '@/lib/toast';
 
 type Props = {
   book: Book;
@@ -114,7 +114,7 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
           onClick={() => {
             toggleFavorite(book); // додає або видаляє з фаворитів
             if (isBookInFavorites) {
-              showError('Book removed from favorites!');
+              showInfo('Book removed from favorites!');
             } else {
               showSuccess('Book added to favorites!');
             }

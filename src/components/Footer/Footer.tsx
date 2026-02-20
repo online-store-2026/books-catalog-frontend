@@ -24,7 +24,7 @@ export const Footer = () => {
             className="shrink-0"
           >
             <img
-              src="/img/icons/Logo.svg"
+              src={`${import.meta.env.BASE_URL}img/icons/Logo.svg`}
               alt="Nice Boook logo"
               className="w-22.25 h-8 transition-transform hover:scale-105"
             />
@@ -82,7 +82,7 @@ export const Footer = () => {
           className="shrink-0 self-start"
         >
           <img
-            src="/img/icons/Logo.svg"
+            src={`${import.meta.env.BASE_URL}img/icons/Logo.svg`}
             alt="Nice Boook logo"
             className="w-22.25 h-8 transition-transform hover:scale-105"
           />

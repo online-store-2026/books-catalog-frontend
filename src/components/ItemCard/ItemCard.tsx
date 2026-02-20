@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getBookAndVariants } from '@/utils/getBookAndVariants';
 import type { Book } from '@/types/Book';
+import { useBooks } from '../../context/BooksContext';
 import { TYPOGRAPHY } from '@/constants/typography';
 
 import { Breadcrumbs } from './Breadcrumbs';
@@ -10,6 +11,7 @@ import { ItemCardDetails } from './ItemCardDetails';
 import { ItemCardAbout } from './ItemCardAbout';
 import { ItemCardCharacteristics } from './ItemCardCharacteristics';
 import { BooksSection } from '@/components/BooksSection';
+import { Loader } from '@/components/ui/Loader.tsx';
 
 type BookType = 'paperback' | 'kindle' | 'audiobook';
 
@@ -18,6 +20,7 @@ interface Props {
 }
 
 export const ItemCard: React.FC<Props> = ({ type }) => {
+  const { suggestedBooks } = useBooks();
   const [book, setBook] = useState<Book | null>(null);
   const [bookVariants, setBookVariants] = useState<Book[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -44,14 +47,10 @@ export const ItemCard: React.FC<Props> = ({ type }) => {
   };
 
   if (isLoading || !book) {
-    return (
-      <div className="w-full min-h-[60vh] flex items-center justify-center">
-        <p className={TYPOGRAPHY.h3}>Loading...</p>
-      </div>
-    );
+    return <Loader />;
   }
 
-  const imageUrls = book.images.map((img) => `/${img}`);
+  const imageUrls = book.images.map((img) => `${img}`);
   const categoryName = book.category?.[0] || 'General';
 
   return (
@@ -89,7 +88,7 @@ export const ItemCard: React.FC<Props> = ({ type }) => {
 
       <BooksSection
         title="You may like"
-        //fetchBooks={getYouMightLikeBooks}
+        books={suggestedBooks}
       />
     </div>
   );

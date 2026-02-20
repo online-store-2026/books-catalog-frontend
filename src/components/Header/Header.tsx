@@ -36,7 +36,7 @@ export const Header = () => {
             className="flex mr-4 transition-transform hover:scale-105"
           >
             <img
-              src="/img/icons/Logo.svg"
+              src={`${import.meta.env.BASE_URL}img/icons/Logo.svg`}
               alt="Nice Boook logo"
             />
           </Link>

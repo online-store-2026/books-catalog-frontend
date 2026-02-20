@@ -1,6 +1,6 @@
 import './App.css';
 
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { AudiobookPage } from '@/pages/AudiobookPage';
@@ -22,7 +22,10 @@ import { LoginPage } from './pages/LoginPage';
 import { SignUpPage } from './pages/SignUpPage';
 import { ProfilePage } from './pages/ProfilePage';
 
+import { BooksProvider } from './context/BooksContext';
 // import { CategoriesSection } from '@/components/CategoriesSection/CategoriesSection';
+//const location = useLocation();
+// const hideLayout = location.pathname === '/login' || location.pathname === '/signup';
 
 function App() {
   const location = useLocation();
@@ -123,6 +126,75 @@ function App() {
           />
         </Routes>
       )}
+  return (
+    <>
+      <BooksProvider>
+        <div className="flex min-h-screen flex-col">
+          <Header />
+          <main className="flex-1">
+            <Routes>
+              <Route
+                path="/"
+                element={<HomePage />}
+              />
+              <Route
+                path="/home"
+                element={<Navigate to="/" />}
+              />
+              <Route
+                path="/catalog"
+                element={<CatalogPage />}
+              />
+              <Route
+                path="/paper"
+                element={<PaperPage />}
+              />
+              <Route
+                path="/kindle"
+                element={<KindlePage />}
+              />
+              <Route
+                path="/audiobook"
+                element={<AudiobookPage />}
+              />
+              <Route
+                path="/category/:categoryName"
+                element={<CategoryPage />}
+              />
+              <Route
+                path="/favourites"
+                element={<FavouritesPage />}
+              />
+              <Route
+                path="/cart"
+                element={<CartPage />}
+              />
+              <Route
+                path="/checkout"
+                element={<CheckoutPage />}
+              />
+              <Route
+                path="/contacts"
+                element={<ContactsPage />}
+              />
+              <Route
+                path="/rights"
+                element={<RightsPage />}
+              />
+              <Route
+                path="/item/:type/:bookSlug"
+                element={<ItemCardPage />}
+              />
+              <Route
+                path="*"
+                element={<NotFoundPage />}
+              />
+            </Routes>
+            {/* <CategoriesSection /> */}
+          </main>
+          <Footer />
+        </div>
+      </BooksProvider>
     </>
   );
 }

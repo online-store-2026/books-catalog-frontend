@@ -9,6 +9,7 @@ import { TYPOGRAPHY } from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import type { Book } from '@/types/Book';
 import { useTranslation } from 'react-i18next';
+import { showInfo, showSuccess } from '@/lib/toast';
 
 type Props = {
   book: Book;
@@ -26,13 +27,15 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
   const toggleAddToCart = () => {
     if (isBookInCart) {
       removeFromCart(book.id);
+      showInfo('Book removed from cart!');
     } else {
       addToCart(book);
+      showSuccess('Book added to cart!');
     }
   };
 
   return (
-    <div className="relative flex flex-col gap-4 flex-shrink-0 w-[214px] h-[400px] p-5 sm:w-[272px] sm:h-[506px] sm:p-8 rounded-xl border border-border bg-card hover:shadow-lg transition-shadow">
+    <div className="pointer-events-none relative flex flex-col gap-4 flex-shrink-0 w-[214px] h-[400px] p-5 sm:w-[272px] sm:h-[506px] sm:p-8 rounded-xl border border-border bg-card hover:shadow-lg transition-shadow">
       {book.type === 'audiobook' && (
         <div className="absolute top-8 right-6 w-10 h-10 flex items-center justify-center bg-primary rounded-full z-10">
           <Icon
@@ -51,17 +54,17 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
           <>
             <img
               className="w-full h-full object-contain"
-              src="/public/img/audiobook/2.webp"
+              src={`https://ik.imagekit.io/ox4rssyih/img/audiobook/2.webp?updatedAt=1771496288464`}
               alt="iPad"
             />
             <img
               className="absolute top-[8.7%] left-[10.5%] w-[79.5%] h-[82%] object-cover"
-              src={`/${book.images[0]}`}
+              src={`${book.images[0]}`}
               alt={book.name}
             />
           </>
         : <img
-            src={`/${book.images[0]}`}
+            src={`${book.images[0]}`}
             alt={book.name}
             className="w-full h-full object-contain rounded-md"
           />
@@ -108,7 +111,14 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
           className="flex-1"
         />
         <HeartButton
-          onClick={() => toggleFavorite(book)}
+          onClick={() => {
+            toggleFavorite(book); // додає або видаляє з фаворитів
+            if (isBookInFavorites) {
+              showInfo('Book removed from favorites!');
+            } else {
+              showSuccess('Book added to favorites!');
+            }
+          }}
           isSelected={isBookInFavorites}
         />
       </div>

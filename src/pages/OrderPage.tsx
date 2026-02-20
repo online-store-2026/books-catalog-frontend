@@ -4,6 +4,7 @@ import { getUserOrders } from '@/services/paymentAPI';
 import type { Order } from '@/types/Order';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { ChevronLeft } from 'lucide-react';
+import { Loader } from '@/components/ui/Loader';
 import { cn } from '@/lib/utils.ts';
 
 const StatusBadge = ({ status }: { status: Order['status'] }) => {
@@ -39,7 +40,7 @@ const OrdersPage = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-32">
-        <span className="w-8 h-8 border-2 border-gray-200 border-t-gray-900 rounded-full animate-spin" />
+        <Loader />
       </div>
     );
   }

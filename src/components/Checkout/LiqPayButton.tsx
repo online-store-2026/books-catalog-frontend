@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { LiqPayForm } from './LiqPayForm';
 import { getLiqPayPayload } from '@/services/paymentAPI';
 import { TYPOGRAPHY } from '@/constants/typography';
+import { Loader } from '@/components/ui/Loader';
 
 interface LiqPayButtonProps {
   orderId: string;
@@ -36,8 +37,12 @@ export const LiqPayButton = ({
             `Order ID: ${orderId}\nAmount: $${amount.toFixed(2)}`,
         );
       }
-    } catch {
-      onError('Failed to initialize LiqPay payment. Please try again.');
+    } catch (error) {
+      const message =
+        error instanceof Error && error.message ?
+          error.message
+        : 'Failed to initialize LiqPay payment. Please try again.';
+      onError(message);
     } finally {
       setIsLoading(false);
     }
@@ -89,7 +94,7 @@ export const LiqPayButton = ({
           className={`h-14 bg-[#00AAFF] hover:bg-[#0095e0] disabled:opacity-60 disabled:cursor-not-allowed text-white ${TYPOGRAPHY.uppercase} rounded transition-colors flex items-center justify-center`}
         >
           {isLoading ?
-            <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            <Loader />
           : 'Pay with LiqPay'}
         </button>
 

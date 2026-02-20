@@ -13,6 +13,8 @@ import {
   SelectValue,
 } from '@/components/ui/select.tsx';
 import { TYPOGRAPHY } from '@/constants/typography';
+import { showError } from '@/lib/toast';
+import { Loader } from '@/components/ui/Loader';
 
 interface CheckoutFormProps {
   onSubmit: (data: CheckoutFormValues) => void;
@@ -31,10 +33,14 @@ const COUNTRIES = [
   'Other',
 ];
 
-const FieldError = ({ message }: { message?: string }) =>
-  message ?
-    <p className={`${TYPOGRAPHY.small} text-red-500 mt-1`}>{message}</p>
-  : null;
+const FieldError = ({ message }: { message?: string }) => {
+  if (message) {
+    showError(message);
+  }
+  return message ?
+      <p className={`${TYPOGRAPHY.small} text-red-500 mt-1`}>{message}</p>
+    : null;
+};
 
 export const CheckoutForm = ({ onSubmit, isLoading }: CheckoutFormProps) => {
   const {
@@ -173,7 +179,7 @@ export const CheckoutForm = ({ onSubmit, isLoading }: CheckoutFormProps) => {
         className={`h-14 ${TYPOGRAPHY.uppercase}`}
       >
         {isLoading ?
-          <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+          <Loader />
         : 'Proceed to Payment'}
       </Button>
     </form>

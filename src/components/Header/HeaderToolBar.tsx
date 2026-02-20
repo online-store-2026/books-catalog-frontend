@@ -2,7 +2,7 @@ import { useAuth } from '@/context/authContext';
 import { Icon } from '../ui/icons';
 import { HeaderIconLink } from './HeaderIconLink';
 import { doSingOut } from '@/firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type Props = {
   onMenuClick: () => void;
@@ -12,6 +12,7 @@ type Props = {
 export const HeaderToolBar = ({ onMenuClick, onSearchIconClick }: Props) => {
   const { userLoggedIn } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <>
@@ -48,19 +49,31 @@ export const HeaderToolBar = ({ onMenuClick, onSearchIconClick }: Props) => {
           />
         </HeaderIconLink>
         {userLoggedIn ?
-          <HeaderIconLink
-            className="w-[64px] h-full border-1"
-            onClick={() => {
-              doSingOut().then(() => {
-                navigate('/login', { replace: true });
-              });
-            }}
-          >
-            <Icon
-              name="signOut"
-              className="w-4 h-4"
-            />
-          </HeaderIconLink>
+          <>
+            <HeaderIconLink
+              to="/profile"
+              state={{ background: location }}
+              className="w-[64px] h-full border-1"
+            >
+              <Icon
+                name="profileIcon"
+                className="w-4 h-4"
+              />
+            </HeaderIconLink>
+            <HeaderIconLink
+              className="w-[64px] h-full border-1"
+              onClick={() => {
+                doSingOut().then(() => {
+                  navigate('/login', { replace: true });
+                });
+              }}
+            >
+              <Icon
+                name="signOut"
+                className="w-4 h-4"
+              />
+            </HeaderIconLink>
+          </>
         : <>
             <HeaderIconLink
               to="/login"

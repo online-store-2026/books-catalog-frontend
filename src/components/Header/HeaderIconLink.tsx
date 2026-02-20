@@ -1,14 +1,25 @@
 import { cn } from '@/lib/utils';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, type Location } from 'react-router-dom';
+
+interface NavigationState {
+  background?: Location;
+}
 
 type Props = {
   to?: string;
   children: React.ReactNode;
   onClick?: () => void;
   className?: string;
+  state?: NavigationState;
 };
 
-export const HeaderIconLink = ({ to, children, onClick, className }: Props) => {
+export const HeaderIconLink = ({
+  to,
+  children,
+  onClick,
+  className,
+  state,
+}: Props) => {
   const { pathname } = useLocation();
   const isActive = to ? pathname === to : false;
 
@@ -29,6 +40,7 @@ export const HeaderIconLink = ({ to, children, onClick, className }: Props) => {
     return (
       <Link
         to={to}
+        state={state}
         onClick={onClick}
         className={cn(
           'relative flex items-center justify-center group',

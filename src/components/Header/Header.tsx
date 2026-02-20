@@ -6,9 +6,11 @@ import { BurgerMenu } from './BurgerMenu';
 import { HeaderToolBar } from './HeaderToolBar';
 import { Link } from 'react-router-dom';
 import { Bookmark } from './Bookmark';
+import { GlobalSearch } from './GlobalSearch/GlobalSearch';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -44,11 +46,13 @@ export const Header = () => {
           <HeaderNav />
 
           <div className="flex items-center h-full">
-            <HeaderSearch />
+            <HeaderSearch onClick={() => setIsSearchOpen(true)} />
             <div className="relative h-full flex items-center">
               <HeaderToolBar
                 onMenuClick={() => setIsMenuOpen(true)}
-                onSearchIconClick={() => {}}
+                onSearchIconClick={() => {
+                  setIsSearchOpen(true);
+                }}
               />
               <Bookmark />
             </div>
@@ -56,7 +60,21 @@ export const Header = () => {
         </div>
       </header>
 
-      {isMenuOpen && <BurgerMenu onClose={() => setIsMenuOpen(false)} />}
+      {isMenuOpen && (
+        <BurgerMenu
+          onClose={() => setIsMenuOpen(false)}
+          onSearchClick={() => {
+            setIsSearchOpen(true);
+            setIsMenuOpen(false);
+          }}
+        />
+      )}
+
+      <GlobalSearch
+        open={isSearchOpen}
+        setOpen={setIsSearchOpen}
+        onSelect={() => setIsSearchOpen(false)}
+      />
     </>
   );
 };

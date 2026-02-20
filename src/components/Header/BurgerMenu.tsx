@@ -9,9 +9,10 @@ import { doSingOut } from '@/firebase/auth';
 
 type Props = {
   onClose: () => void;
+  onSearchClick: () => void;
 };
 
-export const BurgerMenu = ({ onClose }: Props) => {
+export const BurgerMenu = ({ onClose, onSearchClick }: Props) => {
   const { userLoggedIn } = useAuth();
   const navigate = useNavigate();
 
@@ -58,7 +59,7 @@ export const BurgerMenu = ({ onClose }: Props) => {
             <HeaderSearch
               isMobile
               onCategorySelect={onClose}
-              onSearchSelect={onClose}
+              onClick={onSearchClick}
             />
           </div>
         </div>

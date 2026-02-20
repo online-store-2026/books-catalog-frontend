@@ -1,18 +1,25 @@
 import type { RefObject } from 'react';
 
 interface ScrollButtonsProps {
-  scrollRef: RefObject<HTMLDivElement | null>;
+  scrollRef?: RefObject<HTMLDivElement | null>;
+  onScroll?: () => void;
   amount?: number;
   direction: 'left' | 'right';
 }
 
 export const ScrollButton = ({
   scrollRef,
+  onScroll,
   amount,
   direction,
 }: ScrollButtonsProps) => {
   const handleScroll = () => {
-    if (scrollRef.current) {
+    if (onScroll) {
+      onScroll();
+      return;
+    }
+
+    if (scrollRef?.current) {
       const firstCard = scrollRef.current.querySelector(
         ':scope > *',
       ) as HTMLElement;
@@ -36,7 +43,7 @@ export const ScrollButton = ({
       className="w-[40px] h-[40px] flex items-center justify-center transition-all duration-200 hover:scale-125 transition-colors flex-shrink-0"
       aria-label={`Scroll ${direction}`}
     >
-      <span className="text-[20px] font-normal hover:font-black transition-all ">
+      <span className="text-[20px] font-normal hover:font-black transition-all">
         {direction === 'left' ? '←' : '→'}
       </span>
     </button>

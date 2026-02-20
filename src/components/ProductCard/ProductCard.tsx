@@ -8,6 +8,7 @@ import { useCartFavorites } from '@/context/CartFavoritesContext';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import type { Book } from '@/types/Book';
+import { showError, showInfo, showSuccess } from '@/lib/toast';
 
 type Props = {
   book: Book;
@@ -24,8 +25,10 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
   const toggleAddToCart = () => {
     if (isBookInCart) {
       removeFromCart(book.id);
+      showInfo('Book removed from cart!');
     } else {
       addToCart(book);
+      showSuccess('Book added to cart!');
     }
   };
 
@@ -106,7 +109,14 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
           className="flex-1"
         />
         <HeartButton
-          onClick={() => toggleFavorite(book)}
+          onClick={() => {
+            toggleFavorite(book); // додає або видаляє з фаворитів
+            if (isBookInFavorites) {
+              showError('Book removed from favorites!');
+            } else {
+              showSuccess('Book added to favorites!');
+            }
+          }}
           isSelected={isBookInFavorites}
         />
       </div>

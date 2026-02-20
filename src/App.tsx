@@ -16,6 +16,7 @@ import { NotFoundPage } from '@/pages/NotFoundPage.tsx';
 import { PaperPage } from '@/pages/PaperPage';
 import { RightsPage } from '@/pages/RightsPage';
 import { CategoryPage } from './pages/CategoryPage';
+import ToasterWrapper from './components/ui/ToasterWrapper/ToasterWrapper';
 // import { CategoriesSection } from '@/components/CategoriesSection/CategoriesSection';
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
           {/* <CategoriesSection /> */}
         </main>
         <Footer />
+        <ToasterWrapper />
       </div>
     </>
   );

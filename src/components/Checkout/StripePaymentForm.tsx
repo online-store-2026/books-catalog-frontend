@@ -6,6 +6,7 @@ import {
 } from '@stripe/react-stripe-js';
 import { Button } from '@/components/ui/button';
 import { TYPOGRAPHY } from '@/constants/typography';
+import { Loader } from 'lucide-react';
 
 interface StripePaymentFormProps {
   onSuccess: () => void;
@@ -64,7 +65,7 @@ export const StripePaymentForm = ({
         className={`h-14 ${TYPOGRAPHY.uppercase}`}
       >
         {isLoading ?
-          <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+          <Loader />
         : 'Pay now'}
       </Button>
     </form>

@@ -15,7 +15,7 @@ function request<T>(url: string): Promise<T> {
     });
 }
 
-const API_BASE = '/api';
+const API_BASE = `${import.meta.env.BASE_URL}api`;
 
 export const client = {
   get: <T>(path: string) => request<T>(`${API_BASE}/${path}.json`),

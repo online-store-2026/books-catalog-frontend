@@ -7,7 +7,7 @@ import { CartFavoritesProvider } from '@/context/CartFavoritesContext';
 import { AuthProvider } from './context/authContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
-  <BrowserRouter>
+  <BrowserRouter basename="/books-catalog-frontend/">
     <AuthProvider>
       <CartFavoritesProvider>
         <App />

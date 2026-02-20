@@ -62,7 +62,7 @@ export function LoginForm() {
         setEmail('');
         setPassword('');
       } catch (err) {
-        setError(getErrorMessage(err.code));
+        setError(getErrorMessage((err as { code: string }).code));
       } finally {
         setIsSigningIn(false);
       }
@@ -77,7 +77,7 @@ export function LoginForm() {
       try {
         await doSingInWithGoogle();
       } catch (err) {
-        setError(getErrorMessage(err.code));
+        setError(getErrorMessage((err as { code: string }).code));
       } finally {
         setIsSigningIn(false);
       }

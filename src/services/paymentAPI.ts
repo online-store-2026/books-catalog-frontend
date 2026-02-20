@@ -1,76 +1,78 @@
+import { httpsCallable } from 'firebase/functions';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+  orderBy,
+} from 'firebase/firestore';
+import { auth, firestore, functions } from '@/firebase/firebase';
 import type { Order, CreateOrderPayload } from '../types/Order';
 
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
-const generateOrderId = () =>
-  `ORD-${Date.now()}-${Math.random().toString(36).slice(2, 7).toUpperCase()}`;
-
-const STORAGE_KEY = 'niceboook_orders';
-
-const getStoredOrders = (): Order[] => {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  } catch {
-    return [];
-  }
-};
+const docToOrder = (id: string, data: Record<string, unknown>): Order => ({
+  id,
+  createdAt: data.createdAt as string,
+  status: data.status as Order['status'],
+  paymentMethod: data.paymentMethod as Order['paymentMethod'],
+  customer: data.customer as Order['customer'],
+  items: data.items as Order['items'],
+  subtotal: data.subtotal as number,
+  total: data.total as number,
+  userId: data.userId as string | undefined,
+  invoiceUrl: data.invoiceUrl as string | undefined,
+});
 
 export const createOrder = async (
   payload: CreateOrderPayload,
 ): Promise<Order> => {
-  await delay(600);
-
-  const subtotal = payload.items.reduce((sum, item) => {
-    const price = item.priceDiscount ?? item.priceRegular;
-    return sum + price * item.quantity;
-  }, 0);
-
-  const order: Order = {
-    id: generateOrderId(),
-    createdAt: new Date().toISOString(),
-    status: 'pending',
-    paymentMethod: payload.paymentMethod,
-    customer: payload.customer,
-    items: payload.items,
-    subtotal,
-    total: subtotal,
-  };
-
-  const orders = getStoredOrders();
-  orders.unshift(order);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
-
-  return order;
+  const fn = httpsCallable<CreateOrderPayload, Order>(functions, 'createOrder');
+  const result = await fn(payload);
+  return result.data;
 };
 
 export const getOrder = async (orderId: string): Promise<Order | null> => {
-  await delay(300);
-  return getStoredOrders().find((o) => o.id === orderId) ?? null;
+  const ref = doc(firestore, 'orders', orderId);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) return null;
+  return docToOrder(snap.id, snap.data());
 };
 
 export const getUserOrders = async (): Promise<Order[]> => {
-  await delay(400);
-  return getStoredOrders();
+  const user = auth.currentUser;
+  if (!user) return [];
+
+  const q = query(
+    collection(firestore, 'orders'),
+    where('userId', '==', user.uid),
+    orderBy('createdAt', 'desc'),
+  );
+
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => docToOrder(d.id, d.data()));
 };
 
 export const createStripeIntent = async (
   orderId: string,
   amount: number,
 ): Promise<{ clientSecret: string }> => {
-  await delay(500);
-  console.log('[MOCK] createStripeIntent', { orderId, amount });
-  return {
-    clientSecret: 'pi_mock_secret_' + Math.random().toString(36).slice(2),
-  };
+  const fn = httpsCallable<
+    { orderId: string; amount: number },
+    { clientSecret: string }
+  >(functions, 'createStripeIntent');
+  const result = await fn({ orderId, amount });
+  return result.data;
 };
 
 export const getLiqPayPayload = async (
   orderId: string,
   amount: number,
 ): Promise<{ data: string; signature: string }> => {
-  await delay(500);
-  console.log('[MOCK] getLiqPayPayload', { orderId, amount });
-  return {
-    data: btoa(JSON.stringify({ order_id: orderId, amount, currency: 'USD' })),
-    signature: 'mock_sig_' + Math.random().toString(36).slice(2),
-  };
+  const fn = httpsCallable<
+    { orderId: string; amount: number },
+    { data: string; signature: string }
+  >(functions, 'getLiqPayPayload');
+  const result = await fn({ orderId, amount });
+  return result.data;
 };

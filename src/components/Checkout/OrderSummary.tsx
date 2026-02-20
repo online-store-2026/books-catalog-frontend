@@ -1,4 +1,5 @@
 import type { CartItem } from '@/types/Book.ts';
+import { TYPOGRAPHY } from '@/constants/typography';
 
 interface OrderSummaryProps {
   items: CartItem[];
@@ -14,8 +15,8 @@ export const OrderSummary = ({ items }: OrderSummaryProps) => {
 
   return (
     <div className="bg-gray-50 rounded p-8 sticky top-24">
-      <h2 className="text-lg font-bold text-gray-900">Order summary</h2>
-      <p className="text-xs text-gray-400 mt-1 mb-6">
+      <h2 className={`${TYPOGRAPHY.h4} text-gray-900`}>Order summary</h2>
+      <p className={`${TYPOGRAPHY.small} text-gray-400 mt-1 mb-6`}>
         {items.length} {items.length === 1 ? 'item' : 'items'}
       </p>
 
@@ -36,12 +37,16 @@ export const OrderSummary = ({ items }: OrderSummaryProps) => {
               </span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-gray-900 truncate">
+              <p className={`${TYPOGRAPHY.buttons} text-gray-900 truncate`}>
                 {item.name}
               </p>
-              <p className="text-xs text-gray-400">{item.author}</p>
+              <p className={`${TYPOGRAPHY.small} text-gray-400`}>
+                {item.author}
+              </p>
             </div>
-            <span className="text-sm font-bold text-gray-900 whitespace-nowrap">
+            <span
+              className={`${TYPOGRAPHY.buttons} font-bold text-gray-900 whitespace-nowrap`}
+            >
               ${(getPrice(item) * item.quantity).toFixed(2)}
             </span>
           </li>
@@ -51,19 +56,25 @@ export const OrderSummary = ({ items }: OrderSummaryProps) => {
       <div className="h-px bg-gray-200 my-5" />
 
       <div className="flex justify-between mb-2.5">
-        <span className="text-sm text-gray-500">Subtotal</span>
-        <span className="text-sm text-gray-500">${total.toFixed(2)}</span>
+        <span className={`${TYPOGRAPHY.body} text-gray-500`}>Subtotal</span>
+        <span className={`${TYPOGRAPHY.body} text-gray-500`}>
+          ${total.toFixed(2)}
+        </span>
       </div>
       <div className="flex justify-between">
-        <span className="text-sm text-gray-500">Shipping</span>
-        <span className="text-sm text-gray-500">Calculated at next step</span>
+        <span className={`${TYPOGRAPHY.body} text-gray-500`}>Shipping</span>
+        <span className={`${TYPOGRAPHY.body} text-gray-500`}>
+          Calculated at next step
+        </span>
       </div>
 
       <div className="h-px bg-gray-200 my-5" />
 
       <div className="flex justify-between items-baseline">
-        <span className="text-sm font-bold text-gray-900">Total</span>
-        <span className="text-3xl font-extrabold text-gray-900 tracking-tight">
+        <span className={`${TYPOGRAPHY.buttons} font-bold text-gray-900`}>
+          Total
+        </span>
+        <span className={`${TYPOGRAPHY.h2} text-gray-900 tracking-tight`}>
           ${total.toFixed(2)}
         </span>
       </div>

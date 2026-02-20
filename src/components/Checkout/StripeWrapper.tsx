@@ -2,7 +2,6 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import { StripePaymentForm } from './StripePaymentForm';
 
-// Тестовий publishable key — замінити на свій з dashboard.stripe.com
 const stripePromise = loadStripe(
   'pk_test_51T2Z36HgUJaKIiLfmdNyCLzc6JXFYo35LnbrddyrzcA3tyRv9Z73K5x59oPRNCCGBE8Dgdqw83MG8mOIQuKkCi7z00IzaGYL0r',
 );

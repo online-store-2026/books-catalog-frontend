@@ -29,10 +29,12 @@ export interface Order {
   subtotal: number;
   total: number;
   invoiceUrl?: string;
+  userId?: string;
 }
 
 export interface CreateOrderPayload {
   customer: CustomerData;
   items: CartItem[];
   paymentMethod: PaymentMethod;
+  userId?: string;
 }

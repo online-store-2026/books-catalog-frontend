@@ -1,5 +1,6 @@
 import type { PaymentMethod } from '@/types/Order';
 import type { JSX } from 'react';
+import { TYPOGRAPHY } from '@/constants/typography';
 
 interface PaymentMethodSelectorProps {
   value: PaymentMethod;
@@ -74,9 +75,7 @@ export const PaymentMethodSelector = ({
 }: PaymentMethodSelectorProps) => {
   return (
     <div className="flex flex-col gap-3">
-      <p className="text-[11px] font-bold tracking-widest uppercase text-gray-400">
-        Payment method
-      </p>
+      <p className={`${TYPOGRAPHY.uppercase} text-gray-400`}>Payment method</p>
 
       <div className="grid grid-cols-2 gap-3 max-sm:grid-cols-1">
         {METHODS.map((method) => {
@@ -93,7 +92,6 @@ export const PaymentMethodSelector = ({
                 : 'border-gray-200 bg-white hover:border-gray-400',
               ].join(' ')}
             >
-              {/* Radio dot */}
               <span
                 className={[
                   'w-4 h-4 rounded-full border-2 flex-shrink-0 flex items-center justify-center transition-colors',
@@ -105,15 +103,13 @@ export const PaymentMethodSelector = ({
                 )}
               </span>
 
-              {/* Icon */}
               {method.icon}
 
-              {/* Text */}
               <div className="flex flex-col min-w-0">
-                <span className="text-sm font-semibold text-gray-900">
+                <span className={`${TYPOGRAPHY.buttons} text-gray-900`}>
                   {method.label}
                 </span>
-                <span className="text-xs text-gray-400 truncate">
+                <span className={`${TYPOGRAPHY.small} text-gray-400 truncate`}>
                   {method.description}
                 </span>
               </div>

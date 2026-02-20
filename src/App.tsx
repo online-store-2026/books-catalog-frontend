@@ -20,11 +20,14 @@ import OrderSuccessPage from '@/pages/OrderSuccessPage';
 import OrdersPage from '@/pages/OrderPage.tsx';
 import { LoginPage } from './pages/LoginPage';
 import { SignUpPage } from './pages/SignUpPage';
+import { ProfilePage } from './pages/ProfilePage';
 
 // import { CategoriesSection } from '@/components/CategoriesSection/CategoriesSection';
 
 function App() {
   const location = useLocation();
+  const state = location.state as { background?: Location };
+  const background = state?.background;
 
   const hideLayout =
     location.pathname === '/login' || location.pathname === '/signup';
@@ -34,7 +37,7 @@ function App() {
       <div className="flex min-h-screen flex-col">
         {!hideLayout && <Header />}
         <main className="flex-1">
-          <Routes>
+          <Routes location={background || location}>
             <Route
               path="/"
               element={<HomePage />}
@@ -112,6 +115,14 @@ function App() {
         </main>
         {!hideLayout && <Footer />}
       </div>
+      {background && (
+        <Routes>
+          <Route
+            path="/profile"
+            element={<ProfilePage />}
+          />
+        </Routes>
+      )}
     </>
   );
 }

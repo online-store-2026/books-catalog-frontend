@@ -5,6 +5,7 @@ import {
   useElements,
 } from '@stripe/react-stripe-js';
 import { Button } from '@/components/ui/button';
+import { TYPOGRAPHY } from '@/constants/typography';
 
 interface StripePaymentFormProps {
   onSuccess: () => void;
@@ -56,15 +57,11 @@ export const StripePaymentForm = ({
       onSubmit={handleSubmit}
       className="flex flex-col gap-6"
     >
-      <PaymentElement
-        options={{
-          layout: 'tabs',
-        }}
-      />
+      <PaymentElement options={{ layout: 'tabs' }} />
       <Button
         type="submit"
         disabled={!stripe || isLoading}
-        className="h-14 text-sm font-bold tracking-widest uppercase"
+        className={`h-14 ${TYPOGRAPHY.uppercase}`}
       >
         {isLoading ?
           <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

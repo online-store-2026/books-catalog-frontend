@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getUserOrders } from '@/services/paymentAPI';
 import type { Order } from '@/types/Order';
+import { TYPOGRAPHY } from '@/constants/typography';
+import { ChevronLeft } from 'lucide-react';
+import { cn } from '@/lib/utils.ts';
 
 const StatusBadge = ({ status }: { status: Order['status'] }) => {
   const config = {
@@ -14,7 +17,7 @@ const StatusBadge = ({ status }: { status: Order['status'] }) => {
   const { label, className } = config[status] ?? config.pending;
   return (
     <span
-      className={`inline-flex items-center px-2.5 py-1 rounded text-xs font-semibold ${className}`}
+      className={`inline-flex items-center px-2.5 py-1 rounded ${TYPOGRAPHY.small} ${className}`}
     >
       {label}
     </span>
@@ -24,6 +27,8 @@ const StatusBadge = ({ status }: { status: Order['status'] }) => {
 const OrdersPage = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUserOrders()
@@ -43,10 +48,27 @@ const OrdersPage = () => {
     <div className="py-10 pb-24">
       <div className="max-w-3xl mx-auto px-6">
         <div className="mb-10">
-          <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight mb-1">
-            My Orders
-          </h1>
-          <p className="text-sm text-gray-400">
+          <button
+            onClick={() => {
+              if (
+                document.referrer &&
+                new URL(document.referrer).origin === window.location.origin
+              ) {
+                navigate(-1);
+              } else {
+                navigate('/');
+              }
+            }}
+            className={cn(
+              TYPOGRAPHY.small,
+              'mb-2 inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors',
+            )}
+          >
+            <ChevronLeft className="size-4" />
+            Back
+          </button>
+          <h1 className={`${TYPOGRAPHY.h1} text-gray-900 mb-1`}>My Orders</h1>
+          <p className={`${TYPOGRAPHY.body} text-gray-400`}>
             {orders.length === 0 ?
               'No orders yet'
             : `${orders.length} ${orders.length === 1 ? 'order' : 'orders'}`}
@@ -88,16 +110,16 @@ const OrdersPage = () => {
               </svg>
             </div>
             <div>
-              <p className="text-base font-semibold text-gray-900 mb-1">
+              <p className={`${TYPOGRAPHY.h5} text-gray-900 mb-1`}>
                 No orders yet
               </p>
-              <p className="text-sm text-gray-400">
+              <p className={`${TYPOGRAPHY.body} text-gray-400`}>
                 Your orders will appear here after checkout
               </p>
             </div>
             <Link
               to="/"
-              className="h-12 px-8 bg-gray-900 hover:bg-gray-700 text-white text-sm font-bold tracking-widest uppercase rounded flex items-center justify-center transition-colors"
+              className={`h-12 px-8 bg-gray-900 hover:bg-gray-700 text-white ${TYPOGRAPHY.uppercase} rounded flex items-center justify-center transition-colors`}
             >
               Start shopping
             </Link>
@@ -114,16 +136,18 @@ const OrdersPage = () => {
                 >
                   <div className="flex items-center justify-between px-5 py-4 bg-gray-50 border-b border-gray-200">
                     <div className="flex flex-col gap-0.5">
-                      <p className="text-[11px] font-bold tracking-widest uppercase text-gray-400">
+                      <p className={`${TYPOGRAPHY.uppercase} text-gray-400`}>
                         Order ID
                       </p>
-                      <p className="text-sm font-semibold text-gray-900 font-mono">
+                      <p
+                        className={`${TYPOGRAPHY.buttons} text-gray-900 font-mono`}
+                      >
                         {order.id}
                       </p>
                     </div>
                     <div className="flex flex-col items-end gap-1.5">
                       <StatusBadge status={order.status} />
-                      <p className="text-[11px] text-gray-400">
+                      <p className={`${TYPOGRAPHY.small} text-gray-400`}>
                         {new Date(order.createdAt).toLocaleDateString('en-GB', {
                           day: 'numeric',
                           month: 'short',
@@ -149,7 +173,7 @@ const OrdersPage = () => {
                           className="w-10 h-14 rounded-sm border-2 border-white bg-gray-100 flex items-center justify-center"
                           style={{ zIndex: 7 }}
                         >
-                          <span className="text-[10px] font-bold text-gray-500">
+                          <span className={`${TYPOGRAPHY.small} text-gray-500`}>
                             +{order.items.length - 3}
                           </span>
                         </div>
@@ -157,17 +181,23 @@ const OrdersPage = () => {
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 truncate">
+                      <p
+                        className={`${TYPOGRAPHY.body} font-medium text-gray-900 truncate`}
+                      >
                         {order.items.map((i) => i.name).join(', ')}
                       </p>
-                      <p className="text-xs text-gray-400 mt-0.5 capitalize">
+                      <p
+                        className={`${TYPOGRAPHY.small} text-gray-400 mt-0.5 capitalize`}
+                      >
                         {order.paymentMethod} ·{' '}
                         {order.items.reduce((s, i) => s + i.quantity, 0)} items
                       </p>
                     </div>
 
                     <div className="flex items-center gap-3 flex-shrink-0">
-                      <span className="text-base font-extrabold text-gray-900">
+                      <span
+                        className={`${TYPOGRAPHY.h5} font-extrabold text-gray-900`}
+                      >
                         ${order.total.toFixed(2)}
                       </span>
                       <svg

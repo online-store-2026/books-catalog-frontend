@@ -3,11 +3,37 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import { InvoicePDF } from './InvoicePDF';
 import { imageToBase64 } from '@/utils/imageToBase64';
 import type { Order } from '@/types/Order';
+import { TYPOGRAPHY } from '@/constants/typography';
 
 interface DownloadInvoiceButtonProps {
   order: Order;
   className?: string;
 }
+
+const defaultClassName = `h-14 border border-gray-200 hover:border-gray-400 text-gray-900 ${TYPOGRAPHY.buttons} rounded flex items-center justify-center gap-2 transition-colors w-full disabled:opacity-50`;
+
+const DownloadIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+  >
+    <path
+      d="M8 1v9M8 10l-3-3M8 10l3-3"
+      stroke="#111"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M2 12v1a1 1 0 001 1h10a1 1 0 001-1v-1"
+      stroke="#111"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+  </svg>
+);
 
 export const DownloadInvoiceButton = ({
   order,
@@ -39,10 +65,7 @@ export const DownloadInvoiceButton = ({
         type="button"
         onClick={handlePrepare}
         disabled={isConverting}
-        className={
-          className ??
-          'h-14 border border-gray-200 hover:border-gray-400 text-gray-900 text-sm font-semibold rounded flex items-center justify-center gap-2 transition-colors w-full disabled:opacity-50'
-        }
+        className={className ?? defaultClassName}
       >
         {isConverting ?
           <>
@@ -50,26 +73,7 @@ export const DownloadInvoiceButton = ({
             Preparing...
           </>
         : <>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-            >
-              <path
-                d="M8 1v9M8 10l-3-3M8 10l3-3"
-                stroke="#111"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M2 12v1a1 1 0 001 1h10a1 1 0 001-1v-1"
-                stroke="#111"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
+            <DownloadIcon />
             Download Invoice
           </>
         }
@@ -86,10 +90,7 @@ export const DownloadInvoiceButton = ({
         <button
           type="button"
           disabled={loading}
-          className={
-            className ??
-            'h-14 border border-gray-200 hover:border-gray-400 text-gray-900 text-sm font-semibold rounded flex items-center justify-center gap-2 transition-colors w-full disabled:opacity-50'
-          }
+          className={className ?? defaultClassName}
         >
           {loading ?
             <>
@@ -97,26 +98,7 @@ export const DownloadInvoiceButton = ({
               Generating...
             </>
           : <>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-              >
-                <path
-                  d="M8 1v9M8 10l-3-3M8 10l3-3"
-                  stroke="#111"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M2 12v1a1 1 0 001 1h10a1 1 0 001-1v-1"
-                  stroke="#111"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
+              <DownloadIcon />
               Download Invoice
             </>
           }

@@ -8,6 +8,7 @@ import {
   Font,
 } from '@react-pdf/renderer';
 import type { Order } from '@/types/Order';
+import { COLORS } from '@/constants/colors';
 
 Font.register({
   family: 'Manrope',
@@ -24,9 +25,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Manrope',
     fontWeight: 400,
     fontSize: 10,
-    color: '#111111',
+    color: COLORS.primary,
     padding: '48 48 64 48',
-    backgroundColor: '#ffffff',
+    backgroundColor: COLORS.white,
   },
   header: {
     flexDirection: 'row',
@@ -34,31 +35,31 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     marginBottom: 40,
     paddingBottom: 24,
-    borderBottom: '1 solid #e8e8e8',
+    borderBottom: `1 solid ${COLORS.elements}`,
   },
   logo: {
     fontSize: 22,
     fontWeight: 800,
     letterSpacing: -0.5,
-    color: '#111',
+    color: COLORS.primary,
   },
   invoiceLabel: {
     fontSize: 9,
     fontWeight: 700,
-    color: '#aaa',
+    color: COLORS.secondary,
     letterSpacing: 2,
     marginBottom: 4,
   },
   invoiceId: {
     fontSize: 12,
     fontWeight: 700,
-    color: '#111',
+    color: COLORS.primary,
   },
   metaLabel: {
     fontSize: 8,
     fontWeight: 700,
     letterSpacing: 1.5,
-    color: '#aaa',
+    color: COLORS.secondary,
     marginBottom: 5,
   },
   badge: {
@@ -70,21 +71,21 @@ const styles = StyleSheet.create({
   badgePaid: { backgroundColor: '#dcfce7' },
   badgePending: { backgroundColor: '#fef9c3' },
   badgeFailed: { backgroundColor: '#fee2e2' },
-  badgeCancelled: { backgroundColor: '#f3f4f6' },
+  badgeCancelled: { backgroundColor: COLORS.hoverAndBg },
   badgeText: {
     fontSize: 8,
     fontWeight: 700,
     letterSpacing: 0.5,
   },
-  badgeTextPaid: { color: '#16a34a' },
+  badgeTextPaid: { color: COLORS.green },
   badgeTextPending: { color: '#ca8a04' },
-  badgeTextFailed: { color: '#dc2626' },
-  badgeTextCancelled: { color: '#6b7280' },
+  badgeTextFailed: { color: COLORS.red },
+  badgeTextCancelled: { color: COLORS.secondary },
   tableHeader: {
     flexDirection: 'row',
     paddingVertical: 8,
     paddingHorizontal: 12,
-    backgroundColor: '#f8f8f8',
+    backgroundColor: COLORS.hoverAndBg,
     borderRadius: 4,
     marginBottom: 2,
   },
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: 10,
     paddingHorizontal: 12,
-    borderBottom: '1 solid #f0f0f0',
+    borderBottom: `1 solid ${COLORS.elements}`,
     alignItems: 'center',
   },
   colImg: { width: 36, marginRight: 10 },
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
     fontSize: 8,
     fontWeight: 700,
     letterSpacing: 1,
-    color: '#aaa',
+    color: COLORS.secondary,
   },
   bookImg: {
     width: 36,
@@ -115,23 +116,23 @@ const styles = StyleSheet.create({
   tdTitle: {
     fontSize: 10,
     fontWeight: 700,
-    color: '#111',
+    color: COLORS.primary,
     marginBottom: 2,
   },
   tdAuthor: {
     fontSize: 8,
     fontWeight: 400,
-    color: '#999',
+    color: COLORS.secondary,
   },
   tdText: {
     fontSize: 10,
     fontWeight: 400,
-    color: '#555',
+    color: COLORS.secondary,
   },
   tdTextBold: {
     fontSize: 10,
     fontWeight: 700,
-    color: '#111',
+    color: COLORS.primary,
   },
   totalsSection: {
     marginTop: 20,
@@ -145,14 +146,14 @@ const styles = StyleSheet.create({
   },
   totalDivider: {
     height: 1,
-    backgroundColor: '#e8e8e8',
+    backgroundColor: COLORS.elements,
     width: 200,
     marginVertical: 8,
   },
-  totalLabel: { fontSize: 10, fontWeight: 400, color: '#666' },
-  totalValue: { fontSize: 10, fontWeight: 400, color: '#666' },
-  grandLabel: { fontSize: 12, fontWeight: 700, color: '#111' },
-  grandValue: { fontSize: 14, fontWeight: 800, color: '#111' },
+  totalLabel: { fontSize: 10, fontWeight: 400, color: COLORS.secondary },
+  totalValue: { fontSize: 10, fontWeight: 400, color: COLORS.secondary },
+  grandLabel: { fontSize: 12, fontWeight: 700, color: COLORS.primary },
+  grandValue: { fontSize: 14, fontWeight: 800, color: COLORS.primary },
   footer: {
     position: 'absolute',
     bottom: 32,
@@ -160,13 +161,13 @@ const styles = StyleSheet.create({
     right: 48,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderTop: '1 solid #e8e8e8',
+    borderTop: `1 solid ${COLORS.elements}`,
     paddingTop: 10,
   },
   footerText: {
     fontSize: 8,
     fontWeight: 400,
-    color: '#bbb',
+    color: COLORS.icons,
   },
 });
 
@@ -215,12 +216,14 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
             flexDirection: 'row',
             marginBottom: 20,
             paddingBottom: 20,
-            borderBottom: '1 solid #f0f0f0',
+            borderBottom: `1 solid ${COLORS.elements}`,
           }}
         >
           <View style={{ flex: 1 }}>
             <Text style={styles.metaLabel}>DATE</Text>
-            <Text style={{ fontSize: 11, fontWeight: 700, color: '#111' }}>
+            <Text
+              style={{ fontSize: 11, fontWeight: 700, color: COLORS.primary }}
+            >
               {new Date(order.createdAt).toLocaleDateString('en-GB', {
                 day: 'numeric',
                 month: 'long',
@@ -230,7 +233,9 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
           </View>
           <View style={{ flex: 1 }}>
             <Text style={styles.metaLabel}>PAYMENT</Text>
-            <Text style={{ fontSize: 11, fontWeight: 700, color: '#111' }}>
+            <Text
+              style={{ fontSize: 11, fontWeight: 700, color: COLORS.primary }}
+            >
               {order.paymentMethod === 'stripe' ? 'Stripe (Card)' : 'LiqPay'}
             </Text>
           </View>
@@ -244,19 +249,14 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
           </View>
         </View>
 
-        <View
-          style={{
-            flexDirection: 'row',
-            marginBottom: 36,
-          }}
-        >
+        <View style={{ flexDirection: 'row', marginBottom: 36 }}>
           <View style={{ flex: 1, paddingRight: 24 }}>
             <Text style={styles.metaLabel}>BILL TO</Text>
             <Text
               style={{
                 fontSize: 11,
                 fontWeight: 700,
-                color: '#111',
+                color: COLORS.primary,
                 marginBottom: 4,
               }}
             >
@@ -266,13 +266,15 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
               style={{
                 fontSize: 10,
                 fontWeight: 400,
-                color: '#555',
+                color: COLORS.secondary,
                 marginBottom: 2,
               }}
             >
               {order.customer.email}
             </Text>
-            <Text style={{ fontSize: 10, fontWeight: 400, color: '#555' }}>
+            <Text
+              style={{ fontSize: 10, fontWeight: 400, color: COLORS.secondary }}
+            >
               {order.customer.phone}
             </Text>
           </View>
@@ -280,7 +282,7 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
           <View
             style={{
               width: 1,
-              backgroundColor: '#eeeeee',
+              backgroundColor: COLORS.elements,
               marginHorizontal: 8,
             }}
           />
@@ -291,7 +293,7 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
               style={{
                 fontSize: 11,
                 fontWeight: 700,
-                color: '#111',
+                color: COLORS.primary,
                 marginBottom: 4,
               }}
             >
@@ -301,7 +303,7 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
               style={{
                 fontSize: 10,
                 fontWeight: 400,
-                color: '#555',
+                color: COLORS.secondary,
                 marginBottom: 2,
               }}
             >
@@ -311,13 +313,15 @@ export const InvoicePDF = ({ order }: InvoicePDFProps) => {
               style={{
                 fontSize: 10,
                 fontWeight: 400,
-                color: '#555',
+                color: COLORS.secondary,
                 marginBottom: 2,
               }}
             >
               {order.customer.city}, {order.customer.zip}
             </Text>
-            <Text style={{ fontSize: 10, fontWeight: 400, color: '#555' }}>
+            <Text
+              style={{ fontSize: 10, fontWeight: 400, color: COLORS.secondary }}
+            >
               {order.customer.country}
             </Text>
           </View>

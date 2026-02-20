@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select.tsx';
+import { TYPOGRAPHY } from '@/constants/typography';
 
 interface CheckoutFormProps {
   onSubmit: (data: CheckoutFormValues) => void;
@@ -31,7 +32,9 @@ const COUNTRIES = [
 ];
 
 const FieldError = ({ message }: { message?: string }) =>
-  message ? <p className="text-xs text-red-500 mt-1">{message}</p> : null;
+  message ?
+    <p className={`${TYPOGRAPHY.small} text-red-500 mt-1`}>{message}</p>
+  : null;
 
 export const CheckoutForm = ({ onSubmit, isLoading }: CheckoutFormProps) => {
   const {
@@ -48,7 +51,7 @@ export const CheckoutForm = ({ onSubmit, isLoading }: CheckoutFormProps) => {
       className="flex flex-col gap-10"
     >
       <div className="flex flex-col gap-5">
-        <p className="text-[11px] font-bold tracking-widest uppercase text-gray-400">
+        <p className={`${TYPOGRAPHY.uppercase} text-gray-400`}>
           Contact information
         </p>
 
@@ -101,7 +104,7 @@ export const CheckoutForm = ({ onSubmit, isLoading }: CheckoutFormProps) => {
       </div>
 
       <div className="flex flex-col gap-5">
-        <p className="text-[11px] font-bold tracking-widest uppercase text-gray-400">
+        <p className={`${TYPOGRAPHY.uppercase} text-gray-400`}>
           Delivery address
         </p>
 
@@ -167,7 +170,7 @@ export const CheckoutForm = ({ onSubmit, isLoading }: CheckoutFormProps) => {
       <Button
         type="submit"
         disabled={isLoading}
-        className="h-14 text-sm font-bold tracking-widest uppercase"
+        className={`h-14 ${TYPOGRAPHY.uppercase}`}
       >
         {isLoading ?
           <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

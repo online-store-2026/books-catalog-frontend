@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { LiqPayForm } from './LiqPayForm';
 import { getLiqPayPayload } from '@/services/paymentAPI';
+import { TYPOGRAPHY } from '@/constants/typography';
 
 interface LiqPayButtonProps {
   orderId: string;
@@ -76,7 +77,7 @@ export const LiqPayButton = ({
               LiqPay
             </text>
           </svg>
-          <p className="text-xs text-blue-700">
+          <p className={`${TYPOGRAPHY.small} text-blue-700`}>
             Visa, Mastercard, Приват24, monobank — захищена оплата через LiqPay
           </p>
         </div>
@@ -85,14 +86,14 @@ export const LiqPayButton = ({
           type="button"
           onClick={handleClick}
           disabled={isLoading}
-          className="h-14 bg-[#00AAFF] hover:bg-[#0095e0] disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-bold tracking-widest uppercase rounded transition-colors flex items-center justify-center"
+          className={`h-14 bg-[#00AAFF] hover:bg-[#0095e0] disabled:opacity-60 disabled:cursor-not-allowed text-white ${TYPOGRAPHY.uppercase} rounded transition-colors flex items-center justify-center`}
         >
           {isLoading ?
             <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
           : 'Pay with LiqPay'}
         </button>
 
-        <p className="text-[11px] text-gray-400 text-center">
+        <p className={`${TYPOGRAPHY.small} text-gray-400 text-center`}>
           You will be redirected to LiqPay&#39;s secure payment page
         </p>
       </div>

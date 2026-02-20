@@ -50,7 +50,7 @@ export const ItemCard: React.FC<Props> = ({ type }) => {
     return <Loader />;
   }
 
-  const imageUrls = book.images.map((img) => `/${img}`);
+  const imageUrls = book.images.map((img) => `${img}`);
   const categoryName = book.category?.[0] || 'General';
 
   return (

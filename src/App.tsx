@@ -1,6 +1,6 @@
 import './App.css';
 
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { AudiobookPage } from '@/pages/AudiobookPage';
@@ -16,18 +16,30 @@ import { NotFoundPage } from '@/pages/NotFoundPage.tsx';
 import { PaperPage } from '@/pages/PaperPage';
 import { RightsPage } from '@/pages/RightsPage';
 import { CategoryPage } from './pages/CategoryPage';
+import OrderSuccessPage from '@/pages/OrderSuccessPage';
+import OrdersPage from '@/pages/OrderPage.tsx';
+import { LoginPage } from './pages/LoginPage';
+import { SignUpPage } from './pages/SignUpPage';
+import { ProfilePage } from './pages/ProfilePage';
 import { BooksProvider } from './context/BooksContext';
 import { BookWordsBackground } from '@/components/BookWordsBackground';
 
 function App() {
+  const location = useLocation();
+  const state = location.state as { background?: Location };
+  const background = state?.background;
+
+  const hideLayout =
+    location.pathname === '/login' || location.pathname === '/signup';
+
   return (
     <>
       <BooksProvider>
         <div className="flex min-h-screen flex-col relative">
           <BookWordsBackground />
-          <Header />
+          {!hideLayout && <Header />}
           <main className="flex-1 relative z-10">
-            <Routes>
+            <Routes location={background || location}>
               <Route
                 path="/"
                 element={<HomePage />}
@@ -35,6 +47,14 @@ function App() {
               <Route
                 path="/home"
                 element={<Navigate to="/" />}
+              />
+              <Route
+                path="/login"
+                element={<LoginPage />}
+              />
+              <Route
+                path="/signup"
+                element={<SignUpPage />}
               />
               <Route
                 path="/catalog"
@@ -69,6 +89,14 @@ function App() {
                 element={<CheckoutPage />}
               />
               <Route
+                path="/order-success/:orderId"
+                element={<OrderSuccessPage />}
+              />
+              <Route
+                path="/orders"
+                element={<OrdersPage />}
+              />
+              <Route
                 path="/contacts"
                 element={<ContactsPage />}
               />
@@ -86,8 +114,16 @@ function App() {
               />
             </Routes>
           </main>
-          <Footer />
+          {!hideLayout && <Footer />}
         </div>
+        {background && (
+          <Routes>
+            <Route
+              path="/profile"
+              element={<ProfilePage />}
+            />
+          </Routes>
+        )}
       </BooksProvider>
     </>
   );

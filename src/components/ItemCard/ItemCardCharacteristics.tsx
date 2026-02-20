@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Book } from '@/types/Book';
-import { formatListeningLength } from '@/utils/formatListeningLength';
+import { formatListeningLength } from '@/utils/formatListeningLength.ts';
 import { TYPOGRAPHY } from '@/constants/typography';
 
 type Props = { book: Book };

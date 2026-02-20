@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { ProductCard } from '@/components/ProductCard';
+import { ProductCardSkeleton } from '@/components/ProductCard/ProductCardSkeleton';
 import { getPaperBooks } from '@/services/booksAPI';
 import type { Book } from '@/types/Book';
 import { ScrollButton } from '@/utils/ScrollButtons';
@@ -28,10 +29,6 @@ export const BooksSection = ({ title }: Props) => {
       });
   }, []);
 
-  if (isLoading) {
-    return <div className="text-center p-10">Loading suggested books...</div>;
-  }
-
   return (
     <section
       className="
@@ -44,11 +41,11 @@ export const BooksSection = ({ title }: Props) => {
     >
       <div
         className="
-      flex flex-row justify-between items-center w-full max-w-[1136px]
-      pr-[16px]
-      min-[640px]:pr-[24px]
-      min-[1200px]:pr-0
-    "
+          flex flex-row justify-between items-center w-full max-w-[1136px]
+          pr-[16px]
+          min-[640px]:pr-[24px]
+          min-[1200px]:pr-0
+        "
       >
         <h2
           className={cn(
@@ -75,20 +72,25 @@ export const BooksSection = ({ title }: Props) => {
         ref={scrollRef}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         className="
-        flex flex-row w-full scroll-smooth
-        [&::-webkit-scrollbar]:hidden
-        overflow-x-auto gap-[16px] h-[400px]
-        min-[640px]:h-[506px]
-       min-[1200px]:h-[571px]
-       min-[1200px]:overflow-x-auto
-      "
+          flex flex-row w-full scroll-smooth
+          [&::-webkit-scrollbar]:hidden
+          overflow-x-auto gap-[16px] h-[400px]
+          min-[640px]:h-[506px]
+          min-[1200px]:h-[571px]
+          min-[1200px]:overflow-x-auto
+        "
       >
-        {books.map((book, index) => (
-          <ProductCard
-            key={`${book.id}-${index}`}
-            book={book}
-          />
-        ))}
+        {isLoading ?
+          Array(4)
+            .fill(null)
+            .map((_, i) => <ProductCardSkeleton key={i} />)
+        : books.map((book, index) => (
+            <ProductCard
+              key={`${book.id}-${index}`}
+              book={book}
+            />
+          ))
+        }
       </div>
     </section>
   );

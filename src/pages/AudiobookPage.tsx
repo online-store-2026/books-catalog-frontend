@@ -8,7 +8,10 @@ export const AudiobookPage = () => {
   const { t } = useTranslation();
   const { books, error, isLoading } = useFetchBooks(getAudioBooks);
 
-  if (error) return <div>{error}</div>;
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   if (isLoading) {
     return (
       <div className="w-full min-h-[60vh] flex items-center justify-center">
@@ -21,6 +24,7 @@ export const AudiobookPage = () => {
     <Catalog
       products={books}
       title={t('categories.audiobooks')}
+      title="Audiobooks"
     />
   );
 };

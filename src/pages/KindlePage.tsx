@@ -8,7 +8,9 @@ export const KindlePage = () => {
   const { t } = useTranslation();
   const { books, error, isLoading } = useFetchBooks(getKindleBooks);
 
-  if (error) return <div>{error}</div>;
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   if (isLoading) {
     return (
@@ -22,6 +24,7 @@ export const KindlePage = () => {
     <Catalog
       products={books}
       title={t('categories.kindle')}
+      title="Kindle books"
     />
   );
 };

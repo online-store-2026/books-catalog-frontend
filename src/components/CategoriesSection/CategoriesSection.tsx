@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import { useTranslation } from 'react-i18next';
+import { CategoriesSectionSkeleton } from './CategoriesSectionSkeleton';
 
 const CATEGORIES = [
   {
@@ -23,6 +25,15 @@ const CATEGORIES = [
 
 export const CategoriesSection = () => {
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setIsLoading(false), 500);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  if (isLoading) return <CategoriesSectionSkeleton />;
+
   return (
     <section className="flex flex-col mt-[56px] px-4 gap-6 min-[640px]:mt-[56px] min-[640px]:px-6 min-[1200px]:mt-[80px] min-[1200px]:w-[1136px] min-[1200px]:mx-auto min-[1200px]:px-0">
       <h2 className={cn(TYPOGRAPHY.h2, 'text-foreground')}>

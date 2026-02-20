@@ -7,6 +7,7 @@ import { HeaderToolBar } from './HeaderToolBar';
 import { Link } from 'react-router-dom';
 import { SearchWithAutocomplete } from './SearchWithAutocomplete';
 import { Bookmark } from './Bookmark';
+import { GlobalSearch } from './GlobalSearch/GlobalSearch';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -59,6 +60,11 @@ export const Header = () => {
               />
               <Bookmark />
             </div>
+            {isSearchOpen && <GlobalSearch />}
+            <HeaderToolBar
+              onMenuClick={() => setIsMenuOpen(true)}
+              onSearchIconClick={handleSearchClick}
+            />
           </div>
         </div>
       </header>

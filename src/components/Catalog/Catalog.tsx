@@ -1,5 +1,5 @@
 import { GridContainer } from '../GridContainer/GridContainer';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import type { Book } from '@/types/Book';
 import { CatalogControls } from './CatalogControls';
@@ -37,16 +37,23 @@ function filtredProduct(incomingProduct: Book[], sortBy: string) {
 type Props = {
   products: Book[];
   title: string;
+  isLoading?: boolean;
 };
 
 export const Catalog = ({ products, title }: Props) => {
   const { t } = useTranslation();
   const [itemsPerPage, setItemsPerPage] = useState<number | 'all'>(16);
+export const Catalog = ({ products, title, isLoading = false }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
+
   const pageFromUrl = Number(searchParams.get('page') || 1);
   const sort = searchParams.get('sort') || 'newest';
+  const itemsParam = searchParams.get('items') || '16';
+  const itemsPerPage: number | 'all' =
+    itemsParam === 'all' ? 'all' : Number(itemsParam);
+
   const MAX_VISIBLE = 5;
 
   const filtresProducts = filtredProduct(products, sort);
@@ -75,7 +82,6 @@ export const Catalog = ({ products, title }: Props) => {
   }
 
   const visiblePages = [];
-
   for (let i = startPage; i <= endPage; i++) {
     visiblePages.push(i);
   }
@@ -83,14 +89,11 @@ export const Catalog = ({ products, title }: Props) => {
   const handleChangeNumber = useCallback(
     (targetPage: number) => {
       const newSearchParams = new URLSearchParams(searchParams.toString());
-
       newSearchParams.set('page', targetPage.toString());
-
       navigate({
         pathname: location.pathname,
         search: `?${newSearchParams.toString()}`,
       });
-
       window.scrollTo({ top: 0, behavior: 'smooth' });
     },
     [searchParams, navigate, location.pathname],
@@ -98,16 +101,22 @@ export const Catalog = ({ products, title }: Props) => {
 
   const handleChangeArrow = (order: 'prev' | 'next') => {
     const newSearchParams = new URLSearchParams(searchParams.toString());
-
     const targetPage = order === 'prev' ? safePage - 1 : safePage + 1;
-
     newSearchParams.set('page', targetPage.toString());
-
     navigate({
       pathname: location.pathname,
       search: `?${newSearchParams.toString()}`,
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleChangeItemsPerPage = (value: number | 'all') => {
+    setSearchParams((prev) => {
+      const params = new URLSearchParams(prev);
+      params.set('items', value.toString());
+      params.set('page', '1');
+      return params;
+    });
   };
 
   useEffect(() => {
@@ -125,33 +134,41 @@ export const Catalog = ({ products, title }: Props) => {
 
   return (
     <GridContainer className="overflow-hidden">
-      <div className="col-span-full flex flex-col items-start m-6">
-        <h1 className="text-[#313237] text-[32px] md:text-[48px] font-manrope font-bold leading-tight tracking-[-0.01em] md:tracking-[-0.02em] m-2">
+      <div className="col-span-full flex flex-col items-start mt-8 mb-8 md:mt-16-mb-10">
+        <h1 className="text-[#313237] text-[32px] md:text-[48px] font-manrope font-bold leading-tight tracking-[-0.01em] md:tracking-[-0.02em] mb-2">
           {title}
         </h1>
         <p className="text-[#89939A] text-[14px] font-manrope font-medium">
           {`${filtresProducts.length} ${t('books.books')}`}
+          {isLoading ? '...' : `${filtresProducts.length} books`}
         </p>
       </div>
 
       <CatalogControls
         sort={sort}
+        itemsPerPage={itemsPerPage}
         setSearchParams={setSearchParams}
-        setItemsPerPage={setItemsPerPage}
+        onChangeItemsPerPage={handleChangeItemsPerPage}
         handleChangeNumber={handleChangeNumber}
       />
 
       <div className="col-span-full h-0" />
 
-      <BooksList books={currentProducts} />
-
-      <PaginationBlock
-        safePage={safePage}
-        handleChangeArrow={handleChangeArrow}
-        visiblePages={visiblePages}
-        handleChangeNumber={handleChangeNumber}
-        totalPages={totalPages}
+      <BooksList
+        books={currentProducts}
+        isLoading={isLoading}
+        itemsPerPage={itemsPerPage === 'all' ? 16 : itemsPerPage}
       />
+
+      {!isLoading && (
+        <PaginationBlock
+          safePage={safePage}
+          handleChangeArrow={handleChangeArrow}
+          visiblePages={visiblePages}
+          handleChangeNumber={handleChangeNumber}
+          totalPages={totalPages}
+        />
+      )}
     </GridContainer>
   );
 };

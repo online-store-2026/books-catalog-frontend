@@ -49,9 +49,9 @@ export const MainBanner = () => {
     <section
       className="flex flex-col items-center
     w-full h-[352px] pt-0
-    min-[640px]:h-[368px] min-[640px]:pt-[40px]
-    min-[1200px]:h-[432px] min-[1200px]:pt-[65px]
-    min-[1200px]:max-w-[1136px] min-[1200px]:mx-auto"
+    md:h-[368px] md:pt-[40px]
+    lg:h-[432px] lg:pt-[65px]
+    lg:max-w-[1136px] lg:mx-auto"
     >
       <div
         ref={scrollRef}
@@ -65,15 +65,15 @@ export const MainBanner = () => {
             key={banner.id}
             className="
         w-full h-full flex-shrink-0 snap-center flex justify-center
-      min-[640px]:px-[24px] min-[1200px]:px-[32px]
+      md:px-[24px] lg:px-[32px]
       "
           >
             <div
               className="flex items-center w-full h-full 
-      gap-0 min-[640px]:gap-[8px] min-[1200px]:gap-[16px]
+      gap-0 md:gap-[8px] lg:gap-[16px]
     "
             >
-              <div className="hidden min-[640px]:flex w-[32px] h-[336px] min-[1200px]:h-[400px] items-center justify-center">
+              <div className="hidden md:flex w-[32px] h-[336px] lg:h-[400px] items-center justify-center">
                 <ScrollButton
                   scrollRef={scrollRef}
                   direction="left"
@@ -87,7 +87,7 @@ export const MainBanner = () => {
             w-full h-full min-[640px]:rounded-[24px]
           "
               />
-              <div className="hidden min-[640px]:flex w-[32px] h-[336px] min-[1200px]:h-[400px] items-center justify-center">
+              <div className="hidden md:flex w-[32px] h-[336px] lg:h-[400px] items-center justify-center">
                 <ScrollButton
                   scrollRef={scrollRef}
                   direction="right"

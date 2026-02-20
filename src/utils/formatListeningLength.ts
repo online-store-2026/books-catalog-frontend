@@ -1,8 +1,6 @@
-// "1 hour" / "2 hours", "1 minute" / "5 minutes"
 const pluralize = (count: number, singular: string) =>
   count === 1 ? `1 ${singular}` : `${count} ${singular}s`;
 
-// Converts duration in ms to "X hours Y minutes" (for audiobook length).
 export const formatListeningLength = (ms: number): string => {
   const totalMinutes = Math.floor(ms / 1000 / 60);
   const hours = Math.floor(totalMinutes / 60);

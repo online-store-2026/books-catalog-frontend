@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import {
   Select,
   SelectContent,
@@ -10,36 +11,36 @@ import type { SetURLSearchParams } from 'react-router-dom';
 
 type Props = {
   sort: string;
+  itemsPerPage: number | 'all';
   setSearchParams: SetURLSearchParams;
-  setItemsPerPage: (value: number | 'all') => void;
+  onChangeItemsPerPage: (value: number | 'all') => void;
   handleChangeNumber: (value: number) => void;
 };
 
 export const CatalogControls = ({
   sort,
+  itemsPerPage,
   setSearchParams,
-  setItemsPerPage,
-  handleChangeNumber,
+  onChangeItemsPerPage,
 }: Props) => {
+  const { t } = useTranslation();
   return (
     <>
       <div className="col-span-2 md:col-span-4 lg:col-span-4 text-left mb-[24px]">
         <label className="text-[#89939A] text-[12px] font-manrope font-medium mb-[3px]">
-          Sort by
+          {t('ui.sortBy')}
         </label>
         <Select
           value={sort}
           onValueChange={(value) => {
             setSearchParams((prev) => {
               const params = new URLSearchParams(prev);
-
               if (value) {
                 params.set('sort', value);
                 params.set('page', '1');
               } else {
                 params.delete('sort');
               }
-
               return params;
             });
           }}
@@ -49,9 +50,9 @@ export const CatalogControls = ({
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="newest">Newest</SelectItem>
-              <SelectItem value="alphabetically">Alphabetically</SelectItem>
-              <SelectItem value="cheapest">Cheapest</SelectItem>
+              <SelectItem value="newest">{t('ui.date')}</SelectItem>
+              <SelectItem value="alphabetically">{t('ui.name')}</SelectItem>
+              <SelectItem value="cheapest">{t('ui.price')}</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -59,18 +60,12 @@ export const CatalogControls = ({
 
       <div className="col-span-2 md:col-span-3 lg:col-span-3 text-left mb-[24px]">
         <label className="text-[#89939A] text-[12px] font-manrope font-medium mb-[3px]">
-          Items on page
+          {t('ui.itemsOnPage')}
         </label>
         <Select
-          defaultValue="16"
+          value={itemsPerPage.toString()}
           onValueChange={(value) => {
-            if (value === 'all') {
-              setItemsPerPage('all');
-            } else {
-              setItemsPerPage(Number(value));
-            }
-
-            handleChangeNumber(1);
+            onChangeItemsPerPage(value === 'all' ? 'all' : Number(value));
           }}
         >
           <SelectTrigger className="w-full h-[40px] rounded-[8px] border-[#E2E6E9] bg-white font-manrope text-[#313237] text-[14px] font-bold">
@@ -78,7 +73,7 @@ export const CatalogControls = ({
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="all">All</SelectItem>
+              <SelectItem value="all">{t('ui.all')}</SelectItem>
               <SelectItem value="4">4</SelectItem>
               <SelectItem value="8">8</SelectItem>
               <SelectItem value="16">16</SelectItem>

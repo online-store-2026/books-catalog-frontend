@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { SearchWithAutocomplete } from './SearchWithAutocomplete';
+import { GlobalSearch } from './GlobalSearch/GlobalSearch';
 
 const CATEGORIES = [
   { label: 'Programming', value: 'programming' },
@@ -19,9 +19,15 @@ const CATEGORIES = [
 
 type Props = {
   isMobile?: boolean;
+  onCategorySelect?: () => void;
+  onSearchSelect?: () => void;
 };
 
-export const HeaderSearch = ({ isMobile }: Props) => {
+export const HeaderSearch = ({
+  isMobile,
+  onCategorySelect,
+  onSearchSelect,
+}: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentCategory =
@@ -31,6 +37,7 @@ export const HeaderSearch = ({ isMobile }: Props) => {
 
   const handleCategoryChange = (value: string) => {
     navigate(`/category/${value}`);
+    onCategorySelect?.();
   };
 
   if (isMobile) {
@@ -38,7 +45,7 @@ export const HeaderSearch = ({ isMobile }: Props) => {
     return (
       <div className="flex flex-col gap-2 w-full">
         {/* Search input */}
-        <SearchWithAutocomplete />
+        <GlobalSearch onSelect={onSearchSelect} />
 
         {/* Dropdown categories */}
         <Select
@@ -70,7 +77,7 @@ export const HeaderSearch = ({ isMobile }: Props) => {
   // Desktop версія (горизонтально)
   return (
     <div className="hidden lg:flex items-center gap-3 mr-6 h-full">
-      <SearchWithAutocomplete />
+      <GlobalSearch />
 
       <Select
         value={currentCategory}

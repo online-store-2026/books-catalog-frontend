@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { TYPOGRAPHY } from '@/constants/typography';
+import { useTranslation } from 'react-i18next';
 
 const linkClass = cn(
   TYPOGRAPHY.uppercase,
@@ -13,6 +14,7 @@ const scrollToTop = () => {
 };
 
 export const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer className="border-t border-border font-manrope">
       <div className="max-[639px]:hidden w-full">
@@ -43,13 +45,13 @@ export const Footer = () => {
               to="/contacts"
               className={linkClass}
             >
-              Contacts
+              {t('navigation.contacts')}
             </Link>
             <Link
               to="/rights"
               className={linkClass}
             >
-              Rights
+              {t('navigation.rights')}
             </Link>
           </nav>
 
@@ -67,7 +69,7 @@ export const Footer = () => {
                 'leading-none whitespace-nowrap text-muted-foreground group-hover:text-foreground transition-colors',
               )}
             >
-              Back to top
+              {t('navigation.backToTop')}
             </span>
             <ChevronUp className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
           </button>

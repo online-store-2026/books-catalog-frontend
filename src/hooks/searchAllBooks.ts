@@ -1,5 +1,5 @@
 import type { Book } from '@/types/Book';
-import { client } from './fetchClient';
+import { client } from '../services/fetchClient';
 
 export const searchAllBooks = async (query: string): Promise<Book[]> => {
   if (!query.trim()) return [];

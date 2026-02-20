@@ -1,18 +1,21 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 
 type Props = {
   isMobile?: boolean;
+  onLinkClick?: () => void;
 };
 
 const NAV_ITEMS = [
-  { label: 'HOME', path: '/' },
-  { label: 'PAPER', path: '/paper' },
-  { label: 'KINDLE', path: '/kindle' },
-  { label: 'AUDIOBOOK', path: '/audiobook' },
+  { label: 'navigation.home', path: '/' },
+  { label: 'categories.paper', path: '/paper' },
+  { label: 'categories.kindle', path: '/kindle' },
+  { label: 'categories.audiobooks', path: '/audiobook' },
 ];
 
-export const HeaderNav = ({ isMobile }: Props) => {
+export const HeaderNav = ({ isMobile, onLinkClick }: Props) => {
+  const { t } = useTranslation();
   const { pathname } = useLocation();
 
   if (isMobile) {
@@ -24,6 +27,7 @@ export const HeaderNav = ({ isMobile }: Props) => {
             <Link
               key={item.label}
               to={item.path}
+              onClick={onLinkClick}
               className={cn(
                 'relative text-lg font-bold uppercase tracking-wider transition-colors duration-200',
                 isActive ?
@@ -31,7 +35,7 @@ export const HeaderNav = ({ isMobile }: Props) => {
                 : 'text-[#89939A] hover:text-[#313237]', // default + hover
               )}
             >
-              {item.label}
+              {t(item.label)}
 
               {/* Підкреслення для вибраної лінки */}
               {isActive && (
@@ -61,7 +65,7 @@ export const HeaderNav = ({ isMobile }: Props) => {
               ),
             )}
           >
-            {item.label}
+            {t(item.label)}
             <span
               className={cn(
                 'absolute bottom-0 left-0 w-full h-[3px] translate-y-[1px] transition-all duration-300',

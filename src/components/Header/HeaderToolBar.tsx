@@ -1,11 +1,18 @@
-import { Link } from 'react-router-dom';
+import { useAuth } from '@/context/authContext';
 import { Icon } from '../ui/icons';
+import { HeaderIconLink } from './HeaderIconLink';
+import { doSingOut } from '@/firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   onMenuClick: () => void;
+  onSearchIconClick: () => void;
 };
 
-export const HeaderToolBar = ({ onMenuClick }: Props) => {
+export const HeaderToolBar = ({ onMenuClick, onSearchIconClick }: Props) => {
+  const { userLoggedIn } = useAuth();
+  const navigate = useNavigate();
+
   return (
     <>
       {/* Desktop + Tablet */}
@@ -15,30 +22,66 @@ export const HeaderToolBar = ({ onMenuClick }: Props) => {
           aria-label="Search"
         >
           <Icon
+            onClick={onSearchIconClick}
             name="search"
             className="w-4 h-4"
           />
         </button>
 
-        <Link
+        <HeaderIconLink
           to="/favourites"
-          className="flex items-center justify-center h-[48px] w-[48px] lg:h-[64px] lg:w-[64px]"
+          className="w-[64px] h-full border-1"
         >
           <Icon
             name="heart"
             className="w-4 h-4"
           />
-        </Link>
+        </HeaderIconLink>
 
-        <Link
+        <HeaderIconLink
           to="/cart"
-          className="flex items-center justify-center h-[48px] w-[48px] lg:h-[64px] lg:w-[64px]"
+          className="w-[64px] h-full border-1"
         >
           <Icon
             name="shoppingBag"
             className="w-4 h-4"
           />
-        </Link>
+        </HeaderIconLink>
+        {userLoggedIn ?
+          <HeaderIconLink
+            className="w-[64px] h-full border-1"
+            onClick={() => {
+              doSingOut().then(() => {
+                navigate('/login', { replace: true });
+              });
+            }}
+          >
+            <Icon
+              name="signOut"
+              className="w-4 h-4"
+            />
+          </HeaderIconLink>
+        : <>
+            <HeaderIconLink
+              to="/login"
+              className="w-[64px] h-full border-1"
+            >
+              <Icon
+                name="signIn"
+                className="w-4 h-4"
+              />
+            </HeaderIconLink>
+            <HeaderIconLink
+              to="/signup"
+              className="w-[64px] h-full border-1"
+            >
+              <Icon
+                name="signUp"
+                className="w-4 h-4"
+              />
+            </HeaderIconLink>
+          </>
+        }
       </div>
 
       {/* Mobile burger */}

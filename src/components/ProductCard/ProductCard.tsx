@@ -54,17 +54,17 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
           <>
             <img
               className="w-full h-full object-contain"
-              src="/public/img/audiobook/2.webp"
+              src={`${import.meta.env.BASE_URL}img/audiobook/2.webp`}
               alt="iPad"
             />
             <img
               className="absolute top-[8.7%] left-[10.5%] w-[79.5%] h-[82%] object-cover"
-              src={`/${book.images[0]}`}
+              src={`${import.meta.env.BASE_URL}${book.images[0]}`}
               alt={book.name}
             />
           </>
         : <img
-            src={`/${book.images[0]}`}
+            src={`${import.meta.env.BASE_URL}${book.images[0]}`}
             alt={book.name}
             className="w-full h-full object-contain rounded-md"
           />

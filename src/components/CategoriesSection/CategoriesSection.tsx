@@ -5,21 +5,23 @@ import { cn } from '@/lib/utils';
 import { useTranslation } from 'react-i18next';
 import { CategoriesSectionSkeleton } from './CategoriesSectionSkeleton';
 
+const BASE = import.meta.env.BASE_URL;
+
 const CATEGORIES = [
   {
     label: 'categories.paperBooks',
     path: '/paper',
-    image: '/img/categories/Paper-books.png',
+    image: `${BASE}img/categories/Paper-books.png`,
   },
   {
     label: 'categories.audioBooks',
     path: '/audiobook',
-    image: '/img/categories/Audiobooks.png',
+    image: `${BASE}img/categories/Audiobooks.png`,
   },
   {
     label: 'categories.kindleBooks',
     path: '/kindle',
-    image: '/img/categories/Kindle-books.png',
+    image: `${BASE}img/categories/Kindle-books.png`,
   },
 ];
 

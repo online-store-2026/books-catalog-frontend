@@ -5,17 +5,10 @@ import { HeaderNav } from './HeaderNav';
 import { BurgerMenu } from './BurgerMenu';
 import { HeaderToolBar } from './HeaderToolBar';
 import { Link } from 'react-router-dom';
-import { SearchWithAutocomplete } from './SearchWithAutocomplete';
 import { Bookmark } from './Bookmark';
-import { GlobalSearch } from './GlobalSearch/GlobalSearch';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-
-  const handleSearchClick = () => {
-    setIsSearchOpen((prev) => !prev);
-  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -52,19 +45,13 @@ export const Header = () => {
 
           <div className="flex items-center h-full">
             <HeaderSearch />
-            {isSearchOpen && <SearchWithAutocomplete />}
             <div className="relative h-full flex items-center">
               <HeaderToolBar
                 onMenuClick={() => setIsMenuOpen(true)}
-                onSearchIconClick={handleSearchClick}
+                onSearchIconClick={() => {}}
               />
               <Bookmark />
             </div>
-            {isSearchOpen && <GlobalSearch />}
-            <HeaderToolBar
-              onMenuClick={() => setIsMenuOpen(true)}
-              onSearchIconClick={handleSearchClick}
-            />
           </div>
         </div>
       </header>

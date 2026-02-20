@@ -24,7 +24,6 @@ export const AudiobookPage = () => {
     <Catalog
       products={books}
       title={t('categories.audiobooks')}
-      title="Audiobooks"
     />
   );
 };

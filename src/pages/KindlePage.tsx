@@ -24,7 +24,6 @@ export const KindlePage = () => {
     <Catalog
       products={books}
       title={t('categories.kindle')}
-      title="Kindle books"
     />
   );
 };

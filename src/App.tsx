@@ -21,8 +21,8 @@ import OrdersPage from '@/pages/OrderPage.tsx';
 import { LoginPage } from './pages/LoginPage';
 import { SignUpPage } from './pages/SignUpPage';
 import { ProfilePage } from './pages/ProfilePage';
-
 import { BooksProvider } from './context/BooksContext';
+import { BookWordsBackground } from '@/components/BookWordsBackground';
 
 function App() {
   const location = useLocation();
@@ -35,9 +35,10 @@ function App() {
   return (
     <>
       <BooksProvider>
-        <div className="flex min-h-screen flex-col">
+        <div className="flex min-h-screen flex-col relative">
+          <BookWordsBackground />
           {!hideLayout && <Header />}
-          <main className="flex-1">
+          <main className="flex-1 relative z-10">
             <Routes location={background || location}>
               <Route
                 path="/"
@@ -112,7 +113,6 @@ function App() {
                 element={<NotFoundPage />}
               />
             </Routes>
-            {/* <CategoriesSection /> */}
           </main>
           {!hideLayout && <Footer />}
         </div>

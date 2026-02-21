@@ -3,6 +3,7 @@ import { Icon } from '../ui/icons';
 import { HeaderIconLink } from './HeaderIconLink';
 import { doSingOut } from '@/firebase/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useBooks } from '@/context/BooksContext';
 
 type Props = {
   onMenuClick: () => void;
@@ -13,6 +14,7 @@ export const HeaderToolBar = ({ onMenuClick, onSearchIconClick }: Props) => {
   const { userLoggedIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const { cartIconRef, favIconRef } = useBooks();
 
   return (
     <>
@@ -33,20 +35,24 @@ export const HeaderToolBar = ({ onMenuClick, onSearchIconClick }: Props) => {
           to="/favourites"
           className="w-[64px] h-full border-1"
         >
-          <Icon
-            name="heart"
-            className="w-4 h-4"
-          />
+          <div ref={favIconRef}>
+            <Icon
+              name="heart"
+              className="w-4 h-4"
+            />
+          </div>
         </HeaderIconLink>
 
         <HeaderIconLink
           to="/cart"
           className="w-[64px] h-full border-1"
         >
-          <Icon
-            name="shoppingBag"
-            className="w-4 h-4"
-          />
+          <div ref={cartIconRef}>
+            <Icon
+              name="shoppingBag"
+              className="w-4 h-4"
+            />
+          </div>
         </HeaderIconLink>
         {userLoggedIn ?
           <>

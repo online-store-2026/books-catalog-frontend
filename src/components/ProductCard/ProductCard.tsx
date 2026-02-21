@@ -35,7 +35,7 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
   };
 
   return (
-    <div className="pointer-events-none relative flex flex-col gap-4 flex-shrink-0 w-full h-[400px] p-5 lg:w-[272px] sm:h-[506px] sm:p-8 rounded-xl border border-border bg-card hover:shadow-lg transition-shadow">
+    <div className="relative flex flex-col gap-4 flex-shrink-0 w-full h-[400px] p-5 lg:w-[272px] sm:h-[506px] sm:p-8 rounded-xl border border-border bg-card hover:shadow-lg transition-shadow">
       {book.type === 'audiobook' && (
         <div className="absolute top-8 right-6 w-10 h-10 flex items-center justify-center bg-primary rounded-full z-10">
           <Icon
@@ -58,7 +58,7 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
               alt="iPad"
             />
             <img
-              className="absolute top-[8.7%] left-[10.5%] w-[79.5%] h-[82%] object-cover"
+              className="pointer-events-none absolute top-[8.7%] left-[10.5%] w-[79.5%] h-[82%] object-cover"
               src={`${book.images[0]}`}
               alt={book.name}
             />
@@ -112,7 +112,7 @@ export const ProductCard: React.FC<Props> = ({ book }) => {
         />
         <HeartButton
           onClick={() => {
-            toggleFavorite(book); // додає або видаляє з фаворитів
+            toggleFavorite(book);
             if (isBookInFavorites) {
               showInfo('Book removed from favorites!');
             } else {

@@ -3,6 +3,7 @@ import { Icon } from '../ui/icons';
 import { HeaderIconLink } from './HeaderIconLink';
 import { doSingOut } from '@/firebase/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { BookmarkToggle } from './Bookmark';
 
 type Props = {
   onMenuClick: () => void;
@@ -48,53 +49,56 @@ export const HeaderToolBar = ({ onMenuClick, onSearchIconClick }: Props) => {
             className="w-4 h-4"
           />
         </HeaderIconLink>
-        {userLoggedIn ?
-          <>
-            <HeaderIconLink
-              to="/profile"
-              state={{ background: location }}
-              className="w-[64px] h-full border-1"
-            >
-              <Icon
-                name="profileIcon"
-                className="w-4 h-4"
-              />
-            </HeaderIconLink>
-            <HeaderIconLink
-              className="w-[64px] h-full border-1"
-              onClick={() => {
-                doSingOut().then(() => {
-                  navigate('/login', { replace: true });
-                });
-              }}
-            >
-              <Icon
-                name="signOut"
-                className="w-4 h-4"
-              />
-            </HeaderIconLink>
-          </>
-        : <>
-            <HeaderIconLink
-              to="/login"
-              className="w-[64px] h-full border-1"
-            >
-              <Icon
-                name="signIn"
-                className="w-4 h-4"
-              />
-            </HeaderIconLink>
-            <HeaderIconLink
-              to="/signup"
-              className="w-[64px] h-full border-1"
-            >
-              <Icon
-                name="signUp"
-                className="w-4 h-4"
-              />
-            </HeaderIconLink>
-          </>
-        }
+        <div className="relative h-full w-fit flex items-center bg-secondary">
+          {userLoggedIn ?
+            <>
+              <HeaderIconLink
+                to="/profile"
+                state={{ background: location }}
+                className="w-[64px] h-full border-1"
+              >
+                <Icon
+                  name="profileIcon"
+                  className="w-4 h-4"
+                />
+              </HeaderIconLink>
+              <HeaderIconLink
+                className="w-[64px] h-full border-1"
+                onClick={() => {
+                  doSingOut().then(() => {
+                    navigate('/login', { replace: true });
+                  });
+                }}
+              >
+                <Icon
+                  name="signOut"
+                  className="w-4 h-4"
+                />
+              </HeaderIconLink>
+            </>
+          : <>
+              <HeaderIconLink
+                to="/login"
+                className="w-[64px] h-full border-1"
+              >
+                <Icon
+                  name="signIn"
+                  className="w-4 h-4"
+                />
+              </HeaderIconLink>
+              <HeaderIconLink
+                to="/signup"
+                className="w-[64px] h-full border-1"
+              >
+                <Icon
+                  name="signUp"
+                  className="w-4 h-4"
+                />
+              </HeaderIconLink>
+            </>
+          }
+          <BookmarkToggle />
+        </div>
       </div>
 
       {/* Mobile burger */}

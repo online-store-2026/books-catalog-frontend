@@ -1,6 +1,12 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
     <meta charset="UTF-8" />
     <link
       rel="icon"
@@ -25,8 +31,8 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="/books-catalog-frontend/assets/index-DZVlx2aC.js"></script>
-    <link rel="stylesheet" crossorigin href="/books-catalog-frontend/assets/index-YqWD7Mlr.css">
+    <script type="module" crossorigin src="/books-catalog-frontend/assets/index-DQVnoQr9.js"></script>
+    <link rel="stylesheet" crossorigin href="/books-catalog-frontend/assets/index-FPDecZRN.css">
   </head>
   <body>
     <div id="root"></div>

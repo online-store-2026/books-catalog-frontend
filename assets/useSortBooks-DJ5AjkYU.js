@@ -1,1 +1,0 @@
-import{u as n,m as t,n as u,o as c}from"./index-KGOYYkpr.js";const m=s=>{const{i18n:o}=n(),[a]=t(),r=a.get("sort")||"newest",e=o.language;return u({queryKey:["books",s,e,r],queryFn:()=>c(e,null,s,r)})};export{m as u};

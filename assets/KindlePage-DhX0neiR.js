@@ -1,0 +1,1 @@
+import{u as a,j as o,L as e}from"./index-DMDsM8EX.js";import{C as i}from"./Catalog-Bs4jhxKd.js";import{u as n}from"./useSortBooks-BFpYkTPS.js";const u=()=>{const{t:s}=a(),{data:t=[],isLoading:r}=n("kindle");return o.jsx(e,{isLoading:r,children:o.jsx(i,{products:t,title:s("categories.kindle")})})};export{u as KindlePage};

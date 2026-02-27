@@ -1,0 +1,1 @@
+import{u as r,j as o,L as i}from"./index-DMDsM8EX.js";import{C as e}from"./Catalog-Bs4jhxKd.js";import{u}from"./useSortBooks-BFpYkTPS.js";const c=()=>{const{t:s}=r(),{data:t=[],isLoading:a}=u("audiobook");return o.jsx(i,{isLoading:a,children:o.jsx(e,{products:t,title:s("categories.audiobooks")})})};export{c as AudiobookPage};

@@ -1,0 +1,1 @@
+import{u as n,n as t,o as u,p as c}from"./index-DMDsM8EX.js";const l=s=>{const{i18n:o}=n(),[a]=t(),r=a.get("sort")||"newest",e=o.language;return u({queryKey:["books",s,e,r],queryFn:()=>c(e,null,s,r)})};export{l as u};
